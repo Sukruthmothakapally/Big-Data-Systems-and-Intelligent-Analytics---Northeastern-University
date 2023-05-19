@@ -2,4 +2,4 @@
 Northeastern University - Course - Big Data Systems and Intelligent Analytics
 
 ## Topics covered
-1. Great Expectations
+1. Great Expectations [link](./Great Expectations)
