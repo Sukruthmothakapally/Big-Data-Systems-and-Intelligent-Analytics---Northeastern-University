@@ -61,9 +61,9 @@ Confirm the prompt
 great_expectations datasource new
 ```
 
-# Input following in the prompt
+ Input following in the prompt
 
-# > `1` - Local File<br> `1` - Pandas <br> `../data` - relative path to datasets
+ > `1` - Local File<br> `1` - Pandas <br> `../data` - relative path to datasets
 
 This open a Jupyter notebook, <br>
 
