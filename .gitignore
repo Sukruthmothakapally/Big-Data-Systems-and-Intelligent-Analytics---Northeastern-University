@@ -1,2 +1,4 @@
-venv/
+bigdata_env/
 Great Expectations\data\FAA_Registrations.csv
+venv/
+streamlit-redis\.env_local
