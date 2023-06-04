@@ -1,0 +1,12 @@
+version: '3.10'
+services:
+    # UI Application
+    streamlit:
+        container_name: streamlit_cloud
+        build:
+            context: streamlit
+        restart: always
+        ports:
+            - "8095:8090"
+        env_file:
+            - .env_cloud
