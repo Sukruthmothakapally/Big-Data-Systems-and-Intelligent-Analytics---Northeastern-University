@@ -24,7 +24,7 @@ jobs:
         name: Install pipenv
         run: pip install pipenv
         
-      - name: Install dependencies
+      - name: Install huggingface
         run: |
           pip install huggingface_hub
       - 
