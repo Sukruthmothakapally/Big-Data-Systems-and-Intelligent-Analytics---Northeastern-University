@@ -23,10 +23,6 @@ jobs:
       - 
         name: Install pipenv
         run: pip install pipenv
-
-      - name: Install huggingface
-        run: pip install huggingface_hub
-
       - 
         name: Run tests
         working-directory: ./fastapi-streamlit/fastapi # TODO: change to your pytest path
