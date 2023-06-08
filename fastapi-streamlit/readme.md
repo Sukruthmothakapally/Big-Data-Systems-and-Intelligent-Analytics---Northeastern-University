@@ -21,12 +21,12 @@ Refer the [notebook](./Authentication.ipynb) to implement Authentication
     OR
     To run the container without building image if the image already exists
     ```bash
-    make up
+    #make up
     ```
 2. Visit the individual services
    * FastAPI - http://localhost:8095/docs
    * Streamlit - http://localhost:8090/
 3. To stop the containers
     ```bash
-    make down
+    #make down
     ```
