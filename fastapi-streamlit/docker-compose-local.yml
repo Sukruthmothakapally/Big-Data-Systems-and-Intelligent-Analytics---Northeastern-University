@@ -1,0 +1,29 @@
+version: "3.10"
+services:
+    fastapi:
+        container_name: fastapi
+        #docker compose fetches the dockerfile from fastapi dir
+        build:
+            context: fastapi
+        restart: always
+        ports:
+            - "8095:8095"
+        healthcheck:
+            test: ["CMD", "curl", "-s", "http://localhost:8095/api/v1/health"]
+            interval: 10s
+            timeout: 10s
+            start_period: 20s
+            retries: 5
+    streamlit:
+        container_name: streamlit
+        build:
+            context: streamlit
+        restart: always
+        ports:
+            - "8090:8090"
+        depends_on:
+            - fastapi
+        environment:
+            - API_URL=http://fastapi:8095
+
+
