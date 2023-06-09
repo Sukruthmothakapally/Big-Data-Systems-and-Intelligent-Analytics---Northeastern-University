@@ -3,7 +3,7 @@ import json
 import requests
 import streamlit as st
 
-BASE_URL = os.getenv("API_URL", "http://localhost:8002")
+BASE_URL = os.getenv("API_URL", "http://localhost:8003")
 
 st.set_page_config(
     page_title="Hello",
