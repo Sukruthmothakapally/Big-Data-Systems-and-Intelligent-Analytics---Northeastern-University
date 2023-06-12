@@ -1,4 +1,12 @@
 import streamlit as st
+
+page = st.experimental_get_query_params().get("page", ["userlogin"])[0]
+
+if page == "user_login":
+    import pages.userlogin
+elif page == "part_2":
+    import pages.part2
+
 st.set_page_config(page_title="DAMG 7245", page_icon="👋")
 
 st.sidebar.success("Assignment 1 sections")

@@ -648,11 +648,17 @@ services:
 #     container_name: fastapi
 #     #for dockerfile
 #     build:
-#         context: ../fastapi-streamlit/fastapi
+#         context: ./fastapi
 #         # context: fastapi 
 #     restart: always
 #     ports:
 #         - "30004:8095"
+#     healthcheck:
+#             test: ["CMD", "curl", "-s", "http://localhost:8095/health"]
+#             interval: 10s
+#             timeout: 10s
+#             start_period: 20s
+#             retries: 5
   
   # Frontend 
   streamlit:
@@ -663,6 +669,8 @@ services:
     restart: always
     ports:
         - "30005:8090"
+    # environment:
+    #     - API_URL=http://host.docker.internal:8007
 
 volumes:
   postgres-db-volume:
