@@ -1,7 +1,7 @@
 FROM python:3.9.13
 # Pull the base docker image of python with tag 3.10.6-slim
 
-#RUN pip install --upgrade pip
+RUN pip install --upgrade pip
 # Upgrade pip package 
 
 WORKDIR /app
