@@ -10,7 +10,7 @@ app = FastAPI()
 security = HTTPBasic()
 
 r = redis.Redis(
-    host=os.getenv("DB_HOST", "localhost"),
+    host=os.getenv("DB_HOST", "redis-stack"),
     port=os.getenv("DB_PORT", "6379"),
     username=os.getenv("DB_USERNAME", ""),
     password=os.getenv("DB_PASSWORD", ""),

@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-api_url = "http://localhost:8007" # Replace with your FastAPI URL
+api_url = "http://fastapi:8095" # Replace with your FastAPI URL
 
 st.title("User Login")
 

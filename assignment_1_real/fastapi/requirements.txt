@@ -7,3 +7,4 @@ httpx
 #pytest
 openai
 redis
+python-dotenv
