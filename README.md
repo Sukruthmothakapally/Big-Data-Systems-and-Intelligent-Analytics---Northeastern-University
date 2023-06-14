@@ -5,3 +5,7 @@ Northeastern University - Course - Big Data Systems and Intelligent Analytics
 1. Great Expectations
 2. Redis
 3. Streamlit
+4. Docker
+5. Airflow DAGs
+6. Fastapi
+7. GCP deployment
