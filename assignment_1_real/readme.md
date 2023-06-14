@@ -83,11 +83,38 @@ These instructions will get you a copy of the project up and running on your loc
 ## Tech Stack
 
 - **Docker Desktop**: A tool designed to make it easier to create, deploy, and run applications by using containers. In this project, Docker is used to containerize and deploy the application.
+  
+
 - **Redis**: An in-memory data structure store used as a database. In this project, Redis is used to store hash keys of the company data with columns - ticker, company name, date, sbert embedding, openai embedding, and part of chunk.
+
+
 - **Streamlit**: An open-source app framework for creating and sharing custom web apps for machine learning and data science. In this project, Streamlit is used as the frontend for the application where authenticated users can login and perform traditional and hybrid querying on the redis database and finally to display the vector similarity search result.
+
+
 - **Airflow**: A platform to programmatically author, schedule and monitor workflows. In this project, Airflow is used to extract data from github and to store it in redis using hash keys.
+
+
 - **FastAPI**: A modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hints. In this project, FastAPI is used as a backend API framework to register a user using HTTP Basic authentication and store the credentials in redis.
+
+
 - **Postman**: A collaboration platform for API development. In this project, Postman is used for API testing to check the health of FastAPI endpoints and to send POST/GET requests.
+
+
 - **OpenAI text-embedding-ada-002 model**: A powerful natural language processing model developed by OpenAI. In this project, the OpenAI ADA-embedding model is used to compute embeddings for each chunk of the earnings transcript and add them as a column in the database.
+
+
 - **SBERT sentence-transformers/all-MiniLM-L6-v2 model**: A sentence embedding model developed by Sentence-BERT. In this project, the SBERT all-llmv6 model is used to compute embeddings for each chunk of the earnings transcript and add them as a column in the database.
+
+
 - **KNN and cosine similarity**: Techniques used to measure the similarity between vectors. In this project, KNN and cosine similarity are used to perform vector similarity search on the embeddings and retrieve the top 5 statements that are most similar to the user's query.
+
+
+## Authors
+
+- Riya
+- Sukruth
+- Vedant
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
