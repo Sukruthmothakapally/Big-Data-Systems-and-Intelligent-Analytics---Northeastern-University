@@ -108,6 +108,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 - **KNN and cosine similarity**: Techniques used to measure the similarity between vectors. In this project, KNN and cosine similarity are used to perform vector similarity search on the embeddings and retrieve the top 5 statements that are most similar to the user's query.
 
+## Additional Resources
+
+For more detailed information about the project, including snapshots of the working application, please refer to this [codelab](https://codelabs-preview.appspot.com/?file_id=101FZQYWfYfxHDNTEZ28qzYGgoMIOP2VGISQvbXkRs68#0).
+
 
 ## Authors
 
