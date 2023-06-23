@@ -1,3 +1,4 @@
-redis
-openai[embeddings]
-sentence-transformers
+#redis
+#openai[embeddings]
+#sentence-transformers
+#cloud-sql-python-connector[pg8000]

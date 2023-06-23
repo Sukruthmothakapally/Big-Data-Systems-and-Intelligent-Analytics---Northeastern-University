@@ -7,9 +7,11 @@ from datetime import timedelta
 from airflow.operators.docker_operator import DockerOperator
 
 from google.cloud import storage
-from sqlalchemy import create_engine
+# from sqlalchemy import create_engine
 import pandas as pd
 import os
+from google.cloud.sql.connector import Connector
+import sqlalchemy
 
 # dag declaration
 user_input = {
@@ -17,7 +19,7 @@ user_input = {
 }
 
 dag = DAG(
-    dag_id="Data_Pipeline",
+    dag_id="BigData_Pipeline",
     schedule="0 0 * * *",   # https://crontab.guru/
     start_date=days_ago(0),
     catchup=False,
@@ -26,7 +28,21 @@ dag = DAG(
     # default_args=args,
     params=user_input,
 )
+connector = Connector()
 
+def getconn():
+    conn = connector.connect(
+        instance_connection_string="virtual-sylph-384316:us-west1:app",
+        driver="pg8000",
+        user="postgres",
+        password="J1ag[@%$#1.@9k^^",
+        db="postgres",
+    )
+    return conn
+
+pool = sqlalchemy.create_engine("postgresql+pg8000://", creator=getconn)
+
+#1st task
 def get_data_from_github(**kwargs):
     import requests
     import csv
@@ -64,13 +80,22 @@ def get_data_from_github(**kwargs):
 
     ti.xcom_push(key='data', value=response)
 
+
+#2nd task
 def store_data_in_gcs(**kwargs):
     data = kwargs['ti'].xcom_pull(key='data', task_ids='get_data_from_github_task')
 
-    # Store data in Google Cloud Storage
+    # Set the GOOGLE_APPLICATION_CREDENTIALS environment variable
+    # credential_path="C:\\Users\\Dell\\OneDrive - Northeastern University\\courses\\big data and intl analytics\\DAMG7245-Summer2023\\assignment_2\\airflow\\dags\\servicekey.json"
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/opt/airflow/dags/servicekey.json'
+
+
+    # Set the project ID and bucket name
+    project_id = 'virtual-sylph-384316'
     bucket_name = 'damg7245-assignment-7007'
 
-    storage_client = storage.Client()
+    # Initialize the Google Cloud Storage client
+    storage_client = storage.Client(project=project_id)
     bucket = storage_client.bucket(bucket_name)
 
     for item in data:
@@ -79,30 +104,20 @@ def store_data_in_gcs(**kwargs):
         blob.upload_from_string(item['plain_text'])
         print(f"Data loaded to Google Cloud Storage: {blob_name}")
 
-
+#3rd task
 def store_metadata_in_cloud_sql(**kwargs):
     bucket_name = 'damg7245-assignment-7007'
     data = kwargs['ti'].xcom_pull(key='data', task_ids='get_data_from_github_task')
 
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/opt/airflow/dags/servicekey.json'
+    
     # Store metadata in Cloud SQL
-    db_user = 'postgres'
-    db_pass = 'J1ag[@%$#1.@9k^^'
-    db_name = 'postgres'
-    cloud_sql_connection_name = 'virtual-sylph-384316:us-west1:app'
-
-    db_socket_dir = '/cloudsql'
-    driver_name = 'postgres+pg8000'
-    query_string = dict({"unix_sock": "{}/{}/.s.PGSQL.5432".format(db_socket_dir, cloud_sql_connection_name)})
-
-    db_engine = create_engine(f"{driver_name}://{db_user}:{db_pass}@/{db_name}", connect_args=query_string)
-
     metadata_df = pd.DataFrame(data)[['date', 'ticker', 'company_name', 'Part']]
     metadata_df['gcs_location'] = f"gs://{bucket_name}/{metadata_df['company_name']}:{metadata_df['date']}:{metadata_df['Part']}"
 
-    metadata_df.to_sql('metadata_table', db_engine, if_exists='append', index=False)
+    metadata_df.to_sql('metadata_table', pool, if_exists='append', index=False)
 
     print("Metadata loaded to Cloud SQL")
-
 
 with dag:  
 
