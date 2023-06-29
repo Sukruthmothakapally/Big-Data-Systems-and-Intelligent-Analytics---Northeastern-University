@@ -1,4 +1,9 @@
 #redis
 #openai[embeddings]
 #sentence-transformers
-#cloud-sql-python-connector[pg8000]
+google-cloud-storage==2.9.0
+SQLAlchemy
+python-dotenv
+cloud-sql-python-connector
+cloud-sql-python-connector[pg8000]
+requests

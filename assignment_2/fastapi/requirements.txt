@@ -1,0 +1,10 @@
+fastapi
+sentence-transformers==2.1.0
+uvicorn
+gunicorn
+# Dev Dependencies
+httpx
+#pytest
+openai
+redis
+python-dotenv

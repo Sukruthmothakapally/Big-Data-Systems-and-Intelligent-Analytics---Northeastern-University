@@ -1,0 +1,7 @@
+streamlit
+openai
+pinecone-client[grpc]
+sentence-transformers
+langchain
+#pypdf
+tiktoken

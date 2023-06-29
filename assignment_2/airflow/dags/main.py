@@ -8,7 +8,7 @@ from airflow.operators.docker_operator import DockerOperator
 
 from google.cloud import storage
 # from sqlalchemy import create_engine
-import pandas as pd
+#import pandas
 import os
 from google.cloud.sql.connector import Connector
 import sqlalchemy
@@ -28,6 +28,10 @@ dag = DAG(
     # default_args=args,
     params=user_input,
 )
+
+# Set the environment variable
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/opt/airflow/dags/servicekey.json'
+
 connector = Connector()
 
 def getconn():
@@ -40,7 +44,7 @@ def getconn():
     )
     return conn
 
-pool = sqlalchemy.create_engine("postgresql+pg8000://", creator=getconn)
+pool = sqlalchemy.create_engine("postgresql+pg8000://", creator=getconn).connect()
 
 #1st task
 def get_data_from_github(**kwargs):
@@ -62,33 +66,26 @@ def get_data_from_github(**kwargs):
     for row in csv.DictReader(tickers_page.text.splitlines()):
         tickers_data[row['Symbol']] = row['Company']
 
-    words = transcript.split()
-    chunks = [words[i:i + 500] for i in range(0, len(words), 500)]
+    response = {}
 
-    response = []
-
-    for i, chunk in enumerate(chunks):
-        response_chunk = {}
-
-        response_chunk["date"] = kwargs['params']['dataset_name'].split('_')[0]
-        response_chunk["plain_text"] = ' '.join(chunk)
-        response_chunk["ticker"] = kwargs['params']['dataset_name'].split('_')[-1]
-        response_chunk["company_name"] = tickers_data.get(response_chunk["ticker"], "Company not found")
-        response_chunk["Part"] = i + 1
-
-        response.append(response_chunk)
+    response["date"] = kwargs['params']['dataset_name'].split('_')[0]
+    response["plain_text"] = transcript
+    response["ticker"] = kwargs['params']['dataset_name'].split('_')[-1]
+    response["company_name"] = tickers_data.get(response["ticker"], "Company not found")
 
     ti.xcom_push(key='data', value=response)
+    print(f"response: {response}, type: {type(response)}")
 
 
 #2nd task
 def store_data_in_gcs(**kwargs):
+    from google.cloud import storage
+    import os
+
     data = kwargs['ti'].xcom_pull(key='data', task_ids='get_data_from_github_task')
 
-    # Set the GOOGLE_APPLICATION_CREDENTIALS environment variable
-    # credential_path="C:\\Users\\Dell\\OneDrive - Northeastern University\\courses\\big data and intl analytics\\DAMG7245-Summer2023\\assignment_2\\airflow\\dags\\servicekey.json"
+    # Set the environment variable
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/opt/airflow/dags/servicekey.json'
-
 
     # Set the project ID and bucket name
     project_id = 'virtual-sylph-384316'
@@ -98,26 +95,52 @@ def store_data_in_gcs(**kwargs):
     storage_client = storage.Client(project=project_id)
     bucket = storage_client.bucket(bucket_name)
 
-    for item in data:
-        blob_name = f"{item['company_name']}:{item['date']}:{item['Part']}"
-        blob = bucket.blob(blob_name)
-        blob.upload_from_string(item['plain_text'])
-        print(f"Data loaded to Google Cloud Storage: {blob_name}")
+    blob_name = f"{data['company_name']}:{data['date'][:4]}"
+    blob = bucket.blob(blob_name)
+    blob.upload_from_string(data['plain_text'])
+    print(f"Data loaded to Google Cloud Storage: {blob_name}")
+
+    # Push the blob_name variable to XCom
+    kwargs['ti'].xcom_push(key='blob_name', value=blob_name)
+
+
 
 #3rd task
 def store_metadata_in_cloud_sql(**kwargs):
+    import pandas as pd
+    from google.cloud import storage
+
+    # Set the bucket name
     bucket_name = 'damg7245-assignment-7007'
+
+    print("Getting data from XCom...")  # to see if the task is getting stuck here
+    # Get data from XCom
     data = kwargs['ti'].xcom_pull(key='data', task_ids='get_data_from_github_task')
+    print(f"date: {data['date']}")
 
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/opt/airflow/dags/servicekey.json'
-    
+    print("Storing metadata in Cloud SQL...")  # to see if the task is getting stuck here
     # Store metadata in Cloud SQL
-    metadata_df = pd.DataFrame(data)[['date', 'ticker', 'company_name', 'Part']]
-    metadata_df['gcs_location'] = f"gs://{bucket_name}/{metadata_df['company_name']}:{metadata_df['date']}:{metadata_df['Part']}"
+    metadata_df = pd.DataFrame([data])[['date', 'ticker', 'company_name']]
+    metadata_df['date'] = pd.to_datetime(metadata_df['date'], format="%Y%m%d")
+    metadata_df['quarter'] = metadata_df['date'].dt.quarter
+    metadata_df['month'] = metadata_df['date'].dt.month
 
-    metadata_df.to_sql('metadata_table', pool, if_exists='append', index=False)
+    # Get the public URL of the GCS object
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob_name = kwargs['ti'].xcom_pull(key='blob_name', task_ids='store_data_in_gcs_task')
+    blob = bucket.blob(blob_name)
+    public_url = blob.public_url
+    metadata_df['public_url'] = public_url
 
-    print("Metadata loaded to Cloud SQL")
+    print("Connecting to Cloud SQL...")  # to see if the task is able to connect to your Cloud SQL instance
+    try:
+        print(f"pool: {pool}")  # to see if the pool variable is defined correctly
+        metadata_df.to_sql('Companies_metadata', pool, if_exists='append', index=False)
+        print("Metadata loaded to Cloud SQL")
+    except Exception as e:
+        print(f"Error while loading data to Cloud SQL: {e}")  # to see if there are any errors while loading data to Cloud SQL
+
 
 with dag:  
 
