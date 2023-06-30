@@ -220,28 +220,28 @@ services:
   #         - "30002:8001"
   #     restart: always
 
-  # # Backend
-  # fastapi:
-  #   container_name: fastapi
-  #   #for dockerfile
-  #   build:
-  #       context: ./fastapi
-  #       # context: fastapi 
-  #   restart: always
-  #   ports:
-  #       - "30004:8095"
+  # Backend
+  fastapi:
+    container_name: fastapi
+    #for dockerfile
+    build:
+        context: ./fastapi
+        # context: fastapi 
+    restart: always
+    ports:
+        - "30004:8095"
 
-  # # Frontend 
-  # streamlit:
-  #   container_name: streamlit
-  #   build:
-  #       context: ./streamlit 
-  #       # context: streamlit 
-  #   restart: always
-  #   ports:
-  #       - "30005:8090"
-  #   environment:
-  #       - API_URL=http://fastapi:8095
+  # Frontend 
+  streamlit:
+    container_name: streamlit
+    build:
+        context: ./streamlit 
+        # context: streamlit 
+    restart: always
+    ports:
+        - "30005:8090"
+    environment:
+        - API_URL=http://fastapi:8095
 
 volumes:
   postgres-db-volume:

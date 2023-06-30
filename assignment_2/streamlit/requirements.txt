@@ -1,7 +1,8 @@
 streamlit
 openai
 pinecone-client[grpc]
-sentence-transformers
+#sentence-transformers
 langchain
 #pypdf
 tiktoken
+google-cloud-storage
