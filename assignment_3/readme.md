@@ -60,7 +60,7 @@ You will need to provide these values to your Streamlit app in order to use the 
 
 ## Additional Resources
 
-For more detailed information about the project, including snapshots of the working application, please refer to this [codelab](https://codelabs-preview.appspot.com/?file_id=1jnmISjl4bqLAJlhWXvqKj_8e2liZOaHPRmzbPqo4kLo#0)
+For more detailed information about the project, including snapshots of the working application, please refer to [codelab](https://codelabs-preview.appspot.com/?file_id=1jnmISjl4bqLAJlhWXvqKj_8e2liZOaHPRmzbPqo4kLo#0)
 
 
 ## Authors
