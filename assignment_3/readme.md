@@ -30,7 +30,7 @@ The Streamlit app has been dockerized, which means that it can be easily deploye
 
 
 ## Cloud hosting
-The Streamlit app is also hosted on Google Cloud Platform (GCP) at IP address ----, which makes it easy to deploy and scale the app as needed.
+The Streamlit app is also hosted on Google Cloud Platform (GCP) at IP address '34.23.24.122' which makes it easy to deploy and scale the app as needed.
 - Streamlit: `8090`
 
 ## Azure Keys and Endpoint
@@ -60,7 +60,7 @@ You will need to provide these values to your Streamlit app in order to use the 
 
 ## Additional Resources
 
-For more detailed information about the project, including snapshots of the working application, please refer to this [codelab]
+For more detailed information about the project, including snapshots of the working application, please refer to this [codelab](https://codelabs-preview.appspot.com/?file_id=1jnmISjl4bqLAJlhWXvqKj_8e2liZOaHPRmzbPqo4kLo#0)
 
 
 ## Authors
