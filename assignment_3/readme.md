@@ -28,8 +28,10 @@ The Streamlit app has been dockerized, which means that it can be easily deploye
 
 3. Access your Streamlit app by visiting `http://localhost:8090` in your web browser.
 
-The Streamlit app is also hosted on Google Cloud Platform (GCP) on ---, which makes it easy to deploy and scale the app as needed.
 
+## Cloud hosting
+The Streamlit app is also hosted on Google Cloud Platform (GCP) at IP address ----, which makes it easy to deploy and scale the app as needed.
+- Streamlit: `8090`
 
 ## Azure Keys and Endpoint
 
@@ -54,6 +56,19 @@ In order to use the Azure Computer Vision API in your Streamlit app, you will ne
 9. Copy the value of "Endpoint". This is your Azure Computer Vision API endpoint.
 
 You will need to provide these values to your Streamlit app in order to use the Azure Computer Vision API. You can do this by setting environment variables or by passing them as arguments when running your app.
+
+
+## Additional Resources
+
+For more detailed information about the project, including snapshots of the working application, please refer to this [codelab]
+
+
+## Authors
+
+- Riya
+- Sukruth
+- Vedant
+
 
 ## References
 
