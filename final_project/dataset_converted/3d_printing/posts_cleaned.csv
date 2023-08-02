@@ -1,472 +1,302 @@
 post_id,posttypeid,post_creationdate,post_score,post_viewcount,post_body,post_title,post_tags,post_body_accepted,post_score_accepted
-9,2,2016-01-12T18:58:04.410,18,,"<p>Almost all 3D printers have issues that could cause health problems.</p>
+548,1,2016-02-10T14:52:38.880,9,578.0,"<p>Fair warning: I am a complete novice in 3-D printing. This will, hopefully, be the first thing I've ever printed. </p>
 
-<p>FDM/FFF printers heat plastic to a temperature that may cause it to off-gas, and these byproducts may not be healthy.</p>
+<p>I want to make a Constant Velocity Joint for a camera stabilizer I'm making. I've been looking at different options, and it seems that a double cardan joint would be easiest to design/make/print. However, the intended use involves force being applied along the shaft, into the joint, which I think in a double cardan will cause ""buckling"" (forcing the joint into a 90° zig-zag). </p>
 
-<p>SLA printers often use epoxies that may off-gas, or may be somewhat toxic prior to being cured.</p>
+<p>Also, perhaps I'm wrong, but I don't see it rotating very smoothly (pretty essential for camera stabilization.) </p>
 
-<p>Powder based printers can also off-gas, in addition to the powder itself presenting a possible hazard.</p>
+<p>So my next idea is a Tracta type, with bearings. The question is: </p>
 
-<p>Many hobbyist and small companies dance around the problem, and suggest that the machines always be used in well ventillated areas.  Professional machines often have filters and ventillation systems built in.</p>
+<p>Can you print bearings inside their housing? or do movable parts have to be printed separately? </p>
+",Printing a CV joint,<3d-design>,,
+1053,1,2016-04-27T13:12:32.580,1,455.0,"<p>In Google Sketchup, I have text on a surface that I'd like to push / pull so that the text is etched into, rather than placed upon the surface.  I can't seem to figure this out, the text disappears when I try to push it into the surface and I'm not quite sure what else to try.  Any advice?</p>
+",Pushing Text into surface - Google Sketchup,<3d-design>,"<p>Definitely you have to perform substract operation.
+Take a look <a href=""https://www.youtube.com/watch?v=inwYs-Fs-mM"" rel=""nofollow"">here</a></p>
 
-<p>Rather than trying to find a ""perfectly safe"" 3D printer, spend some time deciding what you want to use one for, find printers suitable for your use, and expect that you'll need to provide reasonable ventilation for almost any printer.  Plan your installation for that, and you should be able to make any printer safe for your required use.</p>
+<p>Extrude text and then substract it from the object to etch in.</p>
+",1.0
+1264,1,2016-06-05T20:46:02.477,4,288.0,"<p>What type of printer would one recommend to print and cast car body parts fast on a large scale? Also if I were to print parts for restoration would I need licences from the manufactures?</p>
+",Car Body shop Printers,<3d-design>,,
+1383,1,2016-06-18T09:54:45.630,9,2149.0,"<p>Is there any simple way of creating tappered thread in OpenSCAD? I need something like 10 mm in diameter at the end, 9 at the top and the height of 10 mm.</p>
+",How to create tappered thread in OpenSCAD?,<3d-design>,"<p>I have contacted Dan Kirshner (the author of openscad threads library) and he has updated the library. Now it supports tapered threads. Thanks, Dan!</p>
 
-<p>If, however, you plan on setting up a printer farm with many printers, and plan to have yourself or others spend significant time operating them, I suggest you work with a health and safety professional and have them identify possible hazards and plan mitigation.</p>
-",,,,
-12,2,2016-01-12T19:13:00.710,23,,"<p>There is very little information about safety available, as home 3D printers are relatively new. However, plastics such as ABS have a long history in making plastic products, and a study found that at traditional manufacturing methods (such as injection molding and hot wire cutting) <a href=""http://annhyg.oxfordjournals.org/content/57/3/399"">do not release dangerous levels of carcinogens and/or respiratory sensitizers in to the air</a>.</p>
+<p><a href=""http://dkprojects.net/openscad-threads/"" rel=""nofollow"">Thread-drawing modules for OpenSCAD</a></p>
+",4.0
+2697,1,2016-08-28T00:32:36.523,-2,1752.0,"<p>I am an absolute beginner when it comes to 3d printing. I want to get into the hobby by designing aero automotive parts such as fender flares, custom gauge and switch pods, lips etc. I've never taken a CAD course but I would say I'm proficient enough with computers as I work as a developer. My uncle is an architect and it seems like autocad might be something good to go with. What are some other good alternatives that allow accurate modeling down to millimeters and possibly breaking larger objects into smaller 3d printable pieces to mash together? </p>
+",What is a good software for designing car parts,<3d-design>,"<p>You've avoided a number of attributes of a poor question by specifying your objective in detail, while also providing some indication of your experience. AutoCAD is not well known as being 3d printer friendly, although a skilled AutoCAD design user may be able to create acceptable models.</p>
 
-<p>Of course, 3D printers are not among the processes covered in the study. In home 3D printing circles, <a href=""http://www.sciencedirect.com/science/article/pii/S1352231013005086"">this study</a> that looks at ultrafine particle (UFP) emissions, is often cited. It finds that printing ABS releases relatively high levels of UFP's and PLA releases significantly fewer (but still quite a large amount). However, it is unclear whether/how dangerous these UFP's are in the amounts emitted.</p>
+<p>One could consider more organic modeling software such as Blender, although it works in reverse of my comment above. It's great for free-form model building but not so much for engineering type construction. Again, a competent Blender user can avail himself of the parametric aspects of the software, but it's more work than one would necessarily desire to engage.</p>
 
-<p>It is often suggested that PLA, partly because of the reduced UFP emissions is safer to print than ABS, partly because of its ""natural"" origins as it can be derived from materials such as cornstarch. I would caution against this line of reasoning since ""natural"" materials can still be poisonous (snake venom is natural, after all) and the cornstarch is heavily processed so it hardly resembles its original form. The lower UFP emissions may suggest it is safer, but the study is only quantitative, not qualitative.</p>
+<p>SolidWorks has a number of followers in the 3d modeling community. My experience with the software has shown me that it can be learned fairly quickly and is powerful enough to allow one to explode creatively over time.</p>
 
-<p>That said, PLA does probably pose less of a risk (despite my earlier argumentation against ""natural"" materials, PLA does play quite nicely with the human body), but I contend the risk with ABS is not too large anyways, given that it has been safely used in factories for decades.</p>
+<p>The structure of Solidworks workflow fits in directly with your description, both to the reference to accurate modeling as well as the break-apart aspect. The construction of a model in SW is done via sketches and various actions performed on resultant objects created from those sketches. It's not free software, rather pricey, but it may also save you so much work as to pay for itself over time.</p>
 
-<p><a href=""http://fire.nist.gov/bfrlpubs/fire86/art017.html"">Another study</a> is often miscited, supposedly saying that 3D printing ABS releases hydrogen cyanide. The study only looks at the thermal decomposition of ABS, which happens at significantly higher temperatures than are reached during printing (but a significantly malfunctioning printer might cause toxic gasses to be released, but I contend that at that point you should worry about your printer being on fire, rather than temporary exposure to some toxins).</p>
+<p>There are other options, of course, some of which are free to students and hobbyists. I did a quick Google search for ""free parametric 3d modeling software"" which resulted in this link:</p>
 
-<p>There are no printers out there that are fundamentally safer than others. However, some printers have an enclosure (containing the fumes) and some even have a carbon filter and a fan for fume extraction. If you would like to err on the side of caution, this might be a good choice (but again, it is not clear if a carbon filter is totally effective).</p>
+<p><a href=""https://www.matterhackers.com/articles/finding-the-right-3d-modeling-software-for-you"" rel=""nofollow"">https://www.matterhackers.com/articles/finding-the-right-3d-modeling-software-for-you</a></p>
 
-<p>Finally, as printers are generally quite noisy it tends to be preferrable to keep your printer in a separate room from where you usually work. In this case, fume exposure (during the few minutes that you go to check on your print) is minimal, and the potential advantages of a ""safer"" printers or using ""safer"" materials diminish.</p>
+<p>You will find many suitable programs in the list generated from that link, as well as many that are unsuitable for the reasons mentioned previously.</p>
 
-<p>Incidental exposure as a hobbyist is probably not a big deal; workers in factories are exposed to the fumes of melted plastic their entire lives and they don't seem to be dropping dead. On the other hand, if you are going to be printing structurally then it is probably preferable to move your printer to a separate room, if not because of health and safety because of the noise.</p>
-",,,,
-15,2,2016-01-12T19:25:07.817,5,,"<p>Apart from the inherent process itself and direct health hazards from that, many 3D printers also require some complementary technology to work.</p>
+<p>Consider also to view YouTube videos of your candidate selections. Most of the programs referenced will have tutorial videos which can give you a clearer idea of how well it fits your needs and perhaps how easily it can be understood.</p>
+",2.0
+3222,1,2016-12-18T15:40:13.923,5,654.0,"<p>New to 3D printing so sorry if this is a simple/basic question.  I've done a ton of Googling but can't seem to find the answer...</p>
 
-<p><a href=""/questions/tagged/fdm"" class=""post-tag"" title=""show questions tagged &#39;fdm&#39;"" rel=""tag"">fdm</a> printers have a printing head that needs to move around in 3D space. <strong>Moving machinery parts can be a hazard</strong>. In a home/hobbyist environment with children for example, I would recommend to buy a printer with a housing. </p>
+<p>When I download a .STL file and open it in Print Studio, it opens as a HUGE object - much larger than you would ever want it.  How to I get the file to open at scale to how the designer wanted it.  For instance the following file from Thingaverse has specific size but I'm unsure of how to print it at that exact size.  I'm assuming that the info is able to be stored somewhere in the .STL file.</p>
 
-<p>""open"" designs often feature <strong>bare electronics</strong> mounted directly to the printer structure. This rises the possibility of short circuits and electric shock.</p>
+<p><a href=""http://www.thingiverse.com/make:181631"" rel=""nofollow noreferrer"">http://www.thingiverse.com/make:181631</a></p>
+",Opening .STL to scale in Print Studio (Dremel),<3d-design>,,
+3557,1,2017-02-10T04:02:14.437,4,1625.0,"<p>We have a toy with some broken parts, an Executivity Gear Master. I don't think it's made anymore. Some tiny parts were easy to break and we'd like to 3d print some replacement parts. We don't have CAD or any other 3D drawings file, just a few of the unbroken parts. What's the best way to get some of these printed? Do I have to turn this into a 3D file first? (Is there a quick way to do that from the part itself?) Or is there a way to do it where I just need the part, rather like getting a spare key cut from a pre-existing key being used as the template?</p>
 
-<p>The printers that heat material often do so at very high temperatures. <strong>Hot parts of the printer</strong> should not be touched.</p>
-",,,,
-17,2,2016-01-12T19:27:20.113,5,,"<p>I""m no expert on this, but the article at <a href=""https://en.wikipedia.org/wiki/Amorphous_metal"" rel=""noreferrer"">https://en.wikipedia.org/wiki/Amorphous_metal</a> may be relevant for you.</p>
+<p>Here's a photo of the part I need to print. Placed next to a quarter for size comparison:</p>
 
-<p>There are some special alloys, such as gold/silicon and various titanium-based ones, that become ""bulk metal glasses"" if cooled extremely quickly (for example, by sputtering onto a spinning cold surface). The speed of cooling prevents crystal formation. Early BMGs were quite strong but brittle; improvements have reduced brittleness and required cooling speed.</p>
-",,,,
-18,2,2016-01-12T19:28:04.263,10,,"<p>PET(G) is a strong contender. It is very strong and water-resistant, and as such is often used to make pop bottles.</p>
+<p><a href=""https://i.stack.imgur.com/xZ6VN.jpg"" rel=""noreferrer""><img src=""https://i.stack.imgur.com/xZ6VN.jpg"" alt=""enter image description here""></a> </p>
+",How do you 3d print from an existing part when you have no CAD drawings?,<3d-design>,"<p>You can't print without a 3D model first. There are various ways you can go about this (or pay someone to do the same for you, ignoring any IP issues).</p>
 
-<p>PLA has a reputation for being ""biodegradable"" and therefore it is often discouraged to use PLA outside and/or in contact with water. However, PLA only biodegrades under very specific conditions which it won't generally be exposed to so it can be used (though, as a harder and less flexible material it is more likely to be damaged by hail).</p>
+<p>It is possible to generate a 3D model from a sequence of 2D photographs (there is even <a href=""http://www.123dapp.com/catch"" rel=""nofollow noreferrer"">software which will allow you to do this freehand on a phone</a>). Equipment exists which is specifically designed for this process, and you have likely heard of the services which allow you to get a 3D print of your own body.</p>
 
-<p>ABS and Nylon are good choices as well. Basically, any plastic you have on hand will last for years, even in an outside application.</p>
-",,,,
-21,2,2016-01-12T19:32:33.503,-1,,"<p>It is called <strong>Acetone Finishing</strong></p>
+<p>You can take a 2D photo and import this into a 3D drawing package. Copy the features into a mesh, and extrude it. This might be a good approach for a complex shape, particularly if appearance is more important than precision.</p>
 
-<p>Basically the 3D printed part stays in acetone vapor and the outer shell turns to smooth surface. I have heard that it works better with ABS. </p>
+<p>For the shape you show here, the simplest approach for anyone with modeling experience is maybe to just draw it from scratch (with a few key dimensions). Your shape is only made up of a handful of primitive shapes.</p>
 
-<p>This article shows how <em>with videos</em>:</p>
+<p>Experiment in <a href=""https://www.tinkercad.com/"" rel=""nofollow noreferrer"">TinkerCad</a> which is an online 3D editor to see if you can handle this yourself. It's not clear if you have your own printer, but this sort of part should cost less than $1 to print.</p>
+
+<p>Strength might be a problem if they are already breaking...</p>
+",6.0
+3613,1,2017-02-16T13:15:45.913,9,625.0,"<p>I have <a href=""https://ultimaker.com/en/products/ultimaker-2-plus"" rel=""noreferrer"" title=""Ultimaker 2+"">Ultimaker 2+ 3D Printer</a> and I need to print a piece that doesn't fit within the build volume of the printer. Even though it would fit I'd still need to print it in two parts because I'll need to fit some equipment inside. I could use glue to put it together, but I'll need to remove the equipment later.</p>
+
+<p>So I'm trying to find some feasible solutions how to attach/snap it together. The wall thickness is currently 3mm.</p>
+
+<p><a href=""https://i.stack.imgur.com/FFckZ.png"" rel=""noreferrer"" title=""Cut Plane""><img src=""https://i.stack.imgur.com/FFckZ.png"" alt=""Cut Plane"" title=""Cut Plane""></a></p>
+
+<p>Plane for cutting the part.</p>
+
+<p><a href=""https://i.stack.imgur.com/L2hhV.png"" rel=""noreferrer"" title=""Cut Cross Section""><img src=""https://i.stack.imgur.com/L2hhV.png"" alt=""Cross Section where I split the part"" title=""Cut Cross Section""></a></p>
+
+<p>Cut cross section.</p>
+",Feasible 3D Printed Snap Connectors,<3d-design>,,
+4340,1,2017-07-04T20:17:13.317,2,1057.0,"<p>This is a line drawing and I would like to print it a couple of mm high. I cannot figure out how to get this line drawing filled. I converted to SVG with Inkscape, used GIMP, took it online to TinkerCad and tried it with Onshape but all I ever get is just the line and this does not work well on my printer. What is a smart way to get this filled in and ready to go?</p>
+
+<p>I use TinkerCad to convert to STL and that works fine. So I could also try to edit the STL in stead of the SVG file.</p>
+
+<p>Maybe I should print the original scanned image (TIFF) and then fill it by hand with black ink and then scan it and convert it to SVG but that sounds really dumb.</p>
+
+<p><a href=""https://i.stack.imgur.com/qzDoY.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/qzDoY.png"" alt=""should be SVG""></a></p>
+
+<p><strong>UPDATE</strong><br>
+I went back to the original drawing and using the bucket tool. The result is a rather noisy image and I need it to be sharp and tight to be able to convert it to a good SVG later on.
+Looks like it is more of a graphics design question now..<br>
+<a href=""https://graphicdesign.stackexchange.com/questions/94773/from-drawing-to-3d-print"">https://graphicdesign.stackexchange.com/questions/94773/from-drawing-to-3d-print</a></p>
+
+<p><a href=""https://i.stack.imgur.com/jakBT.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/jakBT.png"" alt=""enter image description here""></a></p>
+",fill in svg or stl design,<3d-design>,,
+4397,1,2017-07-18T13:27:42.120,4,5896.0,"<p>I am designing a door to put on a small enclosure that will open and close upon pressing a button. The idea is something similar to what you would find on an external DVD reader. My problem is with the actual button I understand I will need to use springs for this but I can not figure out the mechanics of the button.</p>
+
+<p>Are there 3D-printable, mechanical designs that could fit for this purpose?</p>
+",Mechanics for modelling a push button latch spring,<3d-design>,,
+4672,1,2017-09-29T16:57:09.640,2,251.0,"<p>What is a good tool to use to design a back plate for a Ring Doorbell?  The shape will essentially be a wedge shape, tilting the doorbell to the side and down a bit.  I'll need to iterate over a few prints, so want to be able to tweak it as I go.</p>
+
+<p>I've found TinkerCAD doesn't let me adjust shape sizes, stretching one axis but not the other.</p>
+",Designing back plate for Ring Doorbell,<3d-design>,,
+4681,1,2017-10-01T01:36:14.353,3,1877.0,"<p>I am new to Fusion 360 and I think I'm going straight to something complicated. Is there a way to make a nose cone for a model rocket? What tools would one you to accomplish this?</p>
+",Make a nose cone in Fusion 360,<3d-design>,"<p>If you have a specific shape in mind and can create a sketch to represent that shape, you are halfway to your goal.</p>
+
+<p>The concept is simple. Create a single line sketch that would represent the desired curve, starting from, in this example, the nose of the cone and traveling to the base. Create only one-half of the nose cone curve and maintain a ""standard"" axis reference, say, using the Y-axis as the rotation point.</p>
+
+<p>The process is called <a href=""http://help.autodesk.com/view/fusion360/ENU/?guid=GUID-5C62F370-7AB4-4DFD-BE61-F8830F30A6D7"" rel=""noreferrer"">revolve. Fusion 360</a> supports this action directly.</p>
+
+<pre><code>In the Sculpt workspace, choose Create Revolve.
+Select the profile to revolve.
+In the Revolve dialog:
+    Click Axis and then select the axis to revolve around.
+    Choose Full or Angle to specify whether the revolution is full or to a specific angle.
+    For Direction choose One Side, Two Side or Symmetrical.
+    For Symmetry, choose None or Circular.
+</code></pre>
+
+<p>The above text is taken directly from the link. The specific web site also includes a Flash video of the steps involved.</p>
+
+<p>If thickness is required for your creation, consider to draw the sketch from the nose to the base, then use Offset or hand sketch in a parallel line that returns to the nose. Ensure the base segment is joined and that the nose segments are open and are aligned to the Y-axis.</p>
+
+<p>As the sketch is revolved, the nose sections will ""close"" while the base creates the closure necessary to make a solid that is hollow within and open at the bottom.</p>
+
+<p>Use The Google or your preferred search engine with the terms ""Fusion 360 Revolve"" to find many tutorials and videos with the same information presented in various ways.</p>
+",4.0
+4764,1,2017-10-18T22:13:55.230,4,3514.0,"<p>Currently, 3D Builder is telling me ""one or more objects are invalidly defined. Click here to repair."" What is this and what does it mean? When I click it, it totally messes up my model (I can't tell what it even did due to the orthogonal camera). Model stats: </p>
 
 <ul>
-<li>(<a href=""https://ultimaker.com/en/community/10412-acetone-finishing-on-pla"" rel=""nofollow noreferrer"">Acetone Finishing on PLA</a> - dead link). </li>
-<li>New link: <a href=""https://community.ultimaker.com/topic/8530-acetone-finishing-on-pla/"" rel=""nofollow noreferrer"">Acetone Finishing on PLA</a> </li>
+<li>Made with Sketchup</li>
+<li>Used STL Exporter to export it</li>
+<li>Last I knew what the repairing did to it was to remove my sinks and reduced them to holes in the floor</li>
+<li>I used ASCII encoding for my STL (I tried using Binary, but it didn't help)</li>
+<li>I tried subdividing it but it didn't help.</li>
 </ul>
-",,,,
-23,2,2016-01-12T19:34:41.753,9,,"<p>Use Taulman t-glase and after a light sanding with really fine paper (optional really, but go for it if you can), spray it with polyurethane varnish or something similar. Check out the article <a href=""http://3dprint.com/29292/taulman-hacks-clear-t-glase-3d-printing-material/"">here</a>.</p>
-",,,,
-29,2,2016-01-12T19:45:28.083,7,,"<p>You can make a mold from the print and then get a cast from that mold with a clear casting material.</p>
-",,,,
-31,2,2016-01-12T19:47:15.650,6,,"<p>Your two easiest options are dipping your print in acetone or giving it an acetone vapor bath. Note this process generally only works with <strong>ABS</strong> not <strong>PLA</strong>, with the exception of some brands. There are <a href=""http://fabsterdam.com/3dprinting/smoothing-pla/"" rel=""noreferrer"">many</a> <a href=""http://fabsterdam.com/3dprinting/smooooooth/"" rel=""noreferrer"">articles</a> <a href=""https://ultimaker.com/en/community/10412-acetone-finishing-on-pla"" rel=""noreferrer"">online</a> where you can learn more about the process.</p>
 
-<p>Aside from finishing, you will generally get a smoother looking end result by <strong>lowering the layer thickness</strong>, and <strong>removing any hysteresis/wobble</strong> in your print head making sure it's well calibrated.</p>
-",,,,
-34,2,2016-01-12T19:54:46.600,51,,"<p><a href=""https://en.wikipedia.org/wiki/Polylactic_acid"">PLA</a> parts can be finished with a coat of epoxy like <a href=""http://www.smooth-on.com/Epoxy-Coatings-XTC/c1397_1429/index.html"">XTC-3D from Smooth-On</a>. This will smooth out the part and give it a pretty nice shine.</p>
+<p>Screenshots:</p>
 
-<p>I've also had a fair amount of success sanding prints, giving them a coat of automotive filler primer, and using glossy spray paint.</p>
+<p>This is a picture of the model before repairing:
+<a href=""https://www.mediafire.com/convkey/173c/2026o54i3pm7h1szg.jpg"" rel=""noreferrer""><img src=""https://www.mediafire.com/convkey/173c/2026o54i3pm7h1szg.jpg"" alt=""This is a picture of the model before repairing""></a></p>
 
-<p>You can also get great results with an acetone <a href=""https://en.wikipedia.org/wiki/Vapor_polishing"">vapor finish</a> if you're willing to switch to <a href=""https://en.wikipedia.org/wiki/Acrylonitrile_butadiene_styrene"">ABS</a>. Though that will require a heated bed and can be a bit more finicky to work with than PLA.</p>
-",,,,
-36,2,2016-01-12T19:58:17.790,32,,"<p>Acetone vaporing is a great way to smooth ABS prints. For PLA, however, acetone smoothing does not work. An <a href=""http://fabsterdam.com/3dprinting/smoothing-pla/"" rel=""noreferrer"">article about smoothing PLA</a> says:</p>
+<p>This is a picture of the model after repairing:
+<a href=""https://www.mediafire.com/convkey/cd41/uh5e97ak6j79zoyzg.jpg"" rel=""noreferrer""><img src=""https://www.mediafire.com/convkey/cd41/uh5e97ak6j79zoyzg.jpg"" alt=""This is a picture of the model after repairing""></a></p>
 
-<blockquote>
-  <p>This is a pity, since PLA is much easier to work with than ABS. We found some solutions for smoothing PLA, but most involve rather dangerous-sounding chemicals such as <a href=""http://www.protoparadigm.com/news-updates/vapor-smoothing-and-polishing-pla-with-tetrahydrofuran-thf/"" rel=""noreferrer"">Tetrahydrofuran</a> and <a href=""http://www.thingiverse.com/thing:74093"" rel=""noreferrer"">Dichloromethane</a>. The one exception we found is <a href=""http://www.printedsolid.com/smoothpla/"" rel=""noreferrer"">Ethyl Acetate</a> which seems to give good results and is (relatively) safe.</p>
-</blockquote>
+<p>(Just in case you wonder. I actually <strong>have</strong> to use STL for this project)</p>
+","3D Builder is Saying ""One or more objects is invalidly defined""",<3d-design>,"<p>How thick are those walls? 3D printers cannot print zero-width surfaces (and slicers cannot slice them). 3D Builder has tried to make your model printable, but obviously not in the way that you might have hoped for. You need to go back to Sketchup (or some other CAD package) and give the walls a definite thickness (and one big enough for a 3D printer to handle).</p>
+",3.0
+5639,1,2018-03-16T09:25:15.337,1,1851.0,"<p>I have an STL file that I want to add a tribal tattoo to with the end goal of getting it printed in colour sandstone from Shapeways, or in full colour on an Mcor Arke at some point, but I'm not really sure where to go. </p>
 
-<p>Other article mentioned <a href=""http://printedsolid.com/blogs/news/37035395-vapor-smoothing-3d-printed-parts-pla-colorfabb-xt-t-glase-pet"" rel=""noreferrer"">MEK Substitute</a>, which is Ethyl Acetate as well. You could also try some kind of polisher manufactured for 3D print results, such as <a href=""http://www.smooth-on.com/Epoxy-Coatings-XTC/c1397_1429/index.html"" rel=""noreferrer"">XTC-3D</a>. Here is a real photo of XTC-3D on PLA:</p>
+<p>I've looked at Microsoft Paint 3D. It's ok, but I cannot get the paint job symmetric. It outputs the .3mf format which the Arke will eventually handle with their Orange software, but it won't export into anything Shapeways will accept.</p>
 
-<p><a href=""https://i.stack.imgur.com/Auq4H.jpg"" rel=""noreferrer""><img src=""https://i.stack.imgur.com/Auq4H.jpg"" alt=""XTC-3D on PLA, image courtesy of tiskni3ddoma.cz""></a></p>
+<p>I've looked at UV unwrapping in Blender, but it seems I have to create the image in another graphics program and then import it... but I can't really work out where the images will be applied to the object, and then when I'm done it seems I cannot export the bits I'm expecting. On the plus side I have the mirror function so I can just paint one side and it's symmetrical.</p>
 
-<p>Ultimaker also <a href=""https://ultimaker.com/en/tips-tricks/17897-vapor-treating"" rel=""noreferrer"">suggests using chloroform</a> for smoothing PLA prints.</p>
+<p>I've looked briefly at Maya and 3Ds Max, but they are eyewateringly expensive, way out of my league.</p>
 
-<p>If your parts are really uneven, it might be a symptom of something bad going on with your print(er), you might want to read <a href=""https://www.evernote.com/shard/s211/sh/701c36c4-ddd5-4669-a482-953d8924c71d/1ef992988295487c98c268dcdd2d687e"" rel=""noreferrer"">Taxonomy of Z axis artifacts in extrusion-based 3d printing</a>.</p>
+<p>Blender with some form of layers for the image might be really useful so I can make the tattoo in bits and then apply them to parts. I've kind of seen how you can split the model into panels but my brain is struggling to get round this as it's really quite hit and miss... and exporting seems to be a problem, although DAE and the texture will go to Shapeways, assuming the DAE has the texture layout embedded. FBX seems to go into Paint 3D and then I can export it to 3MF for the Arke.</p>
 
-<blockquote>
-  <p>The most recognizeable cause of this problem is Z-wobble. It is caused by the misalignment of layers in a repeating pattern with a period equal to the Z thread pitch (technically the lead, but this is the same as the pitch unless you are using a multi-start thread), and was a famous problem of the original Makebot, the CupcakeCNC.</p>
-</blockquote>
-",,,,
-37,2,2016-01-12T19:59:01.223,3,,"<p>As long as you maintain each printer and keep a proper calibration, go for it, this is what they were designed to do, I've even made replacement parts for myself.</p>
-<p>Unfortunately the <a href=""https://en.wikipedia.org/wiki/RepRap_project#History"" rel=""nofollow noreferrer"">RepRap project just shut down on January 15th 2016</a> due to their lack of sales.</p>
-<p>I have a reprap that came from a reprap, and has made another reprap.</p>
-<p>Just make sure that when printing out the pieces for the next you are properly calibrated, otherwise the next machine might be built crooked;</p>
-<p>Your only limitations will be the electronics pieces and the small amount of hardware that you will need to buy.</p>
-",,,,
-39,2,2016-01-12T20:00:22.177,16,,"<p>The files used to print these objects are digital, and do not degrade in any way after each printing. There are no side effects or degradation that occurs over time due simply to printing them multiple times.</p>
+<p>Has anyone got any helping pointers for this confused noob?</p>
 
-<p>This is the RepRap philosophy, and the machines are actually designed with enough tolerance for printing and building mistakes that even if the print isn't perfect, it will not only work fine, but it can print a printer better than it was printed, with some care and attention to calibration.</p>
+<p>Thanks</p>
+",Painting an STL file,<3d-design>,"<p>It is indeed more related to the <a href=""https://blender.stackexchange.com"">blender forum </a> than the 3d printing one. </p>
 
-<p>The process still takes a lot of human intervention, in the way of building the new printer and properly calibrating it.  If there are errors in the printer or the prints it produces, they can almost always be attributed to the builder/calibrator/user, and not to the design or the fact it's the Nth generation of printer.</p>
-",,,,
-41,2,2016-01-12T20:02:33.247,12,,"<p>The easiest way is as you currently do: model the pieces by hand, using (digital) calipers to measure them.</p>
+<p>You can start by looking at <a href=""https://blender.stackexchange.com/questions/65853/can-i-paint-on-my-objects"">this post</a> from blender.stackexchange.com which explain how to unwrap and paint on a 3d object. You can also paint the texture on a 2d software like <a href=""https://www.gimp.org/"" rel=""nofollow noreferrer"">Gimp</a> and then put it in the UV Image editor of Blender. Then you should be able to export your project (with the texture) in a suitable format for 3d print.</p>
+",0.0
+5935,1,2018-05-07T18:57:16.750,7,6157.0,"<p>I want to know how to make a mold of a 3D design in .stl format.</p>
 
-<p>Scanning technology isn't very good, and the models are not of printable quality. Usually, fixing a scan is more work than modeling an item from scratch.</p>
-",,,,
-42,2,2016-01-12T20:05:08.103,5,,"<p>The best option is to find somebody in need of 3&nbsp;mm filament and trade them for it (either in exchange for 1.75&nbsp;mm filament or in exchange for legal tender with which to buy said filament).</p>
+<p>Suppose I have a 3D partin .stl format (for e.g. a cylinder) and I want to make/design a mold for this object (i.e. the structure through which I could make the cylinder). Is there any way to do so? Are there any tools to do so?</p>
 
-<p>The next best option would be to cut it into small pieces, and feed those into a filament extrusion system such as the <a href=""http://www.filastruder.com/"" rel=""nofollow noreferrer"">filastruder</a>.</p>
-",,,,
-43,2,2016-01-12T20:05:22.530,7,,"<p>In theory, making filament is easy.  You take a 3&nbsp;mm hotend with a 1.75&nbsp;mm hole, and extrude the 3&nbsp;mm (sometimes actually 2.85&nbsp;mm) filament, let it cool, and then reel it up.</p>
+<p>My requirement is as follows: I have an .stl file of a design and need to develop the CAD files for its mold. I will then need to 3D print these molds. I would require to add a hole to pour in liquid (resin based) raw material which hardens with time. </p>
+",Generating mold from stl file of the 3D drawing of the object,<3d-design>,,
+6413,1,2018-07-16T22:56:30.507,3,275.0,"<p>Scenario:  I'm cruising <a href=""https://www.thingiverse.com/"" rel=""nofollow noreferrer"">Thingiverse</a>, and I find the awesomest thing.  I NEED THIS IN MY LIFE.  I download it, print it, and for whatever reason, it doesn't work quite right.  OK, no big deal, I'll just download the source because the maker was so kind, modify it ever so slightly, and I will have the most awesomest thing evar!</p>
 
-<p>In reality there are a lot of pitfalls to making filament - if the pressure isn't even, the hole not perfect, the temperature uneven, you can end up with oval filament, filament with bubbles, or worse.  If you are over temperature you may damage the filament and it could look good, but not melt correctly when used.  If you reel it too fast you may thin it out more than the intended diameter, or too slow and you may thicken it. A lot of hotends use steppers, which may result in ripples in the filament, so you may end up building a nearly custom filament machine.</p>
+<p>Several hours later, I realized that I could have designed it from scratch in a software that is way more user friendly, deterministic, simpler, etc.</p>
 
-<p>Resolving all these problems is probably not worth simply selling or giving away the filament to someone that can use it, and buying the right size for your machine.</p>
+<p>And then I <strong>do</strong> redesign it.  From scratch.  Maybe taking a measurement or two from the thing, or something related to the thing.  And I refine it, and it turns out better than the original was.</p>
 
-<p>If you are still interested, though, you might as well go all the way and build a full filament extruder that accepts raw plastic feedstock (usually pellets) as well as your filament, and convert it that way, then continue using it to create your own filament.</p>
-",,,,
-46,2,2016-01-12T20:09:47.153,7,,"<p>The reprap printers have often been compared to plants, providing fruits to you and the possibility to reproduce themselves.</p>
+<p>Did I make a new thing?  Did I only draw inspiration from the previous thing?  Did I make a derivative work?  Using Thingiverse's terminology, did I remix it?</p>
 
-<p>This analogy holds in both good and bad ways. Any life form can reproduce itself only so often without artefacts (mutations) being introduced.</p>
+<p>I'm looking for some canonical guidelines to refer to for the US.  Thingiverse can be an example, but god answers should not be limited to Thingiverse, nor my specific example.</p>
 
-<p>It takes a bit of <strong>skill to build, configure and run a reprap printer</strong>. While the parts can be passed on, that doesn't necessarily hold for gained experience.
-Chances are that the parts your printer produces are not as good as those that you have received to build the printer. At least not until you caught up on the learning curve.</p>
-
-<p>A reprap has a lot <strong>other parts that are not printed and can vary in quality independently from the printed parts</strong>. It makes a difference what steel rods are used, what driver circuit for the motors, etc. If you give printed parts away that are as good as those that you received yourself, the added parts are not necessarily as good as your.</p>
-
-<hr>
-
-<p>My recommendation would be that <strong>you and your friends get printer parts from that somebody and you build your printers together</strong>. While giving parts to others is a great thing, building 3D printers together with friends is greater. </p>
-",,,,
-47,2,2016-01-12T20:14:55.997,14,,"<p>If you'd like to print on RepRap like <a href=""https://en.wikipedia.org/wiki/Fused_deposition_modeling"" rel=""nofollow noreferrer"">FDM printers</a>, you cannot print from metal, but you can use some filament that tries to look like metal. I have good experience with <a href=""http://colorfabb.com/bronzefill"" rel=""nofollow noreferrer"">Bronzefill</a>, but there are plenty of others, just Google for <em>metal filament 3d printing</em>. Note that sometimes the parts need to be post-processed with a <em>rock tumbler</em>. There are <a href=""https://www.thingiverse.com/tag:rock_tumbler"" rel=""nofollow noreferrer"">several open source DIY tumblers</a> you can build and use.</p>
-
-<p>If you actually want to print from metal, you would need SLS (<a href=""https://en.wikipedia.org/wiki/Selective_laser_sintering"" rel=""nofollow noreferrer"">Selective laser sintering</a>) printer, which is much more expensive.</p>
-",,,,
-56,2,2016-01-12T20:29:13.343,7,,"<p>For ABS print, I recommend <a href=""https://en.wikipedia.org/wiki/Acetone"" rel=""nofollow"">acetone</a>. It is not a glue, but it will dissolve the plastic a bit and if you apply it to both connecting parts and push them together, they will stay connected after the acetone dries. However, it does not dry very fast and you have to be careful not to destroy the object.</p>
-
-<p>For PLA I usually use regular super glue (<a href=""https://en.wikipedia.org/wiki/Cyanoacrylate"" rel=""nofollow"">Cyanoacrylate</a>).</p>
-",,,,
-63,2,2016-01-12T20:43:25.427,15,,"<p>The biggest effect I've see on resolution is due to plastic stress due to thermal gradients.</p>
-
-<p>The higher resolution prints build up more layers of material, and each layer has a cumulative effect on thermal stress.  The upper layers pulling up more as they cool, and the lower layers curling up more strongly as the layer count is increased.</p>
-
-<p>To counteract this, a heated (or even just a draft free) enclosure makes a big difference.  Having a heated print bed helps significantly, as long as the bed itself resists deformation (a sheet metal or PCB bed will bend more than glass under the same tension, for instance).</p>
-
-<p>The actual plastic strength, however, appears increased.  Laying down thinner layers of material appears to increase the bond strength between layers.</p>
-",,,,
-66,2,2016-01-12T20:53:44.620,5,,"<p>Increasing the distance between the support/raft and the print should allow for easier removal.  Some slicers (such as Slic3r) have settings for 0.0 mm spacing for water dissoluble supports, and 0.2 mm for regular plastic supports.  </p>
-
-<p>Changing the upper surface of the support also can help.  Some slicers will leave the support as lines all the way to contact with the print.  Others will put a full layer on the top of the support before the print.  The full layer allows for better adhesion and the print not falling between the lines, but it makes it harder to remove.</p>
-
-<p>When the raft/support is done with lines, putting pressure on the lines in the opposite direction should cause them to break off.  As you break some of the outer ones, the support can be pulled down which will continuously rip the support off.  There may be a few pieces that remain.  These can be removed with wood chisels. Sliding the pointed end between the support and the print will cut into the plastic which removes the support.  <em>Note: always push the chisel away from you as it may slip.  You do not want a sharp blade moving uncontrollably towards your body./</em> </p>
-
-<p>A raft with a solid top:
-<a href=""https://i.stack.imgur.com/K3uKu.jpg"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/K3uKu.jpg"" alt=""Raft with solid top from Slic3r""></a></p>
-
-<p>A raft with only lines for the top:
-<a href=""https://i.stack.imgur.com/iMmvy.jpg"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/iMmvy.jpg"" alt=""Raft with no top (only lines) from Slic3r""></a></p>
-",,,,
-67,2,2016-01-12T20:55:28.330,32,,"<p>There are a few options.</p>
-
+<p>I ran into this issue while trying to print out a case for a Raspberry Pi Zero.  I'm not done redesigning it, but I've been wondering how I could share it on Thingiverse, and if any restrictions from the original model's licensing might affect me when I post my thing.</p>
+","Where is the line between ""inspiration"" and copy and derivative?",<3d-design>,,
+6911,1,2018-09-14T12:04:07.417,2,46.0,"<p>I am trying to make a controller(Who doesn't want that?) for PC. Just before starting the build I wondered if it would be hard to 3D print to scale of my board. So I was stuck in a paradox... 3D print first or PCB board design first?</p>
+<hr />
+<h3>Cons: PCB design first</h3>
 <ol>
-<li>Machines are available which grind the used plastic into fine pieces, melt it down, and extrude it as filament to be reused. <a href=""http://www.filabot.com/"">Filabot</a> is perhaps the most well known.</li>
-<li>Depending on where you live the local recycling programs may accept PLA or ABS. They will then shred it and melt it down for reuse.</li>
-<li>PLA is bio-degradable so you can put it in the compost.</li>
-<li>I put scrap ABS in acetone which results in a slurry which can be used as a glue to attach ABS parts, fix cracks, and hold parts to the bed.</li>
+<li>Building to scale is difficult</li>
+<li>Parts may not line up</li>
 </ol>
-",,,,
-69,2,2016-01-12T21:00:27.820,11,,"<p>A raft will allow for better adhesion for the whole print as the raft attaches to the printing surface and the print attaches to the raft. Rafts go all the way under the print and consist of multiple layers, whereas a brim is only 1 layer and on the outside of the print. Rafts are normally harder to remove than brims because of the increased contact with the print.</p>
-
-<p>From my own experiences, the brim does not help a lot with layer adhesion as it is only 1 layer. I normally use a raft when I need a nice looking 1st layer that is not on the bed or when there are not enough contact points.</p>
-",,,,
-72,2,2016-01-12T21:02:18.617,5,,"<p>The solution I prefer to prevent ABS withdrawal is using <a href=""http://reprap.org/wiki/BlueTape"" rel=""noreferrer"">Blue tape</a> on the bed, and then spread a thin layer of <a href=""https://en.wikipedia.org/wiki/Polyvinyl_acetate"" rel=""noreferrer"">Polyvinyl acetate</a> (Vinavil glue). </p>
-
-<p>If your printer allows it, you can also print with the bed at 110°C.</p>
-",,,,
-74,2,2016-01-12T21:09:01.157,7,,"<p>This is a common problem with ABS. You might prevent it by enclosing the printer inside a box/chamber - that will create a warmer environment and the extruded material will cool down more slowly, hence not creating such a tension.</p>
-
-<p>Other option is to use PLA instead if possible, the problem is not so significant with PLA.</p>
-",,,,
-75,2,2016-01-12T21:09:56.233,4,,"<p>Without more information we cannot address what is causing your edges to turn up. This can depend on the model being printed, the process, the material, the bed, and the method used to bond it to the bed.</p>
-
-<p>As far as the initial question, a fan will most certainly ensure <em>uneven</em> cooling.</p>
-
-<p>The middle of the print is, and will remain, the warmest.  If you want the print to cool evenly, you'll need an enclosure to block out drafts and air currents, and you'll need to bring the heated bed temperature and enclosure temperature down slowly over a long period of time.</p>
-",,,,
-77,2,2016-01-12T21:29:04.420,29,,"<p>Paraphrasing <a href=""http://www.protoparadigm.com/news-updates/the-difference-between-abs-and-pla-for-3d-printing/"">this</a> site. Feel free to add suggestions in the form of comments and I will try to incorporate them.</p>
-
-<p>Summary</p>
-
-<ul>
-<li>ABS: Stronger, machinable, more flexible, and more temperature
-resistant than PLA. Typically printed on a heated bed. Warping is a common problem when printing ABS.</li>
-<li>PLA: Wider range of filaments available, easier and in some cases faster to print. Not as strong as ABS and the fact that its biodegradable could be seen as both a benefit and a drawback.</li>
-</ul>
-
-<p>Material Properties:</p>
-
-<ul>
-<li>ABS: Strong plastic with mild flexibility. Naturally beige in color. Can be filled and sanded. Higher temperature. Easy to recycle.</li>
-<li>PLA: Not as strong as ABS but more rigid. Naturally transparent. More difficult to fill and sand. Can sag in hot temperatures. Sourced from organic matter so it can be broken down in commercial compost facilities.</li>
-</ul>
-
-<p>Part Accuracy:</p>
-
-<ul>
-<li>ABS: Part warping is a significant issue. Sharp corners will often be rounded.</li>
-<li>PLA: Less heat required contributes to less warping. Becomes more liquid at common extruder temperatures so finer details can be printed.</li>
-</ul>
-
-<p>Safety and Handling:</p>
-
-<ul>
-<li>ABS: Strong burning/melting plastic smell is present when printing ABS. Health concerns have been raised regarding airborne ultrafine particles generated while printing with ABS (<a href=""https://dx.doi.org/10.1016%2Fj.atmosenv.2013.06.050"">ref</a>). ABS will absorb moisture causing popping when the moisture enters the hot end. This leads to discontinuities in the print job.</li>
-<li>PLA: Doesn't smell as strongly when printing due to its organic nature. Moisture can also be absorbed into PLA and can irreversibly damage it.</li>
-</ul>
-",,,,
-79,2,2016-01-12T21:35:11.777,8,,"<p>The Colorfabb metal filaments are the most metal-like filaments I've used (copper, brass, and bronze) and probably the ones that would make the most sense for jewelry.  While not as dense as solid metal, it's about 3 times as dense as regular plastic and when polished the metal shows through.  Print at 100% infill to make it heavier. Bronzefill is about 3.9g/cm³, about 80% metal by weight, maybe 30-40% by volume.  I wouldn't say the polished result feel like solid metal, but it feels even less like plastic.</p>
-
-<p>There's also Filamet, which promises to be almost entirely made of metal and can be sintered into solid metal, but it hasn't been released yet.</p>
-",,,,
-80,2,2016-01-12T21:46:37.550,5,,"<p>This can highly depend on the slicer you are using. Some software such as Makerware and Slic3r allow you to adjust the settings for the first raft/part layers. I might suggest adjusting this ""Z0"" point to about 1/4-1/2 of your layer height. Essentially the first layer (or two) will not adhere as well.</p>
-
-<p>This is just one suggestion of many solutions. Here are some other variables I could think of off-hand:</p>
-
-<ul>
-<li>Type of build plate tape (ie masking, painters, kapton, etc.)</li>
-<li>Type of material. I've noticed that PLA is very stubborn if you let the part completely cool after printing and that it's much easier to remove the part from the build plate/raft right after it's complete.</li>
-<li>Type of build plate. Are you applying too much heat (if you have a heated bp) for the material such as PLA?</li>
-<li>Try lowering your layer height. This will ensure that each strand does not have too much surface area and therefore less chance that it will create a vacuum affect with the build plate. This can, however, result in a worse surface finish.</li>
-</ul>
-",,,,
-85,2,2016-01-12T22:00:04.173,11,,"<p>There are a few main safety precautions you should consider.</p>
-
-<ul>
-<li><strong><a href=""http://sinkhacks.com/building-acetone-vapor-bath-smoothing-3d-printed-parts/"" rel=""nofollow"">Make sure the area is well-ventilated.</a></strong> Acetone is flammable. A buildup of acetone gas could quickly get concentrated, meaning that a single spark could lead to disaster. Using a fan is good; angle it towards an open window. This is also to prevent exposure to acetone because of its toxicity.</li>
-<li><strong><a href=""http://www.sciencelab.com/msds.php?msdsId=9927062"" rel=""nofollow"">Be prepared to fight a fire.</a></strong> Should vapor ignite, you may need to fight the fire. If it is large enough, then you should clearly evacuate the area. If it appears to be small, use dry chemical powder to snuff out the fire. Alcohol foam, water spray, and/or fog may be used on slightly larger fires. Acetone is not likely to cause a large inferno to rip through the building. But there's always the chance of a small fire. Be careful.</li>
-<li><strong><a href=""https://rivercitylabs.org/acetone-smoothing-chamber-3d-printing/"" rel=""nofollow"">Create a vapor chamber.</a></strong> This is another way to stop a potential fire from spreading. It can also reduce contamination.</li>
-<li><strong>Wear gloves.</strong> This can minimize any potential transfer toxic effects. However, skin exposure is unlikely to cause major issues.</li>
-</ul>
-
-<p>Acetone is toxic, as I mentioned before, but it is not highly toxic. Exposure via <a href=""http://ccohs.ca/oshanswers/chemicals/chem_profiles/acetone.html"" rel=""nofollow"">the eyes and nose/mouth</a> is the main risk. Skin effects may occur (e.g. mild irritation), but they are minor and generally arise only after long-term exposure (hence the recommendation of gloves in some cases).</p>
-
-<p>Acetone exposure is only a serious problem when a person is repeatedly exposed to levels <a href=""http://www.cdc.gov/niosh/idlh/67641.html"" rel=""nofollow"">greater than 1,000 ppm</a> (severe effects only arise at much higher levels). It seems unlikely, given a proper ventilation system, that this will be an issue</p>
-
-<p>In addition to all this, basic safety precautions such as wearing a ventilator mask and goggles should definitely be taken. When working with any such chemicals with the potential for bodily harm, these should absolutely be used.</p>
-",,,,
-88,2,2016-01-12T22:07:56.873,10,,"<p>It depends on a lot of factors, type of plastic, whether the parts need to be strong, can you use a vase print, etc.  Here's a few thoughts.</p>
-
-<p>PLA - The brand of PLA makes a big difference, some can be printed very clear, some can't.  Most of the transparent PLAs I've used print much more clear at around 240°C.</p>
-
-<p>ABS - I've seen some pretty impressive clear parts printed as a single layer shell in ABS and then vapor smoothed. I tend to find ABS more translucent and less transparent though.</p>
-
-<p>PETG - Again the specific PETG you use matters, but I haven't seen nearly as much variation as with PLA.  I'm not sure how much temperature matters, but if it's too hot you get bubbles which will decrease clarity.</p>
-
-<p>Thin Wall Prints - I don't have much experience here, but the Smooth On XTC-3D or vapor smoothing seem to be effective.</p>
-
-<p>Solid Prints
-If I want transparency, I usually print it at 100% infill (should be a real 100%, too much overextrusion or underextrusion will decrease transparency).  Printing slower and with less cooling sometimes helps.  It's easier to get the infill solid with a direct drive extruder, I couldn't get decent results with a long bowden tube (a short bowden tube works fine).</p>
-
-<p>Here's a page where I tested 10 transparent filaments, the printed samples are 2mm thick, 100% infill - <a href=""http://thrinter.com/10-transparent-filaments"">http://thrinter.com/10-transparent-filaments</a>.  Those samples are all overextruded a bit, you can get better results if you dial in the extrusion precisely, but that's hard to get right, and the optimal settings may change slightly depending on the part geometry.  Larger nozzles and thicker layers may help to, but I haven't experimented much with that as there are significant downsides to that approach.</p>
-",,,,
-99,2,2016-01-12T22:49:11.960,3,,"<p>In addition to the aforementioned enriched filaments which give an excellent result, ABS can be plastered, painted and even chrome plated.</p>
-
-<p><a href=""https://i.stack.imgur.com/lLmkCm.jpg"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/lLmkCm.jpg"" alt=""ABS plastered, painted and chrome plated""></a></p>
-",,,,
-104,2,2016-01-12T23:45:22.727,11,,"<p><strong>Sort of.</strong></p>
-
-<p>Fully plastic guns are banned in the United States by <a href=""http://www.gpo.gov/fdsys/pkg/STATUTE-102/pdf/STATUTE-102-Pg3816.pdf"" rel=""nofollow"">the Undetectable Firearms Act</a>, because <a href=""http://www.nytimes.com/2014/08/14/fashion/the-rise-of-3-d-printed-guns.html"" rel=""nofollow"">they can pass unseen through metal detectors</a> - a huge problem. One way around this is to insert a slip of metal into the gun, thereby making it detectable by metal detectors. 3D-printed guns made of metal - were that possible - would not violate the law.</p>
-
-<p>The UFA was originally enacted in 1988, extended from 2003 to 2013, and then again until 2023. It may seem a bit unnecessary, as all-plastic guns, like the famous Liberator have structural issues that make them extremely difficult to fire when compared to a normal all-metal gun. However, then <em>can</em> be used.</p>
-
-<p>In Europe, gun laws vary widely by country. <a href=""http://eur-lex.europa.eu/legal-content/en/ALL/?uri=CELEX:31991L0477"" rel=""nofollow"">The European Firearms Directive</a> is the main international agreement on gun laws, but its application varies, and it does not directly address 3D-printed guns.</p>
-
-<p>I'm not aware of a country that has an explicit law banning 3D-printed guns. The only countries that ban them either unintentionally cover them or ban guns altogether.</p>
-",,,,
-131,2,2016-01-13T01:58:19.810,14,,"<p>I have a bunch of solutions to this problem but I'm always looking for additional ideas. I usually start by slicing as much as possible off with a hobby knife. The more than can be removed before sanding the better.</p>
-
-<p>For big prints I like big <a href=""http://rads.stackoverflow.com/amzn/click/B001449TPS"">generic sandpaper sheets</a> from the hardware store. Starting with the highest grit and moving down. Make sure you're discarding your sheets when they get totally gunked up (which can happen pretty fast) or you won't get much done.</p>
-
-<p>For smaller nooks and crannies I have <a href=""http://rads.stackoverflow.com/amzn/click/B000NPUKYS"">a set of needle files</a>. They do a pretty good job clearing out screw holes and smaller features on printed sculptures.</p>
-
-<p>I've also had some success sanding with my <a href=""http://rads.stackoverflow.com/amzn/click/B00005LEXX"">Dremel</a> when it comes to annoying stuck on supports or other imperfections. Having some horsepower behind your sanding can be a nice break. I've also seen the <a href=""http://rads.stackoverflow.com/amzn/click/B000HWRU9U"">wire brush attachments</a> used for finishing Bronze and Copper-fill prints. Just keep an eye on your speed or you'll sand a hole in your print.</p>
-
-<p>Lastly (and one I haven't tried) are <a href=""http://rads.stackoverflow.com/amzn/click/B0039ZCQAK"">these sanding sticks</a> They were recommended by a friend and look like they would be pretty easy to use/swap out used sandpaper. </p>
-",,,,
-133,2,2016-01-13T02:19:47.097,5,,"<p>For ABS I use a gel super glue (<a href=""http://rads.stackoverflow.com/amzn/click/B003TP2TBQ"" rel=""noreferrer"">Loctite is my current favorite</a>), it seems to slightly melt the ABS parts together and makes for a great bond. A slurry of old scrap ABS and acetone also works well, though I find that it will evaporate even if left in a closed mason jar over time. The small nozzle applicator and the fact it doesn't seem to evaporate makes super glue the better choice for me. </p>
-
-<p>The gel super glue works ""OK"" for PLA but I've had parts fail after taking a small tumble. I just started using this <a href=""http://rads.stackoverflow.com/amzn/click/B003HNFLMY"" rel=""noreferrer"">acrylic cement</a> for PLA. It cures <em>very</em> fast but seems to slightly melt the PLA in the same way the ABS options do.</p>
-
-<p>For internal seams I like to put a bead of <a href=""http://www.mcmaster.com/#7518a61/=10nnkbd"" rel=""noreferrer"">""high performance"" hot glue</a> over the seam. It's just a bit flexible and seems to do a good job taking drops. </p>
-
-<p>Lastly I really like (but haven't mastered) friction welding parts together using a Dremel. Matt Griffin at MAKE Magazine did a great write up on the <a href=""http://makezine.com/projects/make-34/skill-builder-finishing-and-post-processing-your-3d-printed-objects/"" rel=""noreferrer"">technique here</a>.</p>
-",,,,
-136,2,2016-01-13T03:53:05.250,6,,"<p>In most cases, you should be fine with ABS or PLA out of an airtight container. If you're worried about it, throw a few desiccant packets where you store your filament.</p>
-
-<p>However, some specialty filaments should be stored in an airtight container. PVA is notorious for absorbing the ambient humidity around it. When it's heated, the water it has absorbed starts to form bubbles, completely messing up the extrusion.</p>
-
-<p>In short, some specialty filaments, definitely. With others, it isn't necessary, but it can't hurt.</p>
-",,,,
-139,2,2016-01-13T03:59:58.773,-1,,"<p>You shouldn't need to. The purpose of a slower first layer is to help with need adhesion. With a raft the first layer of the model is printing on the raft so it can go at regular speeds.</p>
-",,,,
-144,2,2016-01-13T05:01:54.163,3,,"<p>It's hard to tell without actually testing the part. There are many ways you can 3D print a part, even on the same machine, that can yield different results.</p>
-
-<p>Here are some tips to help uphold strength requirements:</p>
-
-<ul>
-<li>Identify where your stresses are and avoid allowing the natural ""grain"" of the print (i.e. each layer) to coincide with the stresses of the part. For example, I just printed a part with hinges today. I set my part up to ensure that the circular profile of the hinge on each layer, instead of having the machine ""bridge"" the circular profile.</li>
-<li>Make your part more solid by increasing the infill. Note that somewhere around 35% won't really provide much more strength than say 50% with a standard infill pattern (i.e. hexagonal, diamond, catfill). However, I would imagine that if a spherical infill pattern was ever designed, that would be the strongest.</li>
-<li>An easy way to beef up small areas of a part is to increase your shell variable (how many profile layers for each layer). Again, referencing my hinge design, I made sure that my hinges were completely printed using shell instead of shell/infill.</li>
-<li>Don't be afraid to do some post-processing such as adding epoxy/epoxies in high-stress areas.</li>
-</ul>
-
-<p>If it's not an expensive part to print, I would suggest playing with some of these ideas yourself and conduct controlled tests to see what setups work best for your application(s).</p>
-",,,,
-146,2,2016-01-13T05:19:39.603,13,,"<p>The only thing I can think of off hand is an old mod for the early MakerBot machines. It first was released for the Thing-O'-Matic I believe, but is compatible with Replicator 1 machines (and its knock-offs). Here's the <a href=""http://www.thingiverse.com/thing:4056"" rel=""noreferrer"">Thingiverse page</a>, but look up Automatic Build Plate.</p>
-
-<p>Essentially, you can use the Replicator G slicing program and there is a setting for ""ABP"" or Automatic Build Plate. This will basically tell the ABP to run its routine after the controller receives the response that the printing program is done and roll the finished part off the edge of the build plate, then start the same program over again.</p>
-
-<p>Drawbacks:</p>
-
-<ul>
-<li>I don't think it's easily compatible with newer machines/slicers. But, it's open source</li>
-<li>Pretty sure you have to use Replicator G, which is outdated now and may make your machine sound like it's going to fall apart (I know from experience)</li>
-</ul>
-
-<p>Going off of @Pete's answer about solenoids. It reminded me that someone integrated a <a href=""http://www.thingiverse.com/thing:872617"" rel=""noreferrer"">solenoid ""ejector""</a> (aka Boxing Glove) for their machine.</p>
-
-<p>Update (06/08/2016):</p>
-
-<p>Forgot to mention that if you choose to create your own ""Boxing Glove"" or conveyor belt, some software such as Octo-Pi and Repetier-Host allow plugins. So, you could interface with your hardware via customized code and integrate the functionality directly into the slicing application for the full closed loop operation.</p>
-",,,,
-148,2,2016-01-13T06:21:21.800,6,,"<p>An option that might be feasible for some situations (depending on your setup) is <strong>Sequential Printing</strong> - a feature provided by some slicing software, for instance <a href=""http://manual.slic3r.org/advanced/sequential-printing"">Slic3r</a>.</p>
-
-<p>In short, this allows you to print multiple objects <strong>one at a time</strong> rather than simultaneously. This has some obvious benefits, but also some downsides:</p>
-
-<p><strong>Benefits:</strong></p>
-
-<ul>
-<li>Each object is finished individually, and you will therefore not have multiple half-finished prints <em>when</em> something goes wrong. </li>
-<li>No particular printer or bed swapping mechanic is needed.</li>
-</ul>
-
-<p><strong>Downsides:</strong></p>
-
-<ul>
-<li>With most consumer printer, print area is somewhat limited, and sequential printing requires you to place objects so that the hot end can move freely between the finished objects, potentially restricting the effective usage of your print volume.</li>
-<li>By printing objects one at a time, you limit the natural print cooling that happens when printing multiple objects at the same time. In particular for smaller prints, you might not want to print sequentially unless your print cooling solution is up for it.</li>
-<li>Requires some setup</li>
-</ul>
-
-<p>You specifically mention that you would like the finished prints to be moved outside the print area. In it self, sequential printing does not do this for you; however, if you fit your printer with a large, motorized print bed, you might achieve the same effect without moving into unfamiliar technology!</p>
-",,,,
-151,2,2016-01-13T06:39:20.323,22,,"<p>Food safety is a property of both the process and the material. You can't stick food-safe material in a printer that has previously been used to print something food-dangerous and expect the result to be food safe.</p>
-
-<p>The only way to know if a given material is food-safe is to ask your supplier, but a lot depends on how you then process it. For instance, FDM printers often have brass nozzles, which contain lead. To print food-safe materials, you need to use a stainless steel nozzle.</p>
-
-<p>Food safe materials can be identified by mean of <a href=""https://en.wikipedia.org/wiki/Food_safe_symbol"">an universal symbol</a>.</p>
-
-<p>Moreover, to ensure food-safety of a 3D printed model you may need to further process it (for instance, by vapor smoothing or coating with a food-safe lacquer). Some claims circulate on the internet that 3D printed models may have surface porosity in which bacteria can grow, but I've not been able to find a reliable source for this claim. Still, you need to be cautious.</p>
-",,,,
-154,2,2016-01-13T06:57:39.023,2,,"<p>So, as you say you want to materials for printing robotics parts. And as you have not given any budget constraint, I would give you a list of materials which would help you achieve the task, and you can choose amongst them accordingly.</p>
-
+<h3>Cons: 3D print first</h3>
 <ol>
-<li>Plastics: Basically used for building prototypes. Nylon Polyamide should be a choice for you.</li>
+<li>Eagle design needs precise measurements</li>
+<li>PCB may not fit correctly</li>
 </ol>
+<p>Which is better to do first?</p>
+",3d print first or board design?,<3d-design>,,
+7191,1,2018-10-16T14:07:10.670,3,496.0,"<p>I am interested in 3d printing from aluminum valve cover for car <a href=""https://www.eeuroparts.com/Parts/59071/Engine-Valve-Cover-Front-V6-4623740/"" rel=""nofollow noreferrer"">SAAB valve cover</a></p>
 
-<blockquote>
-  <p>Polyamide 3D printing is achieved through SLS 3D printing. It offers
-  strong and flexible prints. The upside of this material is that the
-  printing technology requires minimum preparation of the 3D file before
-  printing. There is no need for support. And it also offers the
-  possibility to create intricate shapes and moving part in just one go.
-  After the print the polyamide can be polished and dyed.</p>
+<p>I am thinking of creating 3d scan and the placing order with i.materialize or similar online services. </p>
+
+<p>I am curios if this is feasible at all, since  I am interested in 3d printing functional part not just a souvenir. Also since 3d part does not have smooth surface, will sand blasting help without affecting dimensions?</p>
+
+<p>Also what would be an approximate cost of 3d scanning and printing?</p>
+
+<p>I really do not know where to start and would appreciate any directions. </p>
+",3d print aluminum valve cover for car,<3d-design>,"<p>This is a very large part. My estimate for the cost would be a few thousand to get this printed in metal, if not tens of thousands (assuming it even fits the maximum build volume of the printer, which is only 440mm on its longest axis).</p>
+
+<p>3D scanning also isn't a very reliable way to reproduce parts, especially for something mechanical that needs to be precise. You can not just scan something and then print it like making a photocopy. A lot of manual design and reverse engineering work would be involved.</p>
+",4.0
+8172,1,2019-02-05T18:18:00.183,3,415.0,"<p>I'm designing a box and lid that will be FDM-printed. The lid push-fits onto the box. <a href=""https://3dprinting.stackexchange.com/q/6576/13100"">What kinds of gaps/tolerances should I use when designing pieces that fit together?</a> has advice for designing the clearance between the lid and the box. Assume I've already settled that question and I have a good clearance so my lid slides on and off freely.</p>
+
+<p>Now I'd like to add a lip-and-groove feature to my design to hold it shut, with a lip on the lid that clips into a groove in the box when the lid is fully closed - like a cantilever fit, but easy to open, and directly on the mating walls.</p>
+
+<p>How deep should I make the lip and how tall? Does it depend on what plastic I'm printing in? Does it depend on the wall thickness and the geometric rigidity of the part?</p>
+",How do I decide what size my push-fit feature should be?,<3d-design>,,
+10246,1,2019-06-12T18:23:22.583,0,19.0,"<p>Does anybody know anyone from the R3 team or have any insights  into their scalability and reliability claims?  </p>
+
+<p>The format and potential cost savings are appealing...</p>
+
+<p>We are looking for an industrial scale 3D printing solution for the connectors that make up our TWIND Power Exoblades and R3 looks like a cool startup, on their web page at least </p>
+
+<p><a href=""https://r3printing.com/"" rel=""nofollow noreferrer"">https://r3printing.com/</a></p>
+
+<p><a href=""https://discordapp.com/channels/532618939486699520/532622198133882880"" rel=""nofollow noreferrer"">https://discordapp.com/channels/532618939486699520/532622198133882880</a></p>
+
+<p><a href=""https://discord.gg/JFxAXzd"" rel=""nofollow noreferrer"">https://discord.gg/JFxAXzd</a></p>
+
+<p>r2</p>
+",R3 Insights into industrial scale claims,<3d-design>,,
+12206,1,2020-03-19T14:20:28.220,0,100.0,"<p>Have people been using 3D printing to genuinely create a number of needed objects in their homes, and if so, what? Or is 3D printing better for special niche interests like art projects, home engineering projects, etc?</p>
+",Is 3D printing useful for making everyday objects or is it more for special hobbies?,<3d-design>,,
+16106,1,2021-04-16T12:26:27.173,1,24.0,"<p>Where do I go for deeper knowledge about 3D printing functional parts?</p>
+<p>I want to up my game a bit and design some more functional parts. In particular, I want to do more with boxes, organizers, and moving systems.</p>
+<p>For instance, I've found some <a href=""https://www.youtube.com/watch?v=iSBsBTMsGTk"" rel=""nofollow noreferrer"">YouTube videos showing hinge design</a>, but I want more. I want more details on WHY they chose the pin to be 1.5 mm diameter, etc.  I want design options (can the hinge be somewhere other than halfway between top and bottom).</p>
+<p>I'd also like to know how to do enclosures that snap together (same problem: YouTube shows me one or two designs, not much detail on why they are designed that way or how to change them if they snap off).</p>
+<p>I want box tops that can stay on. How do I make clasps? Sliding lids? Hinges with stops? Snaps?</p>
+<p>I haven't even started to mention my desires to learn about levers/gears/etc.</p>
+<p>Can anyone recommend a good book? Or a course? Or a really good YouTuber?</p>
+",Source of design advice for modeling functional parts,<3d-design>,,
+16168,1,2021-04-23T07:34:29.187,0,88.0,"<p>I am creating a bottlecap-like design. The design is sealed by rotating the lid. I am adding a chemical to it for an experiment. I would like the inside of the design to have no air circulating to it through the lid tiny spaces.</p>
+<p>My design:</p>
+<p><a href=""https://i.stack.imgur.com/2Xc1Q.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/2Xc1Q.png"" alt=""enter image description here"" /></a></p>
+<p>Are there any simple solutions I can implement out there? Design-wise, material-wise, or maybe an extra piece?</p>
+",How to create an air-free design?,<3d-design>,"<blockquote>
+<p>Are there any simple solutions I can implement out there?</p>
 </blockquote>
-
-<ol start=""2"">
-<li>Metals: Metals like Brass, Alumunium and Steel should be a good choice.</li>
-</ol>
-
-<p>But, if I were to achieve your task, I would select carbon fiber. some details about it:</p>
-
-<blockquote>
-  <p>Carbon fiber consists of 90% carbon atoms, each fiber is 10 times
-  thinner than a human hair. Carbon is especially prized for its lack of
-  combustibility and infusability but also by its incredible strength
-  (stronger than steel) and ability to create flexible structure, light
-  weight and corrosion resistance. Its melting temperature is 1500, this
-  heat there are only carbon.</p>
-</blockquote>
-",,,,
-157,2,2016-01-13T08:32:27.733,9,,"<p>There are 3 things that might affect food safety of 3D printed objects:</p>
-
+<p>A gasket made of rubber or other elastic or deformable material is probably the best option. Printing one or both of the parts using a deformable material like TPU might also work. Finally, if you don't need to open the unit during the experiment, you could use a sealant like silicone caulk might make sense.</p>
+",2.0
+16467,1,2021-06-07T13:15:45.213,4,122.0,"<p>With the increasing price of lumber and construction materials in the U.S., 3D-printed houses become a more viable way of building houses.  Designing the foundations of mini-houses isn't difficult.  However the foundation of a full-size house is different; the larger the more difficult.  The one piece nature of a 3D-printed house makes it almost impossible to repair if the foundation shifts.  Foundation repair is the largest home maintenance cost of existing houses.  Thus, the designs of most existing house foundations are not adequate.</p>
+<p>Usually the form for the foundation is printed, rebar is placed in the form, and the foundation poured.  Piers seem to be a most.  While shims can be added or altered on piers with pier and beam, unless the beams hold the house ridge (minimum flexing), this doesn't appear to be an option.  What are adequate designs for 3D printed houses?</p>
+<p>Family dwellings in the U.S. usually run from 1,100 to 3000 sq.ft. (aprox. 100 to 280 sq.meters).  More common is 1500 to 2000 sq.ft. (aprox. 140 to 190 sq.meters).  Ceilings are at least 8 ft. (2.44 meters) high.</p>
+<p>We can speculate, but a good answer would reference actual construction.  Some speculation:</p>
 <ol>
-<li><p>The filament - it's food safe only if it says so on the package (even if the plastic is not toxic you don't know about the color and other additives)</p></li>
-<li><p>The hotend - the hotend and nozzle may leak metals into the filament, you need something like a full stainless steel hothead.</p></li>
-<li><p>And finally, 3D printed objects contain little holes that bacteria can get into - so nothing printed on an FDM printer is food safe unless coated with some food safe sealing material (except for single use)</p></li>
+<li><p>Print individual wall panels on a bed flat on the ground similar to how warehouses are constructed out of wall panels.  Thus, eliminate the one piece.</p>
+</li>
+<li><p>One could make concrete pier and beams in a grid pattern within the slap.  The beams would need to be ridged enough to keep the house from flexing.</p>
+</li>
+<li><p>Structures built as transportable units would survive a shifting foundation and thus be reparable.</p>
+</li>
 </ol>
-",,,,
-159,2,2016-01-13T08:55:44.043,6,,"<p>You will likely not see a noticeable improvement by upgrading from a 16x or 32x to a 64x or 128x microstepping driver. Depending on the motors you're driving and the size of the load you could actually see a decrease in quality.</p>
-
-<p>Although microstepping increases theoretical resolution it does not necessarily increase accuracy. The reason is that microstepping significantly limits the incremental torque of the motor. This means that you may ask for a step but not get one because the torque of the step won't be enough to actually turn the shaft.</p>
-
-<p>As an example: a motor running in full steps will have 100% of its rated holding torque. Moving to 16 microsteps/full steps drops this to ~10%, 128 drops it to ~1%.</p>
-
-<p>The practical effect of this is that in high torque situations (such as printing at fast speeds) the motor may end up skipping some of the steps. In this way the increase in resolution can actually lead to a decrease in accuracy (smaller steps but they may not actually be taken).</p>
-
-<p>A relevant calculation to do would be to work out what the different number of microsteps to full steps works out to in terms of horizontal, vertical, or whatever movement the motor drives. You can do this by measuring how far the stepper moves said surface in one revolution provided you know the number of steps it takes per revolution.</p>
-
-<p><strong>Example:</strong> </p>
-
-<p>With no microstepping: 1 turn/inch * 200 steps/turn = 200 steps/inch or .005 inch/step (127 micron resolution)</p>
-
-<p>With 16x microstepping: 16 * 200 steps/inch or .0003 inch / step (8 micron resolution)</p>
-
-<p>In this example 128x microstepping would be absolutely foolish. Every situation is different and you should use this information to make a decision based on your setup. Many manufacturers have recommendations on how far their motors can be microstepped.</p>
-",,,,
-160,2,2016-01-13T09:10:09.697,14,,"<p>The stepper motor itself does not.  You may want to inspect the motors for debris or dust.</p>
-
-<p>Depending on your configuration you may want to check on parts of your printer that connect to your stepper motor such as shaft couplings, pulleys, lead screws/threaded rods and belts.  The stepper motor wires should occasionally be inspected for wear and strain.</p>
-",,,,
-165,2,2016-01-13T12:30:23.473,2,,"<p>It would be possible and not too terribly difficult to rig a servo or solenoid with a push plate like a plow, on top of your build plate. </p>
-
-<p>However this would require another processor via raspberry pi or arduino to control it. Scripting execution when the print has completed wouldn't be terribly difficult either, but it isn't readily available and certainly isn't part of a mass produced printer. </p>
-
-<p>My issue with the concept is if you push a bunch of prints off the build plate, what guarantee do you have they wont become damaged in the process?</p>
-",,,,
-167,2,2016-01-13T12:35:21.263,4,,"<p>I use diagonal cutters and a pair of mini pliers. 
-I print with Simplify3d and the support structures are remarkably easy to remove, I find giving a quick pull pops most off. The diagonal cutters get rid of any small beads leftover.  </p>
-",,,,
-169,2,2016-01-13T12:48:36.293,4,,"<p>There are printers designed for medical use, and the manufacturers supply them with varying levels of <a href=""http://www.medicalplasticsnews.com/opinion/passing-the-test_1/"" rel=""nofollow"">certification and testing</a>, however I've not seen a filament manufacturer certify their material as bio-compatible separate from the printer. The printing process changes the material slightly in the best case (and significantly with poor temperature control or badly set parameters), so even if bio-compatible filament were found, the resulting product might not achieve the same level of bio-compatibility.</p>
-
-<p>If your intent is to use hobbyist level machine for medical purposes, you might simply want to use an interface, such as a sock or a molded/cast polymer that you know to be bio-compatible between the printed part and the skin.</p>
-",,,,
-180,2,2016-01-13T14:03:36.367,4,,"<p>There are many factors, here are a few things to check:</p>
-
-<p>I'd first suspect filament feeding.  This type of ridging can be caused by a filament coil that is binding occasionally, or a filament that doesn't have an even diameter or volume per length.  Binding within the filament feeder and feeder tubes can also be a cause. Bubbles in the filament, or sometimes a mismatch between the filament ideal temperature and the head temperature could create results like this, but it probably wouldn't vary so much between the layers.</p>
-
-<p>Next I'd look at the print head.  If it has blockages, or poor temperature control this could result.</p>
-
-<p>Lastly, I'd check the mechanisms - disconnect the motors and see if all the carriages slide smoothly without any binding, particularly the Z axis.  It doesn't look like you're missing steps, but binding here may result in greater backlash, which could result in similar ridges. Make sure any belts and gears are tight.</p>
-",,,,
-183,2,2016-01-13T14:14:00.997,12,,"<p>Almost all of the FDM materials outgas even at normal atmospheric pressure, and, in fact, most plastics outgas.  Further, FDM and many other printing processes do not guarantee no internal voids - meaning that putting a 3D printed object into a vacuum may result in breakage, cracking, and possible explosion hazards.</p>
-
-<p>For this reason I would focus only on SLA, as the model is printed within the liquid resin pool and should have a reduced possibility of internal voids.</p>
-
-<p>Finding a resin that has a low out-gas rate after curing, though, is still going to be difficult. </p>
-
-<p>For this to be answered more completely, you need to specify your tolerable outgassing rate, and the processes used inside the vacuum chamber.  For instance the answer would be completely different if you are discussing an electron microscope vs a sputtering chamber. As a start you might consider companies that specialize in <a href=""http://www.boedeker.com/outgas.htm"">engineered materials intended for vacuum use</a>. They may be able to provide guidance as to which of their materials might be 3D printed and usable in your setup.</p>
-",,,,
-190,2,2016-01-13T14:21:37.690,3,,"<p>Some STLs aren't exported properly from the CAD software.</p>
-
-<p>Use a repair tool or service like <a href=""https://modelrepair.azurewebsites.net"" rel=""nofollow"">https://modelrepair.azurewebsites.net</a> .</p>
-
-<p>The repaired STL shouldn't have those issues anymore.</p>
-",,,,
-193,2,2016-01-13T15:07:02.637,3,,"<p>Regardless of whether the actual filament you are printing is marked as Food Safe by the provider, remember that actually printing the filament might contaminate it. </p>
-
-<p>If you previously have printed a toxic filament on your printer, you cannot be sure no remains of that filament are deposited onto the model. Equally, I believe very few printers only consist of parts that are all marked as Food Safe - the parts that touch the filament that is.</p>
-
-<p>Another aspect of food safety is your ability to properly clean 3D printed objects. Due to the highly structured surface of 3D printed objects, I would not be certain that they are truly clean after washing, particularly since many plastics cannot be cleaned in a dishwasher.  </p>
-",,,,
-194,2,2016-01-13T15:22:26.867,6,,"<p>As others have pointed out, PLA isn't specifically not food safe, but materials that have been printed previously can contaminate the PLA.</p>
-
-<p>Additionally, anything 3D printed is extremely porous. Once a part is used for food, moisture and bacteria will accumulate in the pores, and can never be completely cleaned out, contaminating any food that contacts it. It can't be sterilized either, because the temperatures needed for sterilization would deform or melt the plastic.</p>
-",,,,
-195,2,2016-01-13T15:48:38.257,15,,"<p>My understanding is that this occurs when the object is not a true solid. Since an STL holds the triangulation of each face and spline, the slicing engine is not &quot;smart&quot; enough to determine if there is a gap in the model and therefore if it should be filled in and how. When the slicer encounters a gap, it will either treat the endpoint as the end of the feature or navigate to the next point on the layer, resulting in either gaps in the print or extra inclusions that don't make sense.</p>
-<p>I've noticed that my models will fail as a true solid when I use complex solid tools such as Union, Subtract, and Trim. A lot of times there will be a rounding error in how these tools interact with the solid model that will result in a small (sometimes not very small) gap in the outer shell of the solid model. When exported to an STL, the gap is retained.</p>
-<p>@kareem mentioned it in their answer, but Microsoft does provide online tool(s) for 3D Printing including a solid repair tool. Use <a href=""https://tools3d.azurewebsites.net/"" rel=""nofollow noreferrer"">Microsoft 3D Tools</a> to upload your STL and try to automatically detect and fix issues with your file(s).</p>
-",,,,
+<p>China 3D-prints apartments.  Their techniques may give insight into how to design house foundations for 3D printing.</p>
+<p>A 380 sq. meters (4000 sq.ft.) building is being printed in Germany, but the webpage gives no description of the foundation: <a href=""https://www.designboom.com/architecture/first-3d-printed-apartment-building-germany-construction-peri-cobod-11-24-2020/"" rel=""nofollow noreferrer"">https://www.designboom.com/architecture/first-3d-printed-apartment-building-germany-construction-peri-cobod-11-24-2020/</a></p>
+<p>A huge foundation issue is clay soil in a climate that has both wet and dry seasons.</p>
+<p>P.S. The wise customer will want this answered before purchasing.  The construction company would want this answered to prevent a class action lawsuit.  The industry would want this answered to avoid a setback in consumer confidence.</p>
+",What foundation designs are adequate for a 3D-printed one-floor building larger than 200 square meters?,<3d-design>,,
+16526,1,2021-06-14T16:48:27.027,1,144.0,"<p>Are the following statements still true, or are they now out of date?</p>
+<blockquote>
+<p>[3D printed architecture] The problem is this: No one has been able to successfully take the leap from printing a fancy art pavilion to printing a functional building, and it’s still not clear if the technology is going to save the world or be another decorative footnote of architectural history.</p>
+</blockquote>
+<p>WinSun</p>
+<blockquote>
+<p>For whatever reason, the only printed buildings that look remotely habitable have been built by Chinese companies. But just because they look habitable doesn’t mean that they are. No one lives in these houses, and when you get close enough, they don’t really look like the kind of place you’d want to live, unless you have a thing for creepy-cave chic.
+(Both from <a href=""https://architizer.com/blog/practice/details/3d-printed-buildings-future-or-gimmick/"" rel=""nofollow noreferrer"">https://architizer.com/blog/practice/details/3d-printed-buildings-future-or-gimmick/</a>)</p>
+</blockquote>
+<p>I'm not wanting to argue about the architectural concern for appearance.  As an engineer my concern is with structural integrity and reliability.  However, are people living in 3D houses?  That is the common concern.</p>
+",Is there anyone now permanently living in 3D-printed houses or buildings?,<3d-design>,,
+18845,1,2022-02-02T14:40:15.290,1,51.0,"<p>Probably barely on-topic, but I'm wondering if there's any way to control a 2D inkjet/laser printer similar to 3D printer. Specifically:</p>
+<ul>
+<li>Shifting the XY axis by a certain amount</li>
+<li>Controlling the paper feeder by small increments</li>
+<li>Dispelling ink at defined amounts</li>
+</ul>
+<p>2D printers have a very high resolution and can be useful for some things, which is why I'm asking.</p>
+",Control a 2D printer like a 3D printer,<2d>,,
+18960,1,2022-02-20T22:28:43.913,2,149.0,"<p>I want to use magnets to hold the lid of a box down tight enough to keep it relatively airtight (along with a rubber seal etc.), but I am not sure what strength of magnet to use, that will still allow it to be opened without causing damage either by having to be pried open or by crushing the print layers. I cannot seem to find any guide to how magnets are used for 3d printing at various strengths and I cannot afford to buy too many types that I am not then going to use.</p>
+<p>Any help that you can provide will be greatly appreciated.</p>
+",How Do I Determine The Appropriate Magnet Strength For A Tight Seal On A Box,<3d-design>,"<p>You can vary the “strength” of the magnet by making a membrane of 3D printed plastic in between the magnets. The strength of the attraction is something like a logarithmic relationship to distance- small changes in thickness of material in between the magnets have a large effect on how strong they stick to each other. You could dial in your print by buying strong rare earth magnets and experimenting with attenuating the strength with the membrane. Could even use sheets of paper to get the right feel, then measure the thickness of the stack.</p>
+<p>If using an fdm printer, it could be helpful to insert the magnets with a pause in the printing, and print over the top, if there isn’t a good way to otherwise capture them.</p>
+",3.0
+20265,1,2022-11-28T21:23:04.737,2,38.0,"<p>I have a height-adjustable table, but the height cannot be adjusted as a gear in the motor has worn out cogs and it will not spin. The motor is functional so the only thing I need is to somehow get a that particular part. I have tried searching for the motor itself on eBay, and I found one, but it would cost more than the table did and I dont want to do that unless I know there is no other option.</p>
+<p>I am inserting some images of the part and the engine</p>
+<p><a href=""https://i.stack.imgur.com/KcpgU.jpg"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/KcpgU.jpg"" alt=""enter image description here"" /></a></p>
+<p><a href=""https://i.stack.imgur.com/4Xhrz.jpg"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/4Xhrz.jpg"" alt=""enter image description here"" /></a></p>
+<p><a href=""https://i.stack.imgur.com/gkHGk.jpg"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/gkHGk.jpg"" alt=""enter image description here"" /></a></p>
+<p>What I am searching/asking for, is some kind of database where I might find the 3D design or something like that. I have been trying to learn AutoCAD or a similar design tool, but for a beginner level this seems too complicated.</p>
+",3D printing a part without experience in 3D design,<3d-design>,,
+20483,1,2023-01-20T22:26:56.053,0,104.0,"<p>I'm building a product which requires a dowel pin inserted into a plastic piece. I'm planning to 3D print the plastic piece with nylon (must be nylon for biocompatibility), but the tolerances won't be sufficient to ensure a consistent press-fit for the pin. To get around this, I plan to undersize the hole, and then ream it out with a reamer on the drill press. There will be 1000 pieces on this run. Any flaws you can see with this design?</p>
+",Inserting steel dowel pin into hole with interference fit,<3d-design>,"<p>It is not possible to insert a steel dowel into a hole of a plastic workpiece with a press fit: at least not for long. Tremendous force is exerted on the plastic by the steel, and the plastic will soon begin to deform in a process called cold flow or creep.</p>
+",1.0
+20570,1,2023-02-13T01:01:40.950,0,52.0,"<p>I am making homebrew electronic items and I'm using this OLED, a 0.96&quot; SSD1306 Module; very common in the Arduino world:</p>
+<p><a href=""https://i.stack.imgur.com/3pj11.png"" rel=""nofollow noreferrer"" title=""Photo of OLED screen""><img src=""https://i.stack.imgur.com/3pj11.png"" alt=""Photo of OLED screen"" title=""Photo of OLED screen"" /></a></p>
+<p>If someone were making a commercial device with this and designing a case, how would they mount this? We obviously see the 4 screw holes at the corners, but if you looked at this device from the side, you'll notice the glass is only about 1.2 mm proud of the PCB. In addition, if you solder headers to the 4 terminals, which is the common use, the end of the headers are actually flush with the glass.</p>
+<p>Should the screws be coming through the case from the outside, through the PCB holes, with a nut on the other side? Would the glass normally be covered with acrylic rather than flush with the outside of the case?</p>
+<p>So what's typical in this situation? This is a 3D-printed enclosure, so I'm also limited by that aspect of the design.</p>
+",How would this OLED be mounted if in a commercial device?,<3d-design>,,
