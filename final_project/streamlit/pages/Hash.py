@@ -2,7 +2,10 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import IntegrityError
-import bcrypt
+from passlib.context import CryptContext
+import time
+from jose import jwt
+from datetime import datetime, timedelta
 import streamlit as st
 import subprocess
 
@@ -17,6 +20,13 @@ engine = create_engine(f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
 
+# Password Hashing Configuration
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+# Access Token Configuration
+SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 # Define the User model (table schema)
 class User(Base):
@@ -26,15 +36,12 @@ class User(Base):
     email = Column(String(100), unique=True, nullable=False)
     password = Column(String(200), nullable=False)
 
-# Drop the existing table if it exists
-Base.metadata.drop_all(engine)
-
 # Create the table
 Base.metadata.create_all(engine)
 
 # Function to hash the password
 def hash_password(password):
-    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    return pwd_context.hash(password)
 
 # Function to insert user data into the database
 def store_user_data(username, email, password):
@@ -56,11 +63,23 @@ def get_user(username, password):
     session = Session()
     try:
         user = session.query(User).filter_by(username=username).first()
-        if user and bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
+        if user and verify_password(password, user.password):
             return user
     finally:
         session.close()
     return None
+
+# Function to verify the password
+def verify_password(plain_password, hashed_password):
+    return pwd_context.verify(plain_password, hashed_password)
+
+# Function to create access token
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
 
 # Streamlit application
 def main():
@@ -73,19 +92,18 @@ def main():
 
     st.write("Sign Up")
     new_username = st.text_input("New Username")
-    new_email = st.text_input("Email", max_chars=100)  # Limit email input to 100 characters
+    new_email = st.text_input("Email")
     new_password = st.text_input("New Password", type="password")
     confirm_password = st.text_input("Confirm Password", type="password")
     sign_up_button = st.button("Sign Up")
-
-    if "authenticated" not in st.session_state:
-        st.session_state.authenticated = False
 
     if sign_in_button:
         # Implement sign-in logic here using SQLAlchemy to query the database
         user = get_user(username, password)
         if user:
-            st.experimental_set_query_params(authenticated=True)
+            # Issue an access token upon successful authentication
+            access_token = create_access_token({"sub": user.username})
+            st.session_state.access_token = access_token
             st.experimental_rerun()  # Rerun the Streamlit app to trigger the redirect
         else:
             st.error("Invalid username or password!")
@@ -100,14 +118,13 @@ def main():
         else:
             st.error("Passwords do not match!")
 
-    if "authenticated" in st.experimental_get_query_params():
-        # Redirect to UserDashboard.py
+    if "access_token" in st.session_state:
         subprocess.run(["streamlit", "run", "UserDashboard.py"], check=True)
-        # st.stop()  # Uncomment this line if you want to stop the current app after redirect
 
 def user_dashboard():
     st.title("User Dashboard")
     st.write("Welcome to your dashboard!")
+    # Add your user dashboard content here
 
 if __name__ == "__main__":
     main()
