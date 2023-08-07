@@ -1,6 +1,6 @@
 #creates, bigquery dataset and tables - posts, comments
 provider "google" {
-  credentials = file("C:\\Users\\Dell\\Downloads\\stackai-394819-86a97a8439b6.json")
+  credentials = file("/etc/gcp/credentials.json")
   project     = "stackai-394819"
   region      = "us-west2"
 }

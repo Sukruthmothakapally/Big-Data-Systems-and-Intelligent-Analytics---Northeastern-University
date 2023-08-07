@@ -1,7 +1,7 @@
-openai
-scikit-learn
-sentence-transformers
-langchain
-db-dtypes
+# openai
+# scikit-learn
+# sentence-transformers
+# langchain
+# db-dtypes
 google-cloud-bigquery
-streamlit
+# streamlit
