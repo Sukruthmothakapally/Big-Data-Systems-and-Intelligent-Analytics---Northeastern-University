@@ -8,6 +8,7 @@ from jose import jwt
 from datetime import datetime, timedelta
 import streamlit as st
 import subprocess
+import re
 
 # Database Configuration
 DB_USER = 'projectuser'
@@ -24,7 +25,7 @@ Session = sessionmaker(bind=engine)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # Access Token Configuration
-SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
+SECRET_KEY = "c80056b5cea66f2a2f465156e1899c0a99e4b94f20ff58e7491a375b2710e37d"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
@@ -81,50 +82,97 @@ def create_access_token(data: dict):
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
-# Streamlit application
-def main():
-    st.title("Login Page")
+def is_valid_username(username):
+    return re.match("^[A-Za-z0-9]+$", username) is not None
 
-    st.write("Sign In")
+def is_valid_email(email):
+    return re.match(r"^[A-Za-z0-9+_.-]+@(.+)$", email) is not None
+
+def is_valid_password(password):
+    return re.match("^[a-zA-Z0-9]{8,}$", password) is not None
+
+# Separate sign-in page function
+def sign_in_page():
+    st.title("Sign In")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     sign_in_button = st.button("Sign In")
 
-    st.write("Sign Up")
+    if sign_in_button:
+        errors = []
+
+        if not username:
+            errors.append("Username cannot be empty.")
+        if not password:
+            errors.append("Password cannot be empty.")
+
+        if not errors:
+            user = get_user(username, password)
+            if user:
+                access_token = create_access_token({"sub": user.username})
+                st.session_state.access_token = access_token
+                st.experimental_rerun()
+            else:
+                st.error("Invalid username or password!")
+        else:
+            for error in errors:
+                st.error(error)
+
+# Separate sign-up page function
+def sign_up_page():
+    st.title("Sign Up")
     new_username = st.text_input("New Username")
     new_email = st.text_input("Email")
     new_password = st.text_input("New Password", type="password")
     confirm_password = st.text_input("Confirm Password", type="password")
     sign_up_button = st.button("Sign Up")
 
-    if sign_in_button:
-        # Implement sign-in logic here using SQLAlchemy to query the database
-        user = get_user(username, password)
-        if user:
-            # Issue an access token upon successful authentication
-            access_token = create_access_token({"sub": user.username})
-            st.session_state.access_token = access_token
-            st.experimental_rerun()  # Rerun the Streamlit app to trigger the redirect
-        else:
-            st.error("Invalid username or password!")
-
     if sign_up_button:
-        if new_password == confirm_password:
-            # Store the new user data in the database using SQLAlchemy
+        errors = []
+
+        if not new_username:
+            errors.append("Username cannot be empty.")
+        elif not is_valid_username(new_username):
+            errors.append("Invalid username. Username can only contain letters (A-Z, a-z) and numbers (0-9).")
+
+        if not new_email:
+            errors.append("Email cannot be empty.")
+        elif not is_valid_email(new_email):
+            errors.append("Invalid email address.")
+
+        if not new_password:
+            errors.append("Password cannot be empty.")
+        elif not is_valid_password(new_password):
+            errors.append("Password should be at least 8 characters long and can only contain letters (A-Z, a-z) and numbers (0-9).")
+
+        if not confirm_password:
+            errors.append("Confirm password cannot be empty.")
+        elif new_password != confirm_password:
+            errors.append("Passwords do not match.")
+
+        if not errors:
             if store_user_data(new_username, new_email, new_password):
                 st.success("Sign up successful! You can now sign in.")
             else:
                 st.error("Username or email already exists!")
         else:
-            st.error("Passwords do not match!")
+            for error in errors:
+                st.error(error)
+
+# Streamlit application
+def main():
+    st.title("Login Page")
+    
+    st.sidebar.title("Navigation")
+    selected_page = st.sidebar.radio("Go to", ["Sign Up", "Sign In"])
+
+    if selected_page == "Sign Up":
+        sign_up_page()
+    elif selected_page == "Sign In":
+        sign_in_page()
 
     if "access_token" in st.session_state:
         subprocess.run(["streamlit", "run", "UserDashboard.py"], check=True)
-
-def user_dashboard():
-    st.title("User Dashboard")
-    st.write("Welcome to your dashboard!")
-    # Add your user dashboard content here
 
 if __name__ == "__main__":
     main()
