@@ -45,8 +45,8 @@ x-airflow-common:
   # Comment the image line, place your Dockerfile in the directory where you placed the docker-compose.yaml
   # and uncomment the "build" line below, Then run `docker-compose build` to build the images.
   build:
-    context: .
-    dockerfile: dockerfile
+    context: ./airflow
+    dockerfile: ./dockerfile
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
@@ -56,19 +56,13 @@ x-airflow-common:
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKEND: 'airflow.api.auth.backend.basic_auth'
-    #_PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:- cloud-sql-python-connector[pg8000]}
-    GOOGLE_APPLICATION_CREDENTIALS: /etc/gcp/credentials.json
-    AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: 'google-cloud-platform://?extra__google_cloud_platform__key_path=/etc/gcp/credentials.json'
-    GCP_PROJECT_ID: 'stackai-394819'
-    # # GCP_GCS_BUCKET: "dtc_data_lake_capstone-luis-oliveira-347008"
 
   volumes:
-    - ./airflow/dags:/opt/airflow/dags
-    - ./airflow/logs:/opt/airflow/logs
-    - ./airflow/plugins:/opt/airflow/plugins
-    - ./airflow/config:/opt/airflow/config
-    - ./stackai-394819-86a97a8439b6.json:/etc/gcp/credentials.json:ro
-
+    - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
+    - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
+    - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
+    - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
+    - C://Users//Dell//OneDrive - Northeastern University//courses//big data and intl analytics//DAMG7245-Summer2023//final_project//airflow//dataset_cleaned:/data
 
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
@@ -210,16 +204,6 @@ services:
       - bash
       - -c
       - airflow
-      
-## Other Services
-  # Database
-  # redis-stack:
-  #     image:  redis/redis-stack:latest
-  #     container_name: redis-stack
-  #     ports:
-  #         - "30001:6379" 
-  #         - "30002:8001"
-  #     restart: always
 
 volumes:
   postgres-db-volume:
