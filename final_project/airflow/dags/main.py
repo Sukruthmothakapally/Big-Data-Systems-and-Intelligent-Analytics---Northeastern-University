@@ -5,7 +5,9 @@ from datetime import timedelta
 from airflow.utils.dates import days_ago
 import os
 import pandas as pd
-from sentence_transformers import SentenceTransformer
+import great_expectations as ge
+import logging
+# from sentence_transformers import SentenceTransformer
 
 dag = DAG(
     dag_id="StackAI_Data_Pipeline",
@@ -116,80 +118,104 @@ def Transform_and_load_comments_data():
     job = bq_client.query(query, job_config=job_config)
     job.result()
 
-def generate_and_store_embeddings(**kwargs):
+# def generate_and_store_embeddings(**kwargs):
     
+#     # Set up BigQuery client with explicit project ID
+#     bq_client = bigquery.Client(project='stackai-394819')
+
+#     # Set up query to get data from BigQuery table
+#     query = f"""
+#         SELECT *
+#         FROM `{kwargs['table_name']}`
+#     """
+
+#     # Run query and fetch results into pandas DataFrame
+#     df = bq_client.query(query).to_dataframe()
+
+#     # Concatenate relevant columns for embedding, handling NaN values
+#     relevant_text = df.apply(lambda row: ' '.join(filter(lambda x: pd.notna(x), [row['question_title'], row['question_body'] , row['accepted_answer']])), axis=1)
+
+#     # Convert relevant_text to a list
+#     relevant_text_list = relevant_text.tolist()
+
+#     # Load the pre-trained Sentence Transformers model
+#     model = SentenceTransformer('distilbert-base-nli-stsb-mean-tokens')
+
+#     def generate_embeddings(text):
+#         embeddings = model.encode(text)
+#         return embeddings
+
+#     # Generate embeddings for relevant data
+#     data_embeddings = generate_embeddings(relevant_text_list)
+
+#     # Add new column to DataFrame with embeddings
+#     df['embeddings'] = data_embeddings.tolist()
+
+#     # Update BigQuery table with new column
+#     job_config = bigquery.LoadJobConfig(
+#         write_disposition="WRITE_TRUNCATE",
+#         schema=[
+#             bigquery.SchemaField("embeddings", "STRING"),
+#         ],
+#     )
+
+#     job = bq_client.load_table_from_dataframe(
+#         df, kwargs['table_name'], job_config=job_config
+#     )
+#     job.result()  # Waits for table load to complete.
+#     print(f"Embeddings generated and stored in {kwargs['table_name']}.")
+
+# def extract_cleaned_dataset(**kwargs):
+    
+#     # Set up BigQuery client with explicit project ID
+#     bq_client = bigquery.Client(project='stackai-394819')
+
+#     # Set up query to get data from BigQuery table
+#     query = f"""
+#         SELECT *
+#         FROM `{kwargs['table_name']}`
+#     """
+
+#     query2 = f"""
+#         SELECT *
+#         FROM `{kwargs['table_name2']}`
+#     """
+
+#     # Run query and fetch results into pandas DataFrame
+#     df = bq_client.query(query).to_dataframe()
+
+#     #save to posts csv
+#     df.to_csv('../data/cleaned_posts.csv', index=False)
+
+#     #Run query and fetch results into pandas DataFrame
+#     df2 = bq_client.query(query2).to_dataframe()
+
+#     #save to comments csv
+#     df2.to_csv('../data/cleaned_comments.csv', index=False)
+
+def great_expectations_analysis(**kwargs):
     # Set up BigQuery client with explicit project ID
     bq_client = bigquery.Client(project='stackai-394819')
 
-    # Set up query to get data from BigQuery table
-    query = f"""
+    # Fetch the data from BigQuery into a DataFrame
+    query = """
         SELECT *
-        FROM `{kwargs['table_name']}`
+        FROM `stackai-394819.StackAI.posts_cleaned`
     """
-
-    # Run query and fetch results into pandas DataFrame
     df = bq_client.query(query).to_dataframe()
 
-    # Concatenate relevant columns for embedding, handling NaN values
-    relevant_text = df.apply(lambda row: ' '.join(filter(lambda x: pd.notna(x), [row['question_title'], row['question_body'] , row['accepted_answer']])), axis=1)
+    # Create a Great Expectations Batch from the DataFrame
+    batch = ge.dataset.PandasDataset(df)  # Correct class name
 
-    # Convert relevant_text to a list
-    relevant_text_list = relevant_text.tolist()
+    # Define your expectations
+    batch.expect_column_values_to_not_be_null('question_id')
 
-    # Load the pre-trained Sentence Transformers model
-    model = SentenceTransformer('distilbert-base-nli-stsb-mean-tokens')
+    # Validate the Batch and get the results
+    results = batch.validate()
 
-    def generate_embeddings(text):
-        embeddings = model.encode(text)
-        return embeddings
-
-    # Generate embeddings for relevant data
-    data_embeddings = generate_embeddings(relevant_text_list)
-
-    # Add new column to DataFrame with embeddings
-    df['embeddings'] = data_embeddings.tolist()
-
-    # Update BigQuery table with new column
-    job_config = bigquery.LoadJobConfig(
-        write_disposition="WRITE_TRUNCATE",
-        schema=[
-            bigquery.SchemaField("embeddings", "STRING"),
-        ],
-    )
-
-    job = bq_client.load_table_from_dataframe(
-        df, kwargs['table_name'], job_config=job_config
-    )
-    job.result()  # Waits for table load to complete.
-    print(f"Embeddings generated and stored in {kwargs['table_name']}.")
-
-def extract_cleaned_dataset(**kwargs):
-    
-    # Set up BigQuery client with explicit project ID
-    bq_client = bigquery.Client(project='stackai-394819')
-
-    # Set up query to get data from BigQuery table
-    query = f"""
-        SELECT *
-        FROM `{kwargs['table_name']}`
-    """
-
-    query2 = f"""
-        SELECT *
-        FROM `{kwargs['table_name2']}`
-    """
-
-    # Run query and fetch results into pandas DataFrame
-    df = bq_client.query(query).to_dataframe()
-
-    #save to posts csv
-    df.to_csv('../data/cleaned_posts.csv', index=False)
-
-    #Run query and fetch results into pandas DataFrame
-    df2 = bq_client.query(query2).to_dataframe()
-
-    #save to comments csv
-    df2.to_csv('../data/cleaned_comments.csv', index=False)
+    # Log the validation results
+    logging.info("Great Expectations validation results:")
+    logging.info(results)
 
 with dag:
     Extract_data_task=PythonOperator(
@@ -213,26 +239,33 @@ with dag:
         dag=dag,
     )
 
-    generate_and_store_embeddings_task = PythonOperator(
-    task_id='generate_and_store_embeddings',
-    python_callable=generate_and_store_embeddings,
-    op_kwargs={
-        'project_id': 'stackai-394819',
-        'table_name': 'stackai-394819.StackAI.posts_cleaned'
-    },
-    dag=dag,
+    # generate_and_store_embeddings_task = PythonOperator(
+    # task_id='generate_and_store_embeddings',
+    # python_callable=generate_and_store_embeddings,
+    # op_kwargs={
+    #     'project_id': 'stackai-394819',
+    #     'table_name': 'stackai-394819.StackAI.posts_cleaned'
+    # },
+    # dag=dag,
+    # )
+
+#     extract_cleaned_dataset_task = PythonOperator(
+#     task_id='extract_cleaned_dataset',
+#     python_callable=extract_cleaned_dataset,
+#     op_kwargs={
+#         'project_id': 'stackai-394819',
+#         'table_name': 'stackai-394819.StackAI.posts_cleaned',
+#         'table_name2': 'stackai-394819.StackAI.comments_cleaned'
+#     },
+#     dag=dag,
+# )
+# Task to run Great Expectations
+    ge_task = PythonOperator(
+        task_id='run_great_expectations',
+        python_callable=great_expectations_analysis,
+        provide_context=True,
+        dag=dag,
     )
 
-    extract_cleaned_dataset_task = PythonOperator(
-    task_id='extract_cleaned_dataset',
-    python_callable=extract_cleaned_dataset,
-    op_kwargs={
-        'project_id': 'stackai-394819',
-        'table_name': 'stackai-394819.StackAI.posts_cleaned',
-        'table_name2': 'stackai-394819.StackAI.comments_cleaned'
-    },
-    dag=dag,
-)
-
-Extract_data_task >> Transform_and_load_posts_data_task >> Transform_and_load_comments_data_task >> generate_and_store_embeddings_task >> extract_cleaned_dataset_task
+Extract_data_task >> Transform_and_load_posts_data_task >> Transform_and_load_comments_data_task >> ge_task
 
