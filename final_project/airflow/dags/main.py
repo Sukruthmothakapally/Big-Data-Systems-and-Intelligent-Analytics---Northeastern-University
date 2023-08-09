@@ -7,7 +7,7 @@ import os
 import pandas as pd
 import great_expectations as ge
 import logging
-# from sentence_transformers import SentenceTransformer
+from sentence_transformers import SentenceTransformer
 
 dag = DAG(
     dag_id="StackAI_Data_Pipeline",
@@ -134,7 +134,7 @@ def generate_and_store_embeddings(**kwargs):
     # Set up query
     query = f"""
         SELECT *
-        FROM `{table_name}`
+        FROM `{kwargs['table_name']}`
     """
 
     # Run query and fetch results into pandas DataFrame
@@ -172,34 +172,6 @@ def generate_and_store_embeddings(**kwargs):
     )
     job.result()  # Waits for table load to complete.
     print(f"Embeddings generated and stored in {kwargs['table_name']}.")
-
-# def extract_cleaned_dataset(**kwargs):
-    
-#     # Set up BigQuery client with explicit project ID
-#     bq_client = bigquery.Client(project='stackai-394819')
-
-#     # Set up query to get data from BigQuery table
-#     query = f"""
-#         SELECT *
-#         FROM `{kwargs['table_name']}`
-#     """
-
-#     query2 = f"""
-#         SELECT *
-#         FROM `{kwargs['table_name2']}`
-#     """
-
-#     # Run query and fetch results into pandas DataFrame
-#     df = bq_client.query(query).to_dataframe()
-
-#     #save to posts csv
-#     df.to_csv('../data/cleaned_posts.csv', index=False)
-
-#     #Run query and fetch results into pandas DataFrame
-#     df2 = bq_client.query(query2).to_dataframe()
-
-#     #save to comments csv
-#     df2.to_csv('../data/cleaned_comments.csv', index=False)
 
 def great_expectations_analysis(**kwargs):
     # Set up BigQuery client with explicit project ID
@@ -257,17 +229,7 @@ with dag:
     dag=dag,
     )
 
-#     extract_cleaned_dataset_task = PythonOperator(
-#     task_id='extract_cleaned_dataset',
-#     python_callable=extract_cleaned_dataset,
-#     op_kwargs={
-#         'project_id': 'stackai-394819',
-#         'table_name': 'stackai-394819.StackAI.posts_cleaned',
-#         'table_name2': 'stackai-394819.StackAI.comments_cleaned'
-#     },
-#     dag=dag,
-# )
-# Task to run Great Expectations
+#Task to run Great Expectations
     ge_task = PythonOperator(
         task_id='run_great_expectations',
         python_callable=great_expectations_analysis,
