@@ -5,3 +5,8 @@ langchain
 db-dtypes
 google-cloud-bigquery
 streamlit
+great-expectations
+passlib
+python-jose
+psycopg2-binary
+bcrypt
