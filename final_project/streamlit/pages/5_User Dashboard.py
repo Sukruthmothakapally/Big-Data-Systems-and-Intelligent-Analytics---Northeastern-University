@@ -48,10 +48,10 @@ if "logged_in" in st.session_state and "last_activity" in st.session_state:
             st.write(df.to_html(escape=False, index=False), unsafe_allow_html=True)
 
             # Add a hyperlink to the Great Expectations Data Docs index.html file
-        data_docs_path = r"/opt/Great Expectation/great_expectations/uncommitted/data_docs/local_site/expectations/comments_suite.html"
+        data_docs_path = r"/app/great_expectations/uncommitted/data_docs/local_site/expectations/comments_suite.html"
         link_text = "Comments table expectations"
 
-        data_docs_path2 = r"/opt/Great Expectations/great_expectations/uncommitted/data_docs/local_site/expectations/posts_suite.html"
+        data_docs_path2 = r"/app/great_expectations/uncommitted/data_docs/local_site/expectations/posts_suite.html"
         link_text2 = "Posts table expectations"
         
         # Display the header and the hyperlink
