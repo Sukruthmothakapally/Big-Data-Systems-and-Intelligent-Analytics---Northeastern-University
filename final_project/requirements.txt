@@ -10,3 +10,9 @@ passlib
 python-jose
 psycopg2-binary
 bcrypt
+uvicorn
+fastapi
+pydantic 
+sqlalchemy 
+passlib
+python-multipart
