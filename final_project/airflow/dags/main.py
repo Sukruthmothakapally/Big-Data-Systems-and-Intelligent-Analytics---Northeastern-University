@@ -257,8 +257,8 @@ def great_expectations_analysis(**kwargs):
     batch_comments.expect_compound_columns_to_be_unique(['post_id'])
 
     # Save the Expectations to the Expectation Suite
-    batch.save_expectation_suite('C:\\Users\\Dell\\OneDrive - Northeastern University\\courses\\big data and intl analytics\\DAMG7245-Summer2023\\final_project\\great_expectations\\expectations\\posts_suite.json')
-    batch_comments.save_expectation_suite('C:\\Users\\Dell\\OneDrive - Northeastern University\\courses\\big data and intl analytics\\DAMG7245-Summer2023\\final_project\\great_expectations\\expectations\\comments_suite.json')
+    batch.save_expectation_suite('/opt/great_expectations/expectations/posts_suite.json')
+    batch_comments.save_expectation_suite('/opt/great_expectations/expectations/comments_suite.json')
 
     # Validate the Batch and get the results
     results = batch.validate()
