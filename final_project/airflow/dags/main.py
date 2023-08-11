@@ -8,6 +8,7 @@ import pandas as pd
 import great_expectations as ge
 import logging
 from sentence_transformers import SentenceTransformer
+from great_expectations.data_context import DataContext
 
 dag = DAG(
     dag_id="StackAI_Data_Pipeline",
@@ -174,6 +175,7 @@ def generate_and_store_embeddings(**kwargs):
     print(f"Embeddings generated and stored in {kwargs['table_name']}.")
 
 def great_expectations_analysis(**kwargs):
+
     # Set up BigQuery client with explicit project ID
     bq_client = bigquery.Client(project='stackai-394819')
 
@@ -182,20 +184,110 @@ def great_expectations_analysis(**kwargs):
         SELECT *
         FROM `stackai-394819.StackAI.posts_cleaned`
     """
-    df = bq_client.query(query).to_dataframe()
+    query_comments = """
+        SELECT *
+        FROM `stackai-394819.StackAI.comments_cleaned`
+    """
 
-    # Create a Great Expectations Batch from the DataFrame
-    batch = ge.dataset.PandasDataset(df)  # Correct class name
+    df_posts = bq_client.query(query).to_dataframe()
+    df_comments = bq_client.query(query_comments).to_dataframe()
+
+    # Create Great Expectations Batches from the DataFrames
+    batch = ge.dataset.PandasDataset(df_posts)
+    batch_comments = ge.dataset.PandasDataset(df_comments)
 
     # Define your expectations
     batch.expect_column_values_to_not_be_null('question_id')
+    batch.expect_column_values_to_not_be_null('question_title')
+    batch.expect_column_values_to_not_be_null('question_body')
+    batch.expect_column_values_to_not_be_null('question_tags')
+    batch.expect_column_values_to_not_be_null('question_score')
+    batch.expect_column_values_to_not_be_null('question_view_count')
+    batch.expect_column_values_to_not_be_null('answer_count')
+    batch.expect_column_values_to_not_be_null('comment_count')
+    batch.expect_column_values_to_not_be_null('question_creation_date')
+    batch.expect_column_values_to_not_be_null('accepted_answer')
+    batch.expect_column_values_to_not_be_null('accepted_answer_creation_date')
+    batch.expect_column_values_to_not_be_null('accepted_answer_owner_display_name')
+    batch.expect_column_values_to_not_be_null('owner_reputation')
+    batch.expect_column_values_to_not_be_null('owner_badge')
+    batch.expect_column_values_to_not_be_null('accepted_answer_score')
+    batch.expect_column_values_to_not_be_null('accepted_answer_view_count')
+
+    # Expect column data types to be as expected
+    batch.expect_column_values_to_be_of_type('question_id', 'int64')
+    batch.expect_column_values_to_be_of_type('question_title', 'object')
+    batch.expect_column_values_to_be_of_type('question_body', 'object')
+    batch.expect_column_values_to_be_of_type('question_tags', 'object')
+    batch.expect_column_values_to_be_of_type('question_score', 'int64')
+    batch.expect_column_values_to_be_of_type('question_view_count', 'int64')
+    batch.expect_column_values_to_be_of_type('answer_count', 'int64')
+    batch.expect_column_values_to_be_of_type('comment_count', 'int64')
+    batch.expect_column_values_to_be_of_type('question_creation_date', 'object')
+    batch.expect_column_values_to_be_of_type('accepted_answer', 'object')
+    batch.expect_column_values_to_be_of_type('accepted_answer_creation_date', 'object')
+    batch.expect_column_values_to_be_of_type('accepted_answer_owner_display_name', 'object')
+    batch.expect_column_values_to_be_of_type('owner_reputation', 'int64')
+    batch.expect_column_values_to_be_of_type('owner_badge', 'object')
+    batch.expect_column_values_to_be_of_type('accepted_answer_score', 'int64')
+    batch.expect_column_values_to_be_of_type('accepted_answer_view_count', 'int64')
+
+    # Expect total rows to not be more than 5000
+    batch.expect_table_row_count_to_be_between(0, 5000)
+
+    # Expect post_id to be unique
+    batch.expect_compound_columns_to_be_unique(['question_id'])
+
+    # Define expectations for comments table
+    batch_comments.expect_column_values_to_not_be_null('post_id')
+    batch_comments.expect_column_values_to_not_be_null('text')
+    batch_comments.expect_column_values_to_not_be_null('creation_date')
+    batch_comments.expect_column_values_to_not_be_null('score')
+
+    # Expect column data types to be as expected
+    batch_comments.expect_column_values_to_be_of_type('post_id', 'int64')
+    batch_comments.expect_column_values_to_be_of_type('text', 'object')
+    batch_comments.expect_column_values_to_be_of_type('creation_date', 'object')
+    batch_comments.expect_column_values_to_be_of_type('score', 'object')
+
+    # Expect total rows to not be more than 20000
+    batch_comments.expect_table_row_count_to_be_between(0, 20000)
+
+    # Expect post_id to be unique
+    batch_comments.expect_compound_columns_to_be_unique(['post_id'])
+
+    # Save the Expectations to the Expectation Suite
+    batch.save_expectation_suite('C:\\Users\\Dell\\OneDrive - Northeastern University\\courses\\big data and intl analytics\\DAMG7245-Summer2023\\final_project\\great_expectations\\expectations\\posts_suite.json')
+    batch_comments.save_expectation_suite('C:\\Users\\Dell\\OneDrive - Northeastern University\\courses\\big data and intl analytics\\DAMG7245-Summer2023\\final_project\\great_expectations\\expectations\\comments_suite.json')
 
     # Validate the Batch and get the results
     results = batch.validate()
+    results_comments = batch_comments.validate()
+
+    # Print the validation results
+    print("Posts table validation check:")
+    print(results)
+    print("Comments table validation check:")
+    print(results_comments)
+
+    # Create a DataContext object
+    context = DataContext()
+
+    # Build Data Docs
+    context.build_data_docs()
+
+    # # Get the location of the local site directory
+    # local_site_dir = context.get_docs_sites_urls()[0]['site_url']
+
+    # # Print the location of the local site directory
+    # print(f"Data Docs generated at: {local_site_dir}")
 
     # Log the validation results
-    logging.info("Great Expectations validation results:")
+    logging.info("Great Expectations validation results for Posts table:")
     logging.info(results)
+    
+    logging.info("Great Expectations validation results for Comments table:")
+    logging.info(results_comments)
 
 with dag:
     Extract_data_task=PythonOperator(

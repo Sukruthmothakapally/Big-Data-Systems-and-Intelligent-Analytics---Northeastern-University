@@ -6,6 +6,8 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 from passlib.context import CryptContext
 import subprocess
 import re
+from typing import List
+from fastapi import Depends, HTTPException
 
 # Retrieve DB_HOST value from Terraform output
 DB_HOST = subprocess.check_output(["terraform", "output", "-raw", "instance_address"], cwd="C:\\Users\\Dell\\OneDrive - Northeastern University\\courses\\big data and intl analytics\\DAMG7245-Summer2023\\final_project\\pipeline\\terraform").decode().strip()
@@ -30,7 +32,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 # Set up database models
 class User(Base):
-    __tablename__ = "stackiusers"
+    __tablename__ = "stackaiusers"
 
     id = Column(Integer, primary_key=True, index=True)
     first_name = Column(String)
@@ -51,6 +53,11 @@ class UserIn(BaseModel):
 class UserOut(BaseModel):
     first_name: str
     last_name: str
+
+class UserWithEmailOut(BaseModel):
+    first_name: str
+    last_name: str
+    email: str
 
 # Utility functions
 def get_db():
@@ -108,7 +115,6 @@ def signup(user_in: UserIn, db=Depends(get_db)):
     db.refresh(user)
     return {"first_name": user.first_name, "last_name": user.last_name}
 
-
 @app.post("/login", response_model=UserOut)
 def login(form_data: OAuth2PasswordRequestForm=Depends(), db=Depends(get_db)):
     if not form_data.username:
@@ -122,13 +128,32 @@ def login(form_data: OAuth2PasswordRequestForm=Depends(), db=Depends(get_db)):
                             headers={"WWW-Authenticate": "Bearer"})
     return {"first_name": user.first_name, "last_name": user.last_name}
 
+# Get current user (admin) function
+def get_current_user(form_data: OAuth2PasswordRequestForm = Depends()):
+    user_email = form_data.username
+    # Verify that the user email is the admin's email
+    if user_email != "sukruth@gmail.com":
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions")
+    return user_email
 
-# @app.get("/users/{username}", response_model=UserOut)
-# def get_user(username: str, db=Depends(get_db)):
-#     user = db.query(User).filter(User.username == username).first()
-#     if not user:
-#         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
-#     return {"username": user.username, "hashed_password": user.hashed_password}
+# Route to get all users
+@app.get("/users", response_model=List[User])
+def get_users(current_user: str = Depends(get_current_user), db=Depends(get_db)):
+    users = db.query(User).all()
+    return users
+
+# Route to delete a user (only accessible to admin)
+@app.delete("/users/{user_id}", response_model=User)
+def delete_user(
+    user_id: int, 
+    current_user: str = Depends(get_current_user),db=Depends(get_db)):
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    db.delete(user)
+    db.commit()
+    return user
+
 
 #get health
 @app.get("/health")

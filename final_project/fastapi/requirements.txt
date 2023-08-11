@@ -5,3 +5,4 @@ sqlalchemy
 passlib
 python-multipart
 pydantic[email]
+gunicorn

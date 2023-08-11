@@ -4,7 +4,7 @@ from datetime import timedelta
 from datetime import datetime
 
 # Replace this with the URL of your FastAPI backend
-FASTAPI_URL = "http://localhost:8000"
+FASTAPI_URL = "http://fastapi:8095"
 
 # Set session timeout to 15 minutes
 SESSION_TIMEOUT = timedelta(minutes=15)
@@ -38,6 +38,8 @@ def login():
         # Store user's first name and last name in session state
             st.session_state.first_name = response.json()['first_name']
             st.session_state.last_name = response.json()['last_name']
+        #store email in session state
+            st.session_state.email = email
         else:
             try:
                 error_detail = response.json()["detail"]

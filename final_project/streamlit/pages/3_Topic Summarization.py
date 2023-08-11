@@ -204,7 +204,7 @@ if "logged_in" in st.session_state and "last_activity" in st.session_state:
                             # Create a Document object from the data string
                             doc = Document(page_content=data)
                             # Initialize the OpenAI module and load the summarize chain
-                            llm, chain = init_openai_and_load_summarize_chain(openai_api_key="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", temperature=0, chain_type="stuff")
+                            llm, chain = init_openai_and_load_summarize_chain(openai_api_key="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", temperature=0, chain_type="stuff")
 
                             # Use the string variable as input to the summarization chain
                             summary = chain.run(input_documents=[doc], question="Write a concise summary within 300 words.")

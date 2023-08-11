@@ -1,0 +1,7 @@
+streamlit
+openai
+sentence-transformers
+langchain
+db-dtypes
+google-cloud-bigquery
+scikit-learn

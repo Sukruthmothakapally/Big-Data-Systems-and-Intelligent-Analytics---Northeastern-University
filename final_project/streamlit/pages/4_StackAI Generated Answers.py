@@ -32,7 +32,7 @@ if "logged_in" in st.session_state and "last_activity" in st.session_state:
 
         import openai
         import pandas as pd
-        openai_api_key = "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"
+        openai_api_key = "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"
         openai.api_key = openai_api_key
 
         # Define a function to get the OpenAI response and cache the result using st.cache
