@@ -7,7 +7,7 @@ RUN pip install --upgrade pip
 WORKDIR /app
 # Change the working dir inside the container - cd /app
 
-COPY intro.py requirements.txt ./
+COPY About.py requirements.txt ./
 copy pages ./pages
 # Copy all files from local streamlit directory to /app directory
 
