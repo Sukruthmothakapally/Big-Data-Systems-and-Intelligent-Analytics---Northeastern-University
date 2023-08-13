@@ -9,7 +9,13 @@ import great_expectations as ge
 import logging
 from sentence_transformers import SentenceTransformer
 from great_expectations.data_context import DataContext
+from airflow.models.param import Param
 
+# dag declaration
+user_input = {
+            "Number of Tags": Param(default=5, type='integer'),
+            "Number of Posts": Param(default=15000, type='integer'),
+            }
 dag = DAG(
     dag_id="StackAI_Data_Pipeline",
     schedule="0 0 * * *",   # https://crontab.guru/
@@ -17,6 +23,7 @@ dag = DAG(
     catchup=False,
     dagrun_timeout=timedelta(minutes=60),
     tags=["StackAI", "StackOverFlow Bigquery dataset"],
+    params=user_input,
 )
 
 # Set the environment variable
@@ -24,16 +31,17 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/opt/airflow/dags/servicekey.jso
 
 def Extract_data(**kwargs):
 
+    number_of_tags = kwargs['params']['Number of Tags']
     # Set up BigQuery client with explicit project ID
     bq_client = bigquery.Client(project='stackai-394819')
 
         # Set up query to get the top 3 most repeated tags
-    top_tags_query = """
+    top_tags_query = f"""
         SELECT tags, COUNT(*) as count
         FROM `bigquery-public-data.stackoverflow.posts_questions`
         GROUP BY tags
         ORDER BY count DESC
-        LIMIT 3
+        LIMIT {number_of_tags}
     """
 
     # Run query to get the top 3 most repeated tags
@@ -45,11 +53,16 @@ def Extract_data(**kwargs):
     kwargs['ti'].xcom_push(key='top_tags', value=top_tags)
 
 def Transform_and_load_posts_data(**kwargs):
+
+    number_of_posts = kwargs['params']['Number of Posts']
     # Set up BigQuery client with explicit project ID
     bq_client = bigquery.Client(project='stackai-394819')
 
     # Pull the top tags from XCom
     top_tags = kwargs['ti'].xcom_pull(key='top_tags', task_ids='Extract_data_from_bigquery')
+
+    # Generate a comma-separated list of top tags
+    top_tags_str = ', '.join([f"'{tag}'" for tag in top_tags])
 
     # Set up query to insert data into the table
     query = f"""
@@ -87,10 +100,10 @@ def Transform_and_load_posts_data(**kwargs):
             ON
                 p2.id = b.id
             WHERE
-                p1.tags IN ('{top_tags[0]}', '{top_tags[1]}', '{top_tags[2]}')
+                p1.tags IN ({top_tags_str})
         )
         SELECT *
-        FROM posts_answers limit 500
+        FROM posts_answers limit {number_of_posts}
         """
 
     # Run query to insert data into the table
