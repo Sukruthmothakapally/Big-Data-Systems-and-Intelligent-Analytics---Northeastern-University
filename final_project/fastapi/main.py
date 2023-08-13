@@ -10,6 +10,7 @@ from typing import List
 from fastapi import Depends, HTTPException
 from langchain.chains.summarize import load_summarize_chain
 from langchain.llms.openai import OpenAI
+import openai
 
 # Retrieve DB_HOST value from Terraform output
 DB_HOST = "34.94.157.129"
@@ -19,6 +20,8 @@ DB_USER = 'stackai'
 DB_PASSWORD = 'hello123'
 DB_NAME = 'stackai'
 DB_PORT = '5432'  # Default PostgreSQL port 
+
+openai.api_key = "xxxx" 
 
 # Set up database connection
 engine = create_engine(f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
@@ -79,6 +82,15 @@ class Document:
     def __init__(self, page_content):
         self.page_content = page_content
         self.metadata = {}
+
+# Define request and response models
+class GenerateAnswerRequest(BaseModel):
+    question_title: str
+    question_body: str
+    temperature: float  # Default temperature
+
+class GenerateAnswerResponse(BaseModel):
+    answer: str
 
 # Utility functions
 def get_db():
@@ -180,3 +192,24 @@ def summarize(request: SummarizeRequest):
 
     # Return the summary as a response
     return SummarizeResponse(summary=summary)
+
+# Define a route for generating AI answers based on user input
+@app.post("/generate_answer", response_model=GenerateAnswerResponse)
+def generate_answer(request: GenerateAnswerRequest):
+    # Combine the user input into the "data" variable
+    data = f"{request.question_title}\n{request.question_body}"
+
+    # Use the OpenAI API to generate a response
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "Give a solution to this programming or technology related question:"},
+            {"role": "system", "content": f"Data: {data}"}
+        ],
+        temperature=request.temperature,
+        max_tokens=500
+    )
+
+    # Extract and return the model-generated answer from the response
+    answer = response["choices"][0]["message"]["content"].strip()
+    return GenerateAnswerResponse(answer=answer)
