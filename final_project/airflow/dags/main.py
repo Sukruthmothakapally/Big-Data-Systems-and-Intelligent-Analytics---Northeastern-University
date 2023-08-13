@@ -61,7 +61,7 @@ def Transform_and_load_posts_data(**kwargs):
     # Pull the top tags from XCom
     top_tags = kwargs['ti'].xcom_pull(key='top_tags', task_ids='Extract_data_from_bigquery')
 
-    # Generate a comma-separated list of top tags
+     # Generate a comma-separated list of top tags
     top_tags_str = ', '.join([f"'{tag}'" for tag in top_tags])
 
     # Set up query to insert data into the table
