@@ -8,3 +8,4 @@ final project
 - modify ip in streamlit 5th py
 - add api key in fastapi
 - replace localhost with fastapi in fastapi py
+- add back service key in dags folder
