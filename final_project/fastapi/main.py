@@ -8,6 +8,8 @@ import subprocess
 import re
 from typing import List
 from fastapi import Depends, HTTPException
+from langchain.chains.summarize import load_summarize_chain
+from langchain.llms.openai import OpenAI
 
 # Retrieve DB_HOST value from Terraform output
 DB_HOST = "34.94.157.129"
@@ -62,6 +64,21 @@ class UserWithEmailOut(BaseModel):
     first_name: str
     last_name: str
     email: str
+
+# Define a class for the request body
+class SummarizeRequest(BaseModel):
+    data: str # The text to be summarized
+    temperature: float # The temperature parameter for OpenAI
+    chain_type: str # The chain type for OpenAI
+
+# Define a class for the response body
+class SummarizeResponse(BaseModel):
+    summary: str # The summary of the text
+
+class Document:
+    def __init__(self, page_content):
+        self.page_content = page_content
+        self.metadata = {}
 
 # Utility functions
 def get_db():
@@ -132,34 +149,34 @@ def login(form_data: OAuth2PasswordRequestForm=Depends(), db=Depends(get_db)):
                             headers={"WWW-Authenticate": "Bearer"})
     return {"first_name": user.first_name, "last_name": user.last_name}
 
-# # Get current user (admin) function
-# def get_current_user(form_data: OAuth2PasswordRequestForm = Depends()):
-#     user_email = form_data.username
-#     # Verify that the user email is the admin's email
-#     if user_email != "sukruth@gmail.com":
-#         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions")
-#     return user_email
-
-# # Route to get all users
-# @app.get("/users", response_model=List[User])
-# def get_users(current_user: str = Depends(get_current_user), db=Depends(get_db)):
-#     users = db.query(User).all()
-#     return users
-
-# # Route to delete a user (only accessible to admin)
-# @app.delete("/users/{user_id}", response_model=User)
-# def delete_user(
-#     user_id: int, 
-#     current_user: str = Depends(get_current_user),db=Depends(get_db)):
-#     user = db.query(User).filter(User.id == user_id).first()
-#     if not user:
-#         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
-#     db.delete(user)
-#     db.commit()
-#     return user
-
-
 #get health
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+# Define a function to initialize the OpenAI module and load the summarize chain
+def init_openai_and_load_summarize_chain(openai_api_key, temperature, chain_type):
+    # Initialize the OpenAI module
+    llm = OpenAI(temperature=temperature, openai_api_key=openai_api_key)
+    # Load the summarize chain
+    chain = load_summarize_chain(llm, chain_type)
+    return llm, chain
+
+# Define a route for summarizing text using OpenAI
+@app.post("/summarize", response_model=SummarizeResponse)
+def summarize(request: SummarizeRequest):
+    # Get the request parameters
+    data = request.data
+    temperature = request.temperature
+    chain_type = request.chain_type
+
+    # Create a Document object from the data string
+    doc = Document(page_content=data)
+    # Initialize the OpenAI module and load the summarize chain
+    llm, chain = init_openai_and_load_summarize_chain(openai_api_key="xxxx", temperature=temperature, chain_type=chain_type)
+
+    # Use the string variable as input to the summarization chain
+    summary = chain.run(input_documents=[doc], question="Write a concise summary within 300 words.")
+
+    # Return the summary as a response
+    return SummarizeResponse(summary=summary)
