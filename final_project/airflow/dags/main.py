@@ -277,30 +277,11 @@ def great_expectations_analysis(**kwargs):
     results = batch.validate()
     results_comments = batch_comments.validate()
 
-    # Print the validation results
-    print("Posts table validation check:")
-    print(results)
-    print("Comments table validation check:")
-    print(results_comments)
-
     # Create a DataContext object
     context = DataContext()
 
     # Build Data Docs
     context.build_data_docs()
-
-    # # Get the location of the local site directory
-    # local_site_dir = context.get_docs_sites_urls()[0]['site_url']
-
-    # # Print the location of the local site directory
-    # print(f"Data Docs generated at: {local_site_dir}")
-
-    # Log the validation results
-    logging.info("Great Expectations validation results for Posts table:")
-    logging.info(results)
-    
-    logging.info("Great Expectations validation results for Comments table:")
-    logging.info(results_comments)
 
 with dag:
     Extract_data_task=PythonOperator(
