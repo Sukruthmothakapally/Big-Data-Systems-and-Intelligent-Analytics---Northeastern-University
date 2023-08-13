@@ -77,9 +77,6 @@ if "logged_in" in st.session_state and "last_activity" in st.session_state:
                         "question_body": str(question_body),
                         "temperature": 0.2  # Set the desired temperature here
                     }
-                                        
-                                    # Make a POST request to the FastAPI endpoint
-                    response = requests.post(fastapi_url, json=data)
 
                     # Make a POST request to the FastAPI endpoint
                     try:
@@ -92,18 +89,32 @@ if "logged_in" in st.session_state and "last_activity" in st.session_state:
                             st.error("Failed to generate the answer. Please try again.")
                     except requests.exceptions.RequestException as e:
                         st.error(f"An error occurred while making the request: {e}")
-
                 #openai answer to user question
+
                 user_input = st.session_state.user_question
+
                 # Display the user's question and the value of the user_input variable on the same line
                 st.markdown(f"<h3>User's question : <span style='color:green'>{user_input}</span></h3>", unsafe_allow_html=True)
                 with st.spinner("Loading..."):
                     if st.button("StackAI answer for user's question"):
-                        # Get the model's response based on the user input and the given data
-                        answer = get_openai_response_cached(user_input)
-
-                        # Display the generated answer
-                        st.markdown(f"<h4 style='color:green'>StackAI :</h4> {answer}", unsafe_allow_html=True)
+                        
+                        fastapi_url = "http://localhost:8000/generate_answer"
+                        # Make a POST request to the FastAPI endpoint for user's question
+                        try:
+                            user_question_data = {
+                                "question_title": user_input,
+                                "question_body": "",
+                                "temperature": 0.2  # Set the desired temperature here
+                            }
+                            response = requests.post(fastapi_url, json=user_question_data)
+                            response.raise_for_status()  # Raise an exception for non-200 status codes
+                            if response.status_code == 200:
+                                answer = response.json()["answer"]
+                                st.markdown(f"<h4 style='color:green'>StackAI :</h4> {answer}", unsafe_allow_html=True)
+                            else:
+                                st.error("Failed to generate the answer. Please try again.")
+                        except requests.exceptions.RequestException as e:
+                            st.error(f"An error occurred while making the request: {e}")
 
         else:
             st.write("No result found. Please go back to first page and generate the result.")
