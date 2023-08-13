@@ -58,9 +58,9 @@ x-airflow-common:
     AIRFLOW__API__AUTH_BACKEND: 'airflow.api.auth.backend.basic_auth'
 
   volumes:
-    - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
-    - ${AIRFLOW_PROJ_DIR:-.}/great_expectations:/opt/airflow/great_expectations
-    # - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
+    - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags:rw
+    - ${AIRFLOW_PROJ_DIR:-.}/great_expectations:/opt/airflow/great_expectations:rw
+    - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs:rw
     # - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
     # - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
     # - ~/.google/credentials/:/.google/credentials:ro
@@ -239,7 +239,7 @@ services:
     environment:
       - API_URL=http://fastapi:8095
     volumes:
-      - ${AIRFLOW_PROJ_DIR:-.}/great_expectations:/app/great_expectations
+      - ${AIRFLOW_PROJ_DIR:-.}/great_expectations:/app/great_expectations:rw
 
 volumes:
   postgres-db-volume:
