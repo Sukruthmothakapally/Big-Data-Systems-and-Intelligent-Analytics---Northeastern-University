@@ -2,6 +2,8 @@ import streamlit as st
 
 from datetime import timedelta
 from datetime import datetime
+import requests
+import pandas as pd
 
 # Check if user is logged in and session is still valid
 if "logged_in" in st.session_state and "last_activity" in st.session_state:
@@ -29,27 +31,6 @@ if "logged_in" in st.session_state and "last_activity" in st.session_state:
         """, unsafe_allow_html=True)
 
         st.markdown("<h1 class='center'>Topic Summarization</h1>", unsafe_allow_html=True)
-
-        import pandas as pd
-        from langchain.llms.openai import OpenAI
-        from langchain.chains.summarize import load_summarize_chain
-        #from scipy.spatial.distance import cdist
-        import openai
-
-        # Define a function to initialize the OpenAI module and load the summarize chain, and cache the result using st.cache
-        @st.cache_data(show_spinner=False)
-        def init_openai_and_load_summarize_chain(openai_api_key, temperature, chain_type):
-            # Initialize the OpenAI module
-            llm = OpenAI(temperature=temperature, openai_api_key=openai_api_key)
-            # Load the summarize chain
-            chain = load_summarize_chain(llm, chain_type)
-            return llm, chain
-
-
-        class Document:
-            def __init__(self, page_content):
-                self.page_content = page_content
-                self.metadata = {}
 
         # Check if the result is stored in session state
         if "similar_topics" in st.session_state and "similarity_scores" in st.session_state:
@@ -183,8 +164,6 @@ if "logged_in" in st.session_state and "last_activity" in st.session_state:
                                     """
                                     st.write(table_html, unsafe_allow_html=True)
 
-
-                            
                             #store accepted answer, comments, question_body, question_title in session state
                             st.session_state.accepted_answer = accepted_answer
                             st.session_state.comments_text = comments_text
@@ -192,7 +171,11 @@ if "logged_in" in st.session_state and "last_activity" in st.session_state:
                             st.session_state.question_title = question_title
 
                         elif selected_radio == "Summarize":
-
+                            
+                            FASTAPI_URL = "http://localhost:8000/summarize"
+                            temperature=0
+                            chain_type="stuff"
+                            
                             # Get the index of the selected topic
                             selected_index = options.index(selected_option)
                             # Get the details of the selected topic
@@ -201,22 +184,30 @@ if "logged_in" in st.session_state and "last_activity" in st.session_state:
 
                             # Get the details of the selected topic
                             data = f"{question_title}{question_body}{accepted_answer}"
-                            # Create a Document object from the data string
-                            doc = Document(page_content=data)
-                            # Initialize the OpenAI module and load the summarize chain
-                            llm, chain = init_openai_and_load_summarize_chain(openai_api_key="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", temperature=0, chain_type="stuff")
 
-                            # Use the string variable as input to the summarization chain
-                            summary = chain.run(input_documents=[doc], question="Write a concise summary within 300 words.")
+                            # Create a request body with the user input parameters
+                            request_body = {
+                                "data": data,
+                                "temperature": temperature,
+                                "chain_type": chain_type,
+                            }
 
-                            # Store the summary in session state
-                            st.session_state.summary = summary
-                            # Display the summary
-                            st.markdown(f"<h3>Summary:</h3>", unsafe_allow_html=True)
-                            st.write(f"{st.session_state.summary}")
-                        
-        else:
-            st.write("No result found. Please go back to first page and generate the result.")
+                            with st.spinner("Summarizing your text..."):
+                                response = requests.post(FASTAPI_URL, json=request_body)
+                           
+                            # Check if the response status code is 200 (OK)
+                            if response.status_code == 200:
+                                # Get the response body as a JSON object
+                                response_body = response.json()
+                                # Get the summary from the response body
+                                summary = response_body["summary"]
+                                # Display the summary
+                                st.markdown(f"<h3>Summary:</h3>", unsafe_allow_html=True)
+                                st.write(f"{summary}")
+                            else:
+                                # Display an error message if something went wrong
+                                st.error(f"Something went wrong. Status code: {response.status_code}")
+                                                
     else:
         # Session has timed out, log out user and display login page
         del st.session_state.logged_in
