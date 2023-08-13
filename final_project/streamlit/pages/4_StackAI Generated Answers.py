@@ -2,6 +2,8 @@ import streamlit as st
 
 from datetime import timedelta
 from datetime import datetime
+import requests
+import pandas as pd
 
 # Check if user is logged in and session is still valid
 if "logged_in" in st.session_state and "last_activity" in st.session_state:
@@ -30,35 +32,6 @@ if "logged_in" in st.session_state and "last_activity" in st.session_state:
 
         st.markdown("<h1 class='center'>StackAI Generated Answers</h1>", unsafe_allow_html=True)
 
-        import openai
-        import pandas as pd
-        openai_api_key = "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"
-        openai.api_key = openai_api_key
-
-        # Define a function to get the OpenAI response and cache the result using st.cache
-        @st.cache_data(show_spinner=False)
-        def get_openai_response_cached(data):
-            return get_openai_response(data)
-
-        def get_openai_response(data):
-
-            # Define the conversation history with system, user, and data messages
-            conversation = f"You are a helpful assistant.\n\nData: {data}"
-
-            # Use the OpenAI API to generate a response
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": "Give the answer to this question:"},
-                    {"role": "system", "content": f"Data: {data}"}
-                ],
-                temperature=0.2,
-                max_tokens=500
-            )
-
-            # Extract and return the model-generated answer from the response
-            return response["choices"][0]["message"]["content"].strip()
-
         # Check if the result is stored in session state
         if "similar_topics" in st.session_state and "similarity_scores" in st.session_state:
             # Get the user input from session state
@@ -72,31 +45,53 @@ if "logged_in" in st.session_state and "last_activity" in st.session_state:
             
             # Filter out topics that do not have accepted answers
             similar_topics_with_accepted_answers = [topic for topic in similar_topics if topic['accepted_answer'] != 'N/A']
-            similarity_scores_with_accepted_answers = [similarity_scores[i] for i in range(len(similar_topics)) if similar_topics[i]['accepted_answer'] != 'N/A']
+
+            # Filter out topics that have accepted answers
+            unanswered_topics = [topic for topic in similar_topics if topic['accepted_answer'] == 'N/A']
 
             # Display the result
-            options = [f"{i+1}. {similar_topics_with_accepted_answers[i]['question_title']} (similarity score: {similarity_scores_with_accepted_answers[i]:.2f})" for i in range(len(similar_topics_with_accepted_answers))]
-            st.markdown("<h3> Unanswered Similar Topics :</h3>", unsafe_allow_html=True)
-            selected_option = st.selectbox("",options)
+            if len(unanswered_topics) > 0:
+                options = [f"{i+1}. {unanswered_topics[i]['question_title']} (similarity score: {similarity_scores[i]:.2f})" for i in range(len(unanswered_topics))]
+                st.markdown("<h3> Unanswered Similar Topics :</h3>", unsafe_allow_html=True)
+                selected_option = st.selectbox("", options)
+            else:
+                st.markdown("<h3> No Unanswered Similar Topics Found.</h3>", unsafe_allow_html=True)
+
             
             with st.spinner("Loading..."):
                 # Add a button to display the AI answer of the selected topic
                 if st.button("StackAI answer for similar topics"):
+
+                    fastapi_url = "http://localhost:8000/generate_answer"
+
                     # Get the index of the selected topic
                     selected_index = options.index(selected_option)
                     
                     # Get the details of the selected topic
                     selected_topic = similar_topics_with_accepted_answers[selected_index]
-                    question_id, question_title, question_body, accepted_answer = selected_topic['question_id'], selected_topic['question_title'], selected_topic['question_body'], selected_topic['accepted_answer']
+                    question_id, question_title, question_body = selected_topic['question_id'], selected_topic['question_title'], selected_topic['question_body']
                     
-                    # Define the data variable
-                    data = f"{question_title}{question_body}{accepted_answer}"
-                    
-                    # Get the model's response based on the user input and the given data
-                    answer = get_openai_response_cached(data)
+                    # Create the data JSON payload
+                    data = {
+                        "question_title": str(question_title),
+                        "question_body": str(question_body),
+                        "temperature": 0.2  # Set the desired temperature here
+                    }
+                                        
+                                    # Make a POST request to the FastAPI endpoint
+                    response = requests.post(fastapi_url, json=data)
 
-                    # Display the generated answer
-                    st.markdown(f"<h4 style='color:green'>StackAI :</h4> {answer}", unsafe_allow_html=True)
+                    # Make a POST request to the FastAPI endpoint
+                    try:
+                        response = requests.post(fastapi_url, json=data)
+                        response.raise_for_status()  # Raise an exception for non-200 status codes
+                        if response.status_code == 200:
+                            answer = response.json()["answer"]
+                            st.markdown(f"<h4 style='color:green'>StackAI:</h4> {answer}", unsafe_allow_html=True)
+                        else:
+                            st.error("Failed to generate the answer. Please try again.")
+                    except requests.exceptions.RequestException as e:
+                        st.error(f"An error occurred while making the request: {e}")
 
                 #openai answer to user question
                 user_input = st.session_state.user_question
