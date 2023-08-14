@@ -23,7 +23,7 @@ if "logged_in" in st.session_state and "last_activity" in st.session_state:
         st.title(f"{st.session_state.first_name} {st.session_state.last_name}'s Dashboard")
 
         # search history
-        st.header("Search History - ")
+        st.markdown("<h1 style='text-align: center; color:red'>Search History</h1>", unsafe_allow_html=True)
 
         # Retrieve the stored search history from session state
         search_history = getattr(st.session_state, "search_history", [])
@@ -46,28 +46,6 @@ if "logged_in" in st.session_state and "last_activity" in st.session_state:
 
             # Display the modified table with clickable links
             st.write(df.to_html(escape=False, index=False), unsafe_allow_html=True)
-
-        # Update these paths to the actual paths where the HTML files are served
-        data_docs_path_comments = "http://35.235.101.84/comments_suite.html"
-        link_text_comments = "Comments table expectations"
-        
-        data_docs_path_posts = "http://35.235.101.84/posts_suite.html"
-        link_text_posts = "Posts table expectations"
-        
-        # Display the header and the hyperlink for comments expectations
-        st.header("Great Expectations Data Analysis -")
-        link_markup_comments = f"<a href='{data_docs_path_comments}' target='_blank'>{link_text_comments}</a>"
-        
-        # Handle opening the HTML file in the browser when the link is clicked
-        if st.button(link_text_comments):
-            webbrowser.open_new_tab(data_docs_path_comments)
-        
-        # Display the header and the hyperlink for posts expectations
-        link_markup_posts = f"<a href='{data_docs_path_posts}' target='_blank'>{link_text_posts}</a>"
-        
-        # Handle opening the HTML file in the browser when the link is clicked
-        if st.button(link_text_posts):
-            webbrowser.open_new_tab(data_docs_path_posts)
 
     else:
         # Session has timed out, log out user and display login page
