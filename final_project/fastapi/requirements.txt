@@ -7,3 +7,5 @@ python-multipart
 pydantic[email]
 gunicorn
 psycopg2
+python-dotenv
+OpenAI
