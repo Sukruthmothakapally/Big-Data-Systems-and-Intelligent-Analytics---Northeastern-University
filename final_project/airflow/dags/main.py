@@ -155,7 +155,7 @@ def generate_and_store_embeddings(**kwargs):
     df = bq_client.query(query).to_dataframe()
 
     # Concatenate relevant columns for embedding, handling 'N/A' values
-    relevant_text = df.apply(lambda row: ' '.join(filter(lambda x: x != 'N/A', [row['question_title'], row['question_body'] , row['accepted_answer']])), axis=1)
+    relevant_text = df.apply(lambda row: ' '.join(filter(lambda x: x != 'N/A', [row['question_title']])), axis=1)
 
     # Convert relevant_text to a list
     relevant_text_list = relevant_text.tolist()
