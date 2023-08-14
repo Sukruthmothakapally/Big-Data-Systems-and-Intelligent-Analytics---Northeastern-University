@@ -71,3 +71,52 @@
 # else:
 #     # User is not logged in, display message asking user to log in and display login page
 #     st.warning("Only Admin can access this page. Please Sign In first")
+
+import streamlit as st
+import requests
+from datetime import timedelta, datetime
+
+# Replace this with the URL of your FastAPI backend
+FASTAPI_URL = "http://fastapi:8095"
+
+# Set session timeout to 15 minutes
+SESSION_TIMEOUT = timedelta(minutes=15)
+
+def admin_login():
+    st.title("Admin Login")
+    admin_email = st.text_input("Admin Email", key="admin_login_email")
+    admin_password = st.text_input("Admin Password", type="password", key="admin_login_password")
+    if st.button("Login as Admin"):
+        if admin_email == "admin@gmail.com" and admin_password == "admin":
+            st.session_state.admin_logged_in = True
+            st.session_state.admin_email = admin_email
+            st.success("Admin login successful")
+        else:
+            st.error("Invalid admin credentials")
+
+def admin_dashboard():
+    response = requests.get(f"{FASTAPI_URL}/get_all_users")
+    if response.status_code == 200:
+        user_data = response.json()
+
+        st.title("Admin Dashboard - All Users")
+        st.write("Here are all the registered users:")
+
+        user_table = []
+        for user in user_data:
+            user_table.append([user["first_name"], user["last_name"], user["email"]])
+
+        st.table(user_table)
+    else:
+        st.error("Failed to fetch user data")
+
+# Main application
+def main():
+    # Check if admin is logged in
+    if "admin_logged_in" not in st.session_state:
+        admin_login()
+    else:
+        admin_dashboard()
+
+if __name__ == "__main__":
+    main()
