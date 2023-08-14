@@ -4,24 +4,26 @@ from pydantic import BaseModel, EmailStr
 from sqlalchemy import create_engine, Column, Integer, String, inspect
 from sqlalchemy.orm import sessionmaker, declarative_base
 from passlib.context import CryptContext
-import subprocess
 import re
 from typing import List
 from fastapi import Depends, HTTPException
-from langchain.chains.summarize import load_summarize_chain
-from langchain.llms.openai import OpenAI
 import openai
 
-# Retrieve DB_HOST value from Terraform output
-DB_HOST = "34.94.157.129"
+#import session
+from sqlalchemy.orm import Session
+from dotenv import load_dotenv
+import os
 
-# Database Configuration
-DB_USER = 'stackai'
-DB_PASSWORD = 'hello123'
-DB_NAME = 'stackai'
-DB_PORT = '5432'  # Default PostgreSQL port 
+# Load values from .env file into environment variables
+load_dotenv()
 
-openai.api_key = "xxxx" 
+# Retrieve values from environment variables
+DB_HOST = os.environ.get("DB_HOST")
+DB_USER = os.environ.get("DB_USER")
+DB_PASSWORD = os.environ.get("DB_PASSWORD")
+DB_NAME = os.environ.get("DB_NAME")
+DB_PORT = os.environ.get("DB_PORT")
+api_key = os.environ.get("OPENAI_API_KEY")
 
 # Set up database connection
 engine = create_engine(f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
@@ -37,8 +39,9 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 # Define the User model
 Base = declarative_base()
+
 class User(Base):
-    __tablename__ = "stackaiusers2"
+    __tablename__ = "stackaiusers"
 
     id = Column(Integer, primary_key=True, index=True)
     first_name = Column(String)
@@ -71,8 +74,6 @@ class UserWithEmailOut(BaseModel):
 # Define a class for the request body
 class SummarizeRequest(BaseModel):
     data: str # The text to be summarized
-    temperature: float # The temperature parameter for OpenAI
-    chain_type: str # The chain type for OpenAI
 
 # Define a class for the response body
 class SummarizeResponse(BaseModel):
@@ -166,39 +167,48 @@ def login(form_data: OAuth2PasswordRequestForm=Depends(), db=Depends(get_db)):
 def health():
     return {"status": "ok"}
 
-# Define a function to initialize the OpenAI module and load the summarize chain
-def init_openai_and_load_summarize_chain(openai_api_key, temperature, chain_type):
-    # Initialize the OpenAI module
-    llm = OpenAI(temperature=temperature, openai_api_key=openai_api_key)
-    # Load the summarize chain
-    chain = load_summarize_chain(llm, chain_type)
-    return llm, chain
-
-# Define a route for summarizing text using OpenAI
 @app.post("/summarize", response_model=SummarizeResponse)
 def summarize(request: SummarizeRequest):
     # Get the request parameters
     data = request.data
-    temperature = request.temperature
-    chain_type = request.chain_type
 
-    # Create a Document object from the data string
-    doc = Document(page_content=data)
-    # Initialize the OpenAI module and load the summarize chain
-    llm, chain = init_openai_and_load_summarize_chain(openai_api_key="xxxx", temperature=temperature, chain_type=chain_type)
+    # Define a prompt that guides the summarization process
+    prompt = f"Summarize the following coding-related content within 300 words:\n\n{data}"
 
-    # Use the string variable as input to the summarization chain
-    summary = chain.run(input_documents=[doc], question="Write a concise summary within 300 words.")
+    # Initialize the OpenAI API client
+    openai.api_key = api_key
 
-    # Return the summary as a response
-    return SummarizeResponse(summary=summary)
+    # Use the GPT-3 model to generate the summary
+    response = openai.Completion.create(
+        engine="text-davinci-003",  # Choose an appropriate engine
+        prompt=prompt,
+        max_tokens=100,
+        temperature=0.7
+    )
+
+    # Get the summary from the response
+    summary = response.choices[0].text.strip()
+
+    # Split the generated text into sentences by splitting at '.'
+    sentences = summary.split('.')
+
+    # Remove the last sentence if it's incomplete
+    if not sentences[-1].endswith("."):
+        sentences = sentences[:-1]
+
+    # Join the sentences to create the final summary
+    final_summary = ".".join(sentences)
+
+    # Return the final summary as a response
+    return SummarizeResponse(summary=final_summary)
 
 # Define a route for generating AI answers based on user input
 @app.post("/generate_answer", response_model=GenerateAnswerResponse)
 def generate_answer(request: GenerateAnswerRequest):
     # Combine the user input into the "data" variable
     data = f"{request.question_title}\n{request.question_body}"
-
+    # Initialize the OpenAI module
+    openai.api_key = api_key
     # Use the OpenAI API to generate a response
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
