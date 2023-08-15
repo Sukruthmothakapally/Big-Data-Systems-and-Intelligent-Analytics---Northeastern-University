@@ -98,8 +98,9 @@ if "logged_in" in st.session_state and "last_activity" in st.session_state:
             st.markdown("<h3 class='center'>Enter your question</h3>", unsafe_allow_html=True)
             user_question = st.text_input("")
 
-            # Store the value of the user_question variable in session state
+            # Store the value of the user_question adn user_tag variables in session state
             st.session_state.user_question = user_question
+            st.session_state.user_tag = user_tag
 
             # Check if the user entered a question
             if user_question:
