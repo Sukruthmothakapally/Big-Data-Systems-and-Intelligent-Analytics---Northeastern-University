@@ -7,7 +7,7 @@ final project
 - removed logs volume in docker compose
 - sudo chown -R sukruth_mothakapally:sukruth_mothakapally final_project/
 
-- # STACKAI 🚀
+# STACKAI 🤖🧠
 
 ## Please find the app hosted on GCP (for a limited time only) - 
 
