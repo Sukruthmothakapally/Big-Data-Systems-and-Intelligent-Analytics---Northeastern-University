@@ -19,7 +19,7 @@ Data Pipeline : [![Apache Airflow](https://img.shields.io/badge/Apache_Airflow-0
 
 Documentation : [![codelabs](https://img.shields.io/badge/codelabs-4285F4?style=for-the-badge&logo=codelabs&logoColor=white)](https://codelabs-preview.appspot.com/?file_id=1blarGD_LQ5o5aGcJWiKKbhDBissQSL9qfs28dx5HyFk#11)
 
-App Demo : [![Youtube](https://img.shields.io/badge/Demo_Link-808080?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtu.be/DnmAYNL0kcI)
+App Demo : [![Youtube](https://img.shields.io/badge/Youtube-808080?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtu.be/DnmAYNL0kcI)
 
 
 
