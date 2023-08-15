@@ -23,17 +23,20 @@ App Demo : [![Youtube](https://img.shields.io/badge/Youtube-808080?style=for-the
 
 
 
-
-
-
-
 ## Abstract :memo: 
 
-In response to a noticeable decline in traffic on Stack Overflow – once a thriving developer community platform – due to the rise of OpenAI's ChatGPT, an application named "StackAI" has been developed. This strategic endeavor aims to restore Stack Overflow's status as a preferred destination for developers seeking coding solutions. By integrating advanced AI features, StackAI strives to rejuvenate community engagement while preserving its core values.
-StackAI's key features include a Topic Relevance Search, enabling users to swiftly navigate through relevant topics according to the user input, Stack Overflow's extensive knowledge base, and Topic Summarization, which delivers concise insights for efficient understanding. Moreover, AI-Generated Answers supplement the existing dataset, addressing users' unique queries and maintaining the platform's relevancy.
-The project encompasses meticulous data collection, preprocessing, and validation. It establishes a robust data pipeline, deploys advanced models like SentenceTransformer and langchain chains summarize, and uses FASTAPI for a responsive backend. A user-friendly interface is developed using Streamlit, while Terraform automates the provisioning of crucial GCP resources for Infrastructure as a Service. Comprehensive testing, continuous integration, and deployment using GitHub Actions ensure a seamless user experience.
-Ultimately, StackAI aims to reinvigorate Stack Overflow's community spirit and contribute to a dynamic ecosystem of knowledge exchange by harnessing AI-powered features, enhancing user interactions, and adapting to evolving developer needs.
-management.
+In response to a noticeable decline in traffic on Stack Overflow – once a thriving developer community platform – due to the rise of OpenAI's ChatGPT, an application named "StackAI" has been developed. 
+
+This strategic endeavor aims to restore Stack Overflow's status as a preferred destination for developers seeking coding solutions. By integrating advanced AI features, StackAI strives to rejuvenate community engagement while preserving its core values.
+
+At the core of StackAI lies the Category-Question-Answer paradigm. Users select a category of their choice, enabling focused exploration. Upon posing a question, StackAI employs cutting-edge AI models to generate precise answers in real-time. To enhance credibility, the platform intelligently curates and presents the three most relevant questions from Stack Overflow's vast repository, along with essential statistics such as accepted answers, comments, scores, owner's reputation and so on.
+
+In cases where no accepted answer exists, StackAI generates a reliable response. For lengthy accepted answers, the platform provides concise summaries, fostering efficient comprehension. Our commitment to user satisfaction is unwavering — if the user's question still remain unanswered, StackAI facilitates easy transition to Stack Overflow's human-driven ecosystem. The platform crafts well-structured questions in Stack 
+Overflow format, easing the process of posting a question to seek human assistance.
+
+Advanced AI models such as OpenAI and Sentence Transformer were fine tuned to provide high-quality custom responses. A robust Airflow data pipeline, powered by meticulous data collection, pre-processing and validation, forms the backbone. FASTAPI ensures a responsive backend, while Streamlit creates an intuitive user interface. Terraform seamlessly provisions vital GCP resources such as BigQuery, CloudSQL and Compute Engine.
+
+Ultimately, StackAI aims to create a better environment where human knowledge and AI work together to boost innovation and growth.
 
 ## Project Goals :dart:
 
