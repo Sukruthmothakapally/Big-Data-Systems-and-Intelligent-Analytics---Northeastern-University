@@ -14,6 +14,7 @@ from sqlalchemy.orm import Session
 from dotenv import load_dotenv
 import os
 
+
 # Load values from .env file into environment variables
 load_dotenv()
 
@@ -222,4 +223,68 @@ def generate_answer(request: GenerateAnswerRequest):
 
     # Extract and return the model-generated answer from the response
     answer = response["choices"][0]["message"]["content"].strip()
+    return GenerateAnswerResponse(answer=answer)
+
+@app.post("/generate_stackoverflow_question", response_model=GenerateAnswerResponse)
+def generate_stackoverflow_question(request: GenerateAnswerRequest):
+    # Combine the user input into the "data" variable
+    data = f"{request.question_title}\n{request.question_body}"
+    # Initialize the OpenAI module
+    openai.api_key = api_key
+
+    # Use the OpenAI API to generate the title
+    title_response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "Craft a 'title' for a Stack Overflow question for this programming or software related problem :"},
+            {"role": "system", "content": f"Data: {data}"}
+        ],
+        temperature=request.temperature,
+        max_tokens=100
+    )
+    title = title_response["choices"][0]["message"]["content"].strip()
+
+    # Use the OpenAI API to generate the details of the problem
+    details_response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "Craft a 'What are the details of your problem?' section for Stack Overflow question for this programming or software related problem :"},
+            {"role": "system", "content": f"Data: {data}"}
+        ],
+        temperature=request.temperature,
+        max_tokens=300
+    )
+    details = details_response["choices"][0]["message"]["content"].strip()
+
+    # Use the OpenAI API to generate what was expected from the user input
+    expected_response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "Craft 'what were you expecting?' section for a Stack Overflow question for this programming or software related problem :"},
+            {"role": "system", "content": f"Data: {data}"}
+        ],
+        temperature=request.temperature,
+        max_tokens=100
+    )
+    expected = expected_response["choices"][0]["message"]["content"].strip()
+
+    # Split the generated text into sentences by splitting at '.'
+    sentences = expected.split('.')
+
+    # Remove the last sentence if it's incomplete
+    if not sentences[-1].endswith("."):
+        sentences = sentences[:-1]
+
+    # Join the sentences to create the final summary
+    final_expected = ".".join(sentences)
+
+    # Aggregate and return the generated fields as a single response
+    answer = (
+    f'<div style="font-size: 18px;">'
+    f'<p><b style="font-size: 24px;">Question title:</b> {title}</p>'
+    f'<p><b style="font-size: 24px;">Question details:</b> {details}</p>'
+    f'<p><b style="font-size: 24px;">Expected solution:</b> {final_expected}</p>'
+    f'</div>'
+)
+
     return GenerateAnswerResponse(answer=answer)
