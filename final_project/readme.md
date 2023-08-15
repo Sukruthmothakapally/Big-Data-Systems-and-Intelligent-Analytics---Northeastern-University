@@ -7,23 +7,19 @@ final project
 - removed logs volume in docker compose
 - sudo chown -R sukruth_mothakapally:sukruth_mothakapally final_project/
 
-- # STACKAI :zap: [![Continuous Integration - Unit Testing](https://github.com/BigDataIA-Spring2023-Team-04/Final-Project-Playground/actions/workflows/pytest.yml/badge.svg?branch=main)](https://github.com/BigDataIA-Spring2023-Team-04/Final-Project-Playground/actions/workflows/pytest.yml)
+- # STACKAI 🚀
 
-## Live application Links :octopus:
+## Please find the app hosted on GCP (for a limited time only) - 
 
-- Please use this application responsibly, as we have limited free credits remaining.
+User Inteferface : [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)](http://34.102.9.117:30005/)
 
-[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)](http://34.148.167.159:8051/)
+Backend : [![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=FastAPI&logoColor=white)](http://34.148.167.159:8050/docs)
 
-[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=FastAPI&logoColor=white)](http://34.148.167.159:8050/docs)
+Data Pipeline : [![Apache Airflow](https://img.shields.io/badge/Apache_Airflow-007A88?style=for-the-badge&logo=Apache%20Airflow&logoColor=white)](http://34.138.127.169:8080/)
 
-[![Apache Airflow](https://img.shields.io/badge/Apache_Airflow-007A88?style=for-the-badge&logo=Apache%20Airflow&logoColor=white)](http://34.138.127.169:8080/)
+Documentation : [![codelabs](https://img.shields.io/badge/codelabs-4285F4?style=for-the-badge&logo=codelabs&logoColor=white)](https://codelabs-preview.appspot.com/?file_id=1blarGD_LQ5o5aGcJWiKKbhDBissQSL9qfs28dx5HyFk#11)
 
-[![Great Expectations](https://img.shields.io/badge/Great_Expectations-FF5733?style=for-the-badge)](http://getest1.s3-website-us-east-1.amazonaws.com)
-
-[![codelabs](https://img.shields.io/badge/codelabs-4285F4?style=for-the-badge&logo=codelabs&logoColor=white)](https://codelabs-preview.appspot.com/?file_id=1blarGD_LQ5o5aGcJWiKKbhDBissQSL9qfs28dx5HyFk#11)
-
-[![Demo Link](https://img.shields.io/badge/Demo_Link-808080?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtu.be/DnmAYNL0kcI)
+App Demo : [![Youtube](https://img.shields.io/badge/Demo_Link-808080?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtu.be/DnmAYNL0kcI)
 
 
 
