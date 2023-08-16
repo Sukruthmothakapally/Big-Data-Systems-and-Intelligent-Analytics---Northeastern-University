@@ -83,9 +83,11 @@ The data for this project is sourced from Google Bigquery public Stackoverflow D
 
 ## App setup -
 
-To run the application locally, follow these steps:
+1. To clone this repository, use the following command:
 
-1. Clone the repository to get all the source code on your machine.
+```bash
+git clone https://github.com/Sukruthmothakapally/DAMG7245-Summer2023.git
+```
 
 2. Create a virtual environment and install all requirements from the requirements.txt file present.
 
