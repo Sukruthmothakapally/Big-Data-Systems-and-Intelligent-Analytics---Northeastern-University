@@ -81,7 +81,7 @@ The data for this project is sourced from Google Bigquery public Stackoverflow D
 
 
 
-## TO run a dockerized App -
+## TO run the dockerized App locally -
 
 1. To clone this repository, use the following command:
 
@@ -118,7 +118,15 @@ DB_PORT=CloudSQL database port number.
 
 OPENAI_API_KEY=Your OpenAI API key for accessing the GPT model.
 ```
-10. Once you have set up your environment variables, start Airflow by running the following command from the root directory:
+10. Navigate to Terraform dir and comment out the resource - ``google_compute_instance`` if you don't want the app hosted on GCP
+11. Navigate to ``Terraform/`` path to create the GCP infrastructure with Terraform
+12. Run the following commands -
+```bash
+terraform init
+terraform plan
+terraform apply --auto-approve
+```
+14. Once you have set up your environment variables, start Airflow by running the following command from the root directory:
 ```bash
 docker compose up
 ```
@@ -126,7 +134,16 @@ docker compose up
 12. To run the DAGs in Airflow, click on the dags links on the Airflow UI and toggle the switch to enable the DAGs.
 13. (Optional) - You can trigger a dag with custom input by selecting ``Trigger dag w/ config``
 14. Once the DAGs have run successfully, access the Streamlit application by navigating to ``http://localhost:8090/``
-15. First sign up and then sign in to use the StackAI app
+15. First sign up and then sign in to use the StackAI app and explore it's features
 
 
+## TO stop the app -
+17. Run this command inside terraform/ to destroy the GCP infrastructure created by terraform -
+```bash
+terraform destroy --auto-approve
+```
+17. Run this command in project home dir to stop docker -
+```bash
+docker compose down
+```
 
