@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(page_title="Stack AI", page_icon="👋")
+st.set_page_config(page_title="Stack AI", page_icon="🤖👨‍💻")
 
 st.markdown("""
 <style>
@@ -45,4 +45,3 @@ with st.container():
     st.markdown("## Your Ultimate Coding Companion!", unsafe_allow_html=True)
     st.markdown("Wave goodbye to the challenge of hunting down solutions on Stack Overflow. StackAI revolutionizes your coding experience by instantly fetching related answers written by humans, simplifying intricate topics, and even crafting personalized answers tailored to your unique questions.")
     st.markdown("Supercharge your coding journey now!")
-    st.markdown("### #UnlockTheCodeGenius ", unsafe_allow_html=True)
