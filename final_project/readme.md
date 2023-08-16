@@ -102,19 +102,18 @@ gcloud auth application-default set-quota-project your_project_id_here
 ```
 9. Create a .env file in the root directory with the following variables:
 ```bash
-AIRFLOW_UID=user id of your machine.
+AIRFLOW_UID= 'user id of your machine'
 
-AIRFLOW_PROJ_DIR=The dir where airflow is present.
+AIRFLOW_PROJ_DIR= 'The dir where airflow is present'
+DB_HOST= 'CloudSQL instance public IP'
 
-DB_HOST=CloudSQL public IP
+DB_USER= 'CloudSQL database username'
 
-DB_USER=CloudSQL database username
+DB_PASSWORD= 'CloudSQL database password'
 
-DB_PASSWORD=CloudSQL database password
+DB_NAME= 'CloudSQL database name'
 
-DB_NAME=CloudSQL database name
-
-DB_PORT=CloudSQL database port number.
+DB_PORT= 'CloudSQL database port number'
 
 OPENAI_API_KEY= 'Your OpenAI API key for accessing the GPT model.'
 ```
