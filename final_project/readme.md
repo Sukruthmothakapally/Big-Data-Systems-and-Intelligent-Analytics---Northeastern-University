@@ -42,9 +42,9 @@ The data for this project is sourced from Google Bigquery public Stackoverflow D
 
 **2. Data Preprocessing:** Out of the 15 tables within the Stack Overflow public dataset, a deliberate selection was made by opting for 6 pertinent tables such as badges, comments, posts_questions, etc., aligning with the project's specific needs. Following this selection, a comprehensive exploratory data analysis was conducted, leading to the transformation of these chosen tables into two optimized entities: Posts and Comments. This transformation process involved the careful elimination of extraneous columns and the mitigation of null values, thereby enhancing the data quality.
 
-**3. Data Pipeline:** In this project, a robust data pipeline is established to Extract, Transform, Load (ETL) operations through Airflow. This pipeline orchestrates the extraction of raw data, its transformation to conform to the desired structure, and the loading of cleaned and enriched data into target destinations. The pipeline also automates the creation and storage of embeddings along with performing Great Expectations analysis.
+**3. Data Pipeline:** In this project, a robust data pipeline is established to Extract, Transform, Load (ETL) operations through [`Airflow`](/airflow/dags/). This pipeline orchestrates the extraction of raw data, its transformation to conform to the desired structure, and the loading of cleaned and enriched data into target destinations. The pipeline also automates the creation and storage of embeddings along with performing Great Expectations analysis.
 
-**5. Data Validation:** Used Great Expectations to validate the gathered data, confirming its conformity to anticipated formats and values.
+**5. Data Validation:** Used [`Great Expectations`](/airflow/great_expectations/) to validate the gathered data, confirming its conformity to anticipated formats and values.
 
 **4. Model Selection:** Models like SentenceTransformer -'distilbert-base-nli-stsb-mean-tokens' and openAI's 'gpt-3.5-turbo' and 'text-davinci-003' were selected and fine tuned based on the features implemented on StackAI.
 
@@ -56,11 +56,11 @@ The data for this project is sourced from Google Bigquery public Stackoverflow D
 
 - **StackAI Generated Answers:** ‘gpt-3.5-turbo’ model from OpenAI: This functionality leverages an OpenAI - GPT 3.5 Turbo model tailored for generating custom responses. The model was chosen for its advanced language generation capabilities, enabling the creation of coherent and contextually relevant answers. The model was fine-tuned by providing custom prompts and adjusting its temperature to improve its performance on generating answers for StackAI's features namely - 'Ask a question', 'Generate an answer if accepted answer doesn’t exist' and 'Craft a question', thereby enriching the overall user experience and ensuring they receive comprehensive and precise information.
 
-**6. Backend:** FASTAPI serves as a vital component, orchestrating seamless communication between AI models and Streamlit, and enabling efficient user authentication. It ensures a robust connection between various modules, allowing smooth data exchange and interactions between the AI models and the user interface, making it easy to interact with the AI-generated responses and enhancing the overall application's usability.
+**6. Backend:** [`FastAPI`](/fastapi/) serves as a vital component, orchestrating seamless communication between AI models and Streamlit, and enabling efficient user authentication. It ensures a robust connection between various modules, allowing smooth data exchange and interactions between the AI models and the user interface, making it easy to interact with the AI-generated responses and enhancing the overall application's usability.
 
-**7. User Interface:** A Streamlit based app that offers an instinctive interface enabling users to effortlessly to register, ask any programming question, get StackAI responses, view related questions from Stack Overflow, view essential Stack Overflow details for these questions, get summaries for the accepted answer and even an option to ask StackAI to craft a question to post on Stack Overflow.
+**7. User Interface:** A [`Streamlit`](/streamlit/) based app that offers an instinctive interface enabling users to effortlessly to register, ask any programming question, get StackAI responses, view related questions from Stack Overflow, view essential Stack Overflow details for these questions, get summaries for the accepted answer and even an option to ask StackAI to craft a question to post on Stack Overflow.
 
-**8. Infrastructure as a Service (IaaS):** Terraform was utilized to establish essential GCP resources including CloudSQL, BigQuery, and compute instance. These resources are seamlessly integrated within the application, enabling automated functionality and streamlining its operational efficiency.
+**8. Infrastructure as a Service (IaaS):** [`Terraform`](/pipeline/terraform/) was utilized to establish essential GCP resources including CloudSQL, BigQuery, and compute instance. These resources are seamlessly integrated within the application, enabling automated functionality and streamlining its operational efficiency.
 
 **9. Deployment:** Deployed a dockerized app on GCP
 
@@ -78,7 +78,7 @@ The data for this project is sourced from Google Bigquery public Stackoverflow D
 ```bash
 git clone https://github.com/Sukruthmothakapally/DAMG7245-Summer2023.git
 ```
-2. Navigate to streamlit/pages/ and replace ``fastapi:8095`` with ``localhost:8000`` in all the ``.py`` files
+2. Navigate to [`streamlit/pages/`](/streamlit/pages/) and replace ``fastapi:8095`` with ``localhost:8000`` in all the ``.py`` files
 3. [Install Docker](https://docs.docker.com/engine/install/ubuntu/)
 4. [Install Terraform](https://developer.hashicorp.com/terraform/downloads)
 5. [Install Google cloud SDK](https://cloud.google.com/sdk/gcloud)
@@ -109,9 +109,8 @@ DB_PORT= 'CloudSQL database port number'
 
 OPENAI_API_KEY= 'Your OpenAI API key for accessing the GPT model.'
 ```
-11. Navigate to Terraform dir and comment out the resource - ``google_compute_instance`` if you don't want the app hosted on GCP
-12. Navigate to ``Terraform/`` path to create the GCP infrastructure with Terraform
-13. Run the following commands -
+11. Navigate to [`terraform/`](/pipeline/terraform/) and comment out the resource - ``google_compute_instance`` if you don't want the app hosted on GCP
+12. To create the GCP infrastructure with Terraform, run the following commands -
 ```bash
 terraform init
 
@@ -119,15 +118,15 @@ terraform plan
 
 terraform apply --auto-approve
 ```
-14. Once you have set up your environment variables, start Airflow by running the following command from the root directory:
+13. Once you have set up your environment variables, start Airflow by running the following command from the root directory:
 ```bash
 docker compose up
 ```
-15. Access the Airflow UI by navigating to ``http://localhost:8080/`` in your web browser.
-16. To run the DAGs in Airflow, click on the dags links on the Airflow UI and toggle the switch to enable the DAGs.
-17. (Optional) - You can trigger a dag with custom input by selecting ``Trigger dag w/ config``
-18. Once the DAGs have run successfully, access the Streamlit application by navigating to ``http://localhost:8090/``
-19. First sign up and then sign in to use the StackAI app and explore it's features
+14. Access the Airflow UI by navigating to ``http://localhost:8080/`` in your web browser.
+15. To run the DAGs in Airflow, click on the dags links on the Airflow UI and toggle the switch to enable the DAGs.
+16. (Optional) - You can trigger a dag with custom input by selecting ``Trigger dag w/ config``
+17. Once the DAGs have run successfully, access the Streamlit application by navigating to ``http://localhost:8090/``
+18. First sign up and then sign in to use the StackAI app and explore it's features
 
 
 ## To stop the app -
