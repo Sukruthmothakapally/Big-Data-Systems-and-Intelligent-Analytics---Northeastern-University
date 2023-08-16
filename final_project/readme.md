@@ -89,21 +89,18 @@ The data for this project is sourced from Google Bigquery public Stackoverflow D
 git clone https://github.com/Sukruthmothakapally/DAMG7245-Summer2023.git
 ```
 
-2. [Install Docker]{https://docs.docker.com/engine/install/ubuntu/}
-3. [Install Terraform]{https://developer.hashicorp.com/terraform/downloads}
-4. [Install Google cloud SDK]{https://cloud.google.com/sdk/gcloud}
-5. [Create a GCP account]{https://cloud.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=na-US-all-en-dr-bkws-all-all-trial-e-dr-1605212&utm_content=text-ad-none-any-DEV_c-CRE_665665924744-ADGP_Hybrid+%7C+BKWS+-+MIX+%7C+Txt_General+GCP-KWID_43700077224933058-kwd-353549070178&utm_term=KW_gcp+console-ST_gcp+console&gclid=CjwKCAjwxOymBhAFEiwAnodBLKy1QR6zNZI8WfmBryMskXcRVImg9pDr5MV_RXhns8DLPdl_gwQ0khoCoU0QAvD_BwE&gclsrc=aw.ds&hl=en}
+2. [Install Docker](https://docs.docker.com/engine/install/ubuntu/)
+3. [Install Terraform](https://developer.hashicorp.com/terraform/downloads)
+4. [Install Google cloud SDK](https://cloud.google.com/sdk/gcloud)
+5. [Create a GCP account](https://cloud.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=na-US-all-en-dr-bkws-all-all-trial-e-dr-1605212&utm_content=text-ad-none-any-DEV_c-CRE_665665924744-ADGP_Hybrid+%7C+BKWS+-+MIX+%7C+Txt_General+GCP-KWID_43700077224933058-kwd-353549070178&utm_term=KW_gcp+console-ST_gcp+console&gclid=CjwKCAjwxOymBhAFEiwAnodBLKy1QR6zNZI8WfmBryMskXcRVImg9pDr5MV_RXhns8DLPdl_gwQ0khoCoU0QAvD_BwE&gclsrc=aw.ds&hl=en)
 6. Create a service account with the permissions for accessing BigQuery, CloudSQL, and Cloud Instances.
 7. Download the service account's key in json format
-8. Run this command -
+8. Run these commands to connect your system to your GCP account -
 ```bash
 Set google_application_credentials=path_to_json_file
+gcloud auth application-default set-quota-project your_project_id_here
 ```
-9. 	gcloud auth application-default set-quota-project your_project_id_here
-
-10. Create a virtual environment and install all requirements from the requirements.txt file present.
-
-11. Create a .env file in the root directory with the following variables:
+9. Create a .env file in the root directory with the following variables:
 ```bash
 AIRFLOW_UID=user id of your machine.
 
@@ -121,28 +118,15 @@ DB_PORT=CloudSQL database port number.
 
 OPENAI_API_KEY=Your OpenAI API key for accessing the GPT model.
 ```
-
-5. Once you have set up your environment variables, start Airflow by running the following command from the root directory:
+10. Once you have set up your environment variables, start Airflow by running the following command from the root directory:
 ```bash
 docker compose up
 ```
-5. Access the Airflow UI by navigating to ``http://localhost:8080/`` in your web browser.
-
-6. To run the DAGs in Airflow, click on the dags links on the Airflow UI and toggle the switch to enable the DAGs.
-
-7. Once the DAGs have run successfully, start the Streamlit application by running the following command from the streamlit-app directory:
-
-docker-compose up
-
-8. Access the Streamlit UI by navigating to http://localhost:8501/ in your web browser.
-
-9. Enter GitHub username and select a repository from the dropdown menu to view the issues associated with that repository. You can summarize or find similar issues using the options provided on the UI.
-
-## Github Actions - Testing
-
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/114537365/235001553-2dc11cd4-9131-48d2-a57b-75b302aeb372.png">
-
-
+11. Access the Airflow UI by navigating to ``http://localhost:8080/`` in your web browser.
+12. To run the DAGs in Airflow, click on the dags links on the Airflow UI and toggle the switch to enable the DAGs.
+13. (Optional) - You can trigger a dag with custom input by selecting ``Trigger dag w/ config``
+14. Once the DAGs have run successfully, access the Streamlit application by navigating to ``http://localhost:8090/``
+15. First sign up and then sign in to use the StackAI app
 
 
 
