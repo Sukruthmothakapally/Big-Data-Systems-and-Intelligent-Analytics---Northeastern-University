@@ -40,37 +40,48 @@ Ultimately, StackAI aims to create a better environment where human knowledge an
 
 ## Project Goals :dart:
 
-The project goal of StackAI is to rejuvenate community engagement on Stack Overflow by integrating advanced AI features. The platform presents relevant questions from Stack Overflow’s repository and generates reliable responses backed by human answers. StackAI aims to create an environment where human knowledge and AI work together to boost innovation and growth.
+The goal of StackAI is to rejuvenate community engagement on Stack Overflow by integrating advanced AI features. The platform presents relevant questions from Stack Overflow’s repository and generates reliable responses backed by human answers. StackAI aims to create an environment where human knowledge and AI work together to boost innovation and growth.
 
 
-## Data Source :flashlight:
+## Data Source 📚:
 
-The data source for this project is the Google Bigquery Stackoverflow Dataset, which provides access to all the stackoverflow data for public repositories - https://console.cloud.google.com/bigquery?ws=!1m4!1m3!3m2!1sbigquery-public-data!2sstackoverflow&project=firstproject-390804 
+The data for this project is sourced from Google Bigquery public Stackoverflow Dataset, which consists of over 10 tables, with several million rows of data - https://console.cloud.google.com/bigquery?ws=!1m4!1m3!3m2!1sbigquery-public-data!2sstackoverflow&project=firstproject-390804 
 
 ## Process Outline
 
-**1. Data Collection:** Use stackoverflow public dataset from Google BigQuery
 **2. Data Preprocessing:** Out of the 15 tables within the Stack Overflow public dataset, a deliberate selection was made by opting for 6 pertinent tables such as badges, comments, posts_questions, etc., aligning with the project's specific needs. Following this selection, a comprehensive exploratory data analysis was conducted, leading to the transformation of these chosen tables into two optimized entities: Posts and Comments. This transformation process involved the careful elimination of extraneous columns and the mitigation of null values, thereby enhancing the data quality.
-**3. Data Pipeline:** In this project, a robust data pipeline is established to execute Extract, Transform, Load (ETL) operations through Airflow. This pipeline orchestrates the extraction of raw data, its transformation to conform to the desired structure, and the loading of cleaned and enriched data into target destinations. Airflow's scheduling capabilities and task dependencies ensure a seamless and automated flow of data, allowing for efficient data processing and maintaining data quality throughout the project lifecycle.
-**4. Model Selection:** Selected the models like - SentenceTransformer('distilbert-base-nli-stsb-mean-tokens'), langchain chains summarize, and openAI based on the features that were decided for the streamlit application.
-**Topic Relevance Search:** To implement this feature, we harnessed the power of SentenceTransformer with the 'distilbert-base-nli-stsb-mean-tokens' model. This model is chosen for its ability to convert text sentences into meaningful embeddings, capturing semantic context and similarity relationships. Its design, optimized for sentence similarity tasks, aligns perfectly with our project's goal of determining topic relevance by effectively analyzing the textual content of user inputs and matching them with relevant topics in our dataset. The 'distilbert-base-nli-stsb-mean-tokens' model's contextual embeddings enable accurate topic classification and retrieval, enhancing the user experience and search precision.
-**Topic Summarization:** With a remarkable ability to generate succinct yet informative summaries from textual content, the advanced language understanding of the text-davinci-003 model effortlessly distills lengthy text into concise insights. This aligns seamlessly with our project's aim to condense topic-related information. By utilizing the text-davinci-003 model, we elevate the accessibility of comprehensive topic insights, enabling users to swiftly grasp crucial concepts and details within the summaries.
-**StackAI Generated Answers:** This functionality leverages an openAI - GPT 3.5 Turbo model tailored for generating responses. We opted for this model due to its advanced language generation capabilities, enabling the creation of coherent and contextually relevant answers. By utilizing the openAI model, our project enhances user interactions by providing accurate and informative responses, thereby enriching the overall topic relevance search experience and ensuring users receive comprehensive and precise information.
-**5. Data Validation:** Used Great Expectations to validate the gathered data, confirming its conformity to anticipated formats and values.
-**6. Backend:** FASTAPI is employed as an intermediary layer between the database and the user interface. It facilitates efficient data retrieval and manipulation by seamlessly connecting with the database, enabling smooth communication and ensuring optimal performance for user interactions.
-**7. User Interface:** Develop a web application utilizing Streamlit that offers an instinctive interface enabling users to effortlessly ask a question and view its similar topics and get AI generated answers across various topic categories.
-**8. Infrastructure as a Service (IaaS):** Terraform was utilized to establish essential GCP resources including CloudSQL, BigQuery, and compute instances. These resources are seamlessly integrated within the application, enabling automated functionality and streamlining its operational efficiency.
-**9. Testing:** Employ pytest and pylint for conducting unit tests, assuring the effectiveness of the application and its integral components.
-**10. Deployment:** Deployed the dockerize application in GCP, utilizing Airflow and deployed it using terraform and Airflow. 
-**11. Continuous Integration and Continuous Deployment (CI/CD):** Employed GitHub Actions to establish a streamlined CI/CD pipeline, automating integration and deployment tasks. This process is further enhanced through the utilization of Terraform, pytest, and pylint, fostering efficient and consistent application development and delivery.
 
-## Project Setup
+**3. Data Pipeline:** In this project, a robust data pipeline is established to Extract, Transform, Load (ETL) operations through Airflow. This pipeline orchestrates the extraction of raw data, its transformation to conform to the desired structure, and the loading of cleaned and enriched data into target destinations. The pipeline also automates the creation and storage of embeddings along with performing Great Expectations analysis.
+
+**5. Data Validation:** Used Great Expectations to validate the gathered data, confirming its conformity to anticipated formats and values.
+
+**4. Model Selection:** Models like SentenceTransformer -'distilbert-base-nli-stsb-mean-tokens' and openAI's 'gpt-3.5-turbo' and 'text-davinci-003' were selected and fine tuned based on the features implemented on StackAI.
+
+- **Features** :
+
+**Retrieve related questions from Stack Overflow:** To implement this feature, we harnessed the power of SentenceTransformer with the 'distilbert-base-nli-stsb-mean-tokens' model. This model is chosen for its ability to convert text sentences into meaningful embeddings, capturing semantic context and similarity relationships. Its design, optimized for sentence similarity tasks, aligns perfectly with our project's goal of determining question relevance by effectively analyzing the textual content of user inputs and matching them with relevant queestions in our custom Stack Overflow dataset by performing cosine similarity comparision.
+
+**Accepted answer Summarization:** ‘text-davinci-003’ model from OpenAI: This model was chosen for its ability to provide concise summaries of lengthy accepted answers. This model is known for its ability to generate coherent and contextually relevant summaries, fostering efficient comprehension.
+
+**StackAI Generated Answers:** This functionality leverages an openAI - GPT 3.5 Turbo model tailored for generating responses. We opted for this model due to its advanced language generation capabilities, enabling the creation of coherent and contextually relevant answers. This model is known for its ability to generate coherent and contextually relevant responses, making it a suitable choice for StackAI's features namely - 'Ask a question', 'Generate an answer if accepted answer doesn’t exist' and 'Craft a question', thereby enriching the overall user experience and ensuring they receive comprehensive and precise information.
+
+**6. Backend:** FASTAPI is employed as an intermediary layer between the database and the user interface. It facilitates efficient data retrieval and manipulation by seamlessly connecting with the database, enabling smooth communication and ensuring optimal performance for user interactions.
+
+**7. User Interface:** Develop a web application utilizing Streamlit that offers an instinctive interface enabling users to effortlessly ask a question and view its similar topics and get AI generated answers across various topic categories.
+
+**8. Infrastructure as a Service (IaaS):** Terraform was utilized to establish essential GCP resources including CloudSQL, BigQuery, and compute instances. These resources are seamlessly integrated within the application, enabling automated functionality and streamlining its operational efficiency.
+
+**9. Deployment:** Deployed a dockerized app on GCP
+
+**10. Continuous Integration:** Employed GitHub Actions to perform unit testing with Pytest on any latest code that is pushed into the repo, assuring the effectiveness of the application and its integral components.
+
+## Project Architecture Diagram
 
 <img width="607" alt="image" src="https://user-images.githubusercontent.com/114537365/234988315-a9f89c76-b0ac-413c-9f4b-977eb7c5eab9.png">
 
 
 
-## How to run Application locally
+## App setup -
 
 To run the application locally, follow these steps:
 
