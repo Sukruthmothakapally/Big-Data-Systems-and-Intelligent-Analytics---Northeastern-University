@@ -11,7 +11,7 @@ final project
 
 ## Please find the app hosted on GCP (for a limited time only) - 
 
-User Inteferface : [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)](http://34.102.9.117:30005/)
+User Interface : [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)](http://34.102.9.117:30005/)
 
 Backend : [![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=FastAPI&logoColor=white)](http://34.102.9.117:30004/docs)
 
@@ -31,30 +31,16 @@ This strategic endeavor aims to restore Stack Overflow's status as a preferred d
 
 At the core of StackAI lies the Category-Question-Answer paradigm. Users select a category of their choice, enabling focused exploration. Upon posing a question, StackAI employs cutting-edge AI models to generate precise answers in real-time. To enhance credibility, the platform intelligently curates and presents the three most relevant questions from Stack Overflow's vast repository, along with essential statistics such as accepted answers, comments, scores, owner's reputation and so on.
 
-In cases where no accepted answer exists, StackAI generates a reliable response. For lengthy accepted answers, the platform provides concise summaries, fostering efficient comprehension. Our commitment to user satisfaction is unwavering — if the user's question still remain unanswered, StackAI facilitates easy transition to Stack Overflow's human-driven ecosystem. The platform crafts well-structured questions in Stack 
-Overflow format, easing the process of posting a question to seek human assistance.
+In cases where no accepted answer exists, StackAI generates a reliable response. For lengthy accepted answers, the platform provides concise summaries, fostering efficient comprehension. Our commitment to user satisfaction is unwavering — if the user's question still remain unanswered, StackAI facilitates easy transition to Stack Overflow's human-driven ecosystem. The platform crafts well-structured questions in Stack Overflow format, easing the process of posting a question to seek human assistance.
 
 Advanced AI models such as OpenAI and Sentence Transformer were fine tuned to provide high-quality custom responses. A robust Airflow data pipeline, powered by meticulous data collection, pre-processing and validation, forms the backbone. FASTAPI ensures a responsive backend, while Streamlit creates an intuitive user interface. Terraform seamlessly provisions vital GCP resources such as BigQuery, CloudSQL and Compute Engine.
 
 Ultimately, StackAI aims to create a better environment where human knowledge and AI work together to boost innovation and growth.
 
+
 ## Project Goals :dart:
 
-
-**Enhance User Engagement:** The primary aim of the project is to revitalize the Stack Overflow community by leveraging advanced AI features through "StackAI." This initiative seeks to counter the decline in traffic and engage developers by providing comprehensive AI-driven solutions to their programming inquiries, fostering a renewed sense of interaction and knowledge sharing.
-
-**Adapt to Changing Landscape:** With the rising popularity of OpenAI's ChatGPT, the project aims to adapt to the changing developer landscape. By incorporating AI-generated answers and other AI-driven features, StackAI aims to stay relevant and continue being a preferred destination for developers seeking coding solutions.
-
-**Facilitate Efficient Information Retrieval:** The project aims to provide users with an enhanced experience by enabling them to quickly navigate through the vast knowledge base of Stack Overflow. The Topic Relevance Search feature utilizes advanced NLP models to identify and present users with the most relevant topics associated with their questions.
-
-**Improve User Comprehension:** To cater to diverse user needs, the Topic Summarization feature condenses complex programming concepts into concise summaries. This goal enhances user comprehension and facilitates quicker understanding of intricate topics, thereby enriching the learning experience.
-
-**Provide Reliable and Automated Data Processing:** The project focuses on ensuring data quality through robust data validation and preprocessing, implemented via tools like Great Expectations and Airflow. By automating data pipelines and deployment using CI/CD practices, the project guarantees that users interact with accurate, relevant, and up-to-date information.
-
-By achieving these goals, "StackAI" seeks to reinvent Stack Overflow as a vibrant hub for developers, fostering community engagement, adapting to the evolving technology landscape, and delivering valuable, AI-powered insights to its users.
-
-
-
+The project goal of StackAI is to rejuvenate community engagement on Stack Overflow by integrating advanced AI features. The platform presents relevant questions from Stack Overflow’s repository and generates reliable responses backed by human answers. StackAI aims to create an environment where human knowledge and AI work together to boost innovation and growth.
 
 
 ## Data Source :flashlight:
