@@ -64,12 +64,12 @@ The data for this project is sourced from Google Bigquery public Stackoverflow D
 - **Accepted answer Summarization:** ‘text-davinci-003’ model from OpenAI: This model was chosen for its ability to provide concise summaries of lengthy accepted answers. The model was fine-tuned to generate coherent and contextually relevant summaries, fostering efficient comprehension. The fine-tuning process involved providing custom prompts and adjusting the model’s temperature to improve its performance on summarizing programming-related answers.
 
 - **StackAI Generated Answers:** ‘gpt-3.5-turbo’ model from OpenAI: This functionality leverages an OpenAI - GPT 3.5 Turbo model tailored for generating custom responses. The model was chosen for its advanced language generation capabilities, enabling the creation of coherent and contextually relevant answers. The model was fine-tuned by providing custom prompts and adjusting its temperature to improve its performance on generating answers for StackAI's features namely - 'Ask a question', 'Generate an answer if accepted answer doesn’t exist' and 'Craft a question', thereby enriching the overall user experience and ensuring they receive comprehensive and precise information.
-- 
-**6. Backend:** FASTAPI is employed as an intermediary layer between the database and the user interface. It facilitates efficient data retrieval and manipulation by seamlessly connecting with the database, enabling smooth communication and ensuring optimal performance for user interactions.
 
-**7. User Interface:** Develop a web application utilizing Streamlit that offers an instinctive interface enabling users to effortlessly ask a question and view its similar topics and get AI generated answers across various topic categories.
+**6. Backend:** FASTAPI serves as a vital component, orchestrating seamless communication between AI models and Streamlit, and enabling efficient user authentication. It ensures a robust connection between various modules, allowing smooth data exchange and interactions between the AI models and the user interface, making it easy to interact with the AI-generated responses and enhancing the overall application's usability.
 
-**8. Infrastructure as a Service (IaaS):** Terraform was utilized to establish essential GCP resources including CloudSQL, BigQuery, and compute instances. These resources are seamlessly integrated within the application, enabling automated functionality and streamlining its operational efficiency.
+**7. User Interface:** A Streamlit based app that offers an instinctive interface enabling users to effortlessly to register, ask any programming question, get StackAI responses, view related questions from Stack Overflow, view essential Stack Overflow details for these questions, get summaries for the accepted answer and even an option to ask StackAI to craft a question to post on Stack Overflow.
+
+**8. Infrastructure as a Service (IaaS):** Terraform was utilized to establish essential GCP resources including CloudSQL, BigQuery, and compute instance. These resources are seamlessly integrated within the application, enabling automated functionality and streamlining its operational efficiency.
 
 **9. Deployment:** Deployed a dockerized app on GCP
 
