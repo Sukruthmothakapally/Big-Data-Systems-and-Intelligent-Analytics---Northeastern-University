@@ -80,13 +80,14 @@ The data for this project is sourced from Google Bigquery public Stackoverflow D
 git clone https://github.com/Sukruthmothakapally/DAMG7245-Summer2023.git
 ```
 
-2. [Install Docker](https://docs.docker.com/engine/install/ubuntu/)
-3. [Install Terraform](https://developer.hashicorp.com/terraform/downloads)
-4. [Install Google cloud SDK](https://cloud.google.com/sdk/gcloud)
-5. [Create a GCP account](https://cloud.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=na-US-all-en-dr-bkws-all-all-trial-e-dr-1605212&utm_content=text-ad-none-any-DEV_c-CRE_665665924744-ADGP_Hybrid+%7C+BKWS+-+MIX+%7C+Txt_General+GCP-KWID_43700077224933058-kwd-353549070178&utm_term=KW_gcp+console-ST_gcp+console&gclid=CjwKCAjwxOymBhAFEiwAnodBLKy1QR6zNZI8WfmBryMskXcRVImg9pDr5MV_RXhns8DLPdl_gwQ0khoCoU0QAvD_BwE&gclsrc=aw.ds&hl=en)
-6. Create a service account with the permissions for accessing BigQuery, CloudSQL, and Cloud Instances.
-7. Download the service account's key in json format
-8. Run these commands to connect your system to your GCP account -
+2. Navigate to streamlit/pages/ and replace ``fastapi:8095`` with ``localhost:8000`` in all the ``.py`` files
+3. [Install Docker](https://docs.docker.com/engine/install/ubuntu/)
+4. [Install Terraform](https://developer.hashicorp.com/terraform/downloads)
+5. [Install Google cloud SDK](https://cloud.google.com/sdk/gcloud)
+6. [Create a GCP account](https://cloud.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=na-US-all-en-dr-bkws-all-all-trial-e-dr-1605212&utm_content=text-ad-none-any-DEV_c-CRE_665665924744-ADGP_Hybrid+%7C+BKWS+-+MIX+%7C+Txt_General+GCP-KWID_43700077224933058-kwd-353549070178&utm_term=KW_gcp+console-ST_gcp+console&gclid=CjwKCAjwxOymBhAFEiwAnodBLKy1QR6zNZI8WfmBryMskXcRVImg9pDr5MV_RXhns8DLPdl_gwQ0khoCoU0QAvD_BwE&gclsrc=aw.ds&hl=en)
+7. Create a service account with the permissions for accessing BigQuery, CloudSQL, and Cloud Instances.
+8. Download the service account's key in json format
+9. Run these commands to connect your system to your GCP account -
 ```bash
 Set google_application_credentials=path_to_json_file
 gcloud auth application-default set-quota-project your_project_id_here
