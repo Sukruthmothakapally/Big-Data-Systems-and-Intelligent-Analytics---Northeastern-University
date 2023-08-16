@@ -16,9 +16,33 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h1 class='center'>Welcome to StackAI</h1>", unsafe_allow_html=True)
+# Define custom CSS style
+custom_style = """
+    <style>
+        .center {
+            text-align: center;
+        }
+        .green {
+            color: green;
+        }
+        .feature-box {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+    </style>
+"""
 
-# st.markdown("<h2 class='green'>Features</h2>", unsafe_allow_html=True)
-st.markdown("<h3>Introducing StackAI – Your Ultimate Coding Companion! Wave goodbye to the challenge of hunting down solutions on Stack Overflow. StackAI revolutionizes your coding experience by instantly fetching the right answers written by humans, simplifying intricate topics, and even crafts personalized answers tailored to your unique questions..</h3>", unsafe_allow_html=True)
-st.markdown("<h3>Supercharge your coding journey now!</h3>", unsafe_allow_html=True)
-st.markdown("<h3>#UnlockTheCodeGenius 🚀</h3>", unsafe_allow_html=True)
+# Apply the custom style
+st.markdown(custom_style, unsafe_allow_html=True)
+
+# Display the content with custom styling
+st.markdown("<h1 class='center'>Introducing StackAI 🤖👨‍💻<h1>", unsafe_allow_html=True)
+
+with st.container():
+    st.markdown("## Your Ultimate Coding Companion!", unsafe_allow_html=True)
+    st.markdown("Wave goodbye to the challenge of hunting down solutions on Stack Overflow. StackAI revolutionizes your coding experience by instantly fetching related answers written by humans, simplifying intricate topics, and even crafting personalized answers tailored to your unique questions.")
+    st.markdown("Supercharge your coding journey now!")
+    st.markdown("### #UnlockTheCodeGenius ", unsafe_allow_html=True)
