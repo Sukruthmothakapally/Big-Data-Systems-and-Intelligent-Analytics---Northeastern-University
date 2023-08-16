@@ -105,6 +105,7 @@ gcloud auth application-default set-quota-project your_project_id_here
 AIRFLOW_UID= 'user id of your machine'
 
 AIRFLOW_PROJ_DIR= 'The dir where airflow is present'
+
 DB_HOST= 'CloudSQL instance public IP'
 
 DB_USER= 'CloudSQL database username'
