@@ -45,7 +45,7 @@ The goal of StackAI is to rejuvenate community engagement on Stack Overflow by i
 
 ## Data Source 📚:
 
-The data for this project is sourced from Google Bigquery public Stackoverflow Dataset, which consists of over 10 tables, with several million rows of data - https://console.cloud.google.com/bigquery?ws=!1m4!1m3!3m2!1sbigquery-public-data!2sstackoverflow&project=firstproject-390804 
+The data for this project is sourced from Google Bigquery public Stackoverflow Dataset, which consists of over 10 tables, with several million rows of data - [StackOverflow dataset](https://console.cloud.google.com/bigquery?ws=!1m4!1m3!3m2!1sbigquery-public-data!2sstackoverflow&project=firstproject-390804) 
 
 ## Process Outline
 
