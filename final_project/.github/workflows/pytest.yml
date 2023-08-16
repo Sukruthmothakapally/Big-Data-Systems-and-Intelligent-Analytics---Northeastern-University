@@ -1,9 +1,8 @@
 name: Continuous Integration - Unit Testing
 
 on:  
-  push:
-    branches:
-      - main
+  - push
+  - pull_request
 
 jobs:
   build:
