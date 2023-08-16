@@ -23,7 +23,7 @@ App Demo : [![Youtube](https://img.shields.io/badge/Youtube-808080?style=for-the
 
 
 
-## Abstract :memo: 
+## Introduction :memo: 
 
 In response to a noticeable decline in traffic on Stack Overflow – once a thriving developer community platform – due to the rise of OpenAI's ChatGPT, an application named "StackAI" has been developed. 
 
@@ -81,7 +81,7 @@ The data for this project is sourced from Google Bigquery public Stackoverflow D
 
 
 
-## App setup -
+## TO run a dockerized App -
 
 1. To clone this repository, use the following command:
 
@@ -89,37 +89,44 @@ The data for this project is sourced from Google Bigquery public Stackoverflow D
 git clone https://github.com/Sukruthmothakapally/DAMG7245-Summer2023.git
 ```
 
-2. Create a virtual environment and install all requirements from the requirements.txt file present.
+2. [Install Docker]{https://docs.docker.com/engine/install/ubuntu/}
+3. [Install Terraform]{https://developer.hashicorp.com/terraform/downloads}
+4. [Install Google cloud SDK]{https://cloud.google.com/sdk/gcloud}
+5. [Create a GCP account]{https://cloud.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=na-US-all-en-dr-bkws-all-all-trial-e-dr-1605212&utm_content=text-ad-none-any-DEV_c-CRE_665665924744-ADGP_Hybrid+%7C+BKWS+-+MIX+%7C+Txt_General+GCP-KWID_43700077224933058-kwd-353549070178&utm_term=KW_gcp+console-ST_gcp+console&gclid=CjwKCAjwxOymBhAFEiwAnodBLKy1QR6zNZI8WfmBryMskXcRVImg9pDr5MV_RXhns8DLPdl_gwQ0khoCoU0QAvD_BwE&gclsrc=aw.ds&hl=en}
+6. Create a service account with the permissions for accessing BigQuery, CloudSQL, and Cloud Instances.
+7. Download the service account's key in json format
+8. Run this command -
+```bash
+Set google_application_credentials=path_to_json_file
+```
+9. 	gcloud auth application-default set-quota-project your_project_id_here
 
-3. Create a .env file in the root directory with the following variables:
+10. Create a virtual environment and install all requirements from the requirements.txt file present.
 
-    GITHUB_API_TOKEN: your GitHub API token.
+11. Create a .env file in the root directory with the following variables:
+```bash
+AIRFLOW_UID=user id of your machine.
 
-    SNOWFLAKE_USER: your Snowflake username.
+AIRFLOW_PROJ_DIR=The dir where airflow is present.
 
-    SNOWFLAKE_PASSWORD: your Snowflake password.
+DB_HOST=CloudSQL public IP
 
-    SNOWFLAKE_ACCOUNT: your Snowflake account name.
+DB_USER=CloudSQL database username
 
-    SNOWFLAKE_DATABASE: the name of the Snowflake database to use.
+DB_PASSWORD=CloudSQL database password
 
-    SNOWFLAKE_SCHEMA: the name of the Snowflake schema to use.
+DB_NAME=CloudSQL database name
 
-    ACESS_TOKEN: Your Github Acess token
+DB_PORT=CloudSQL database port number.
 
-    SECRET_KEY: "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7" - for JWT Hashing
+OPENAI_API_KEY=Your OpenAI API key for accessing the GPT model.
+```
 
-    ALGORITHM: "HS256" - - for JWT Hashing
-
-    ACCESS_TOKEN_EXPIRE_MINUTES: The expiration time of the access token in minutes
-
-    OPENAI_API_KEY: Your OpenAI API key for accessing the GPT model.
-
-4. Once you have set up your environment variables, start Airflow by running the following command from the root directory:
-
-docker-compose up airflow-init && docker-compose up -d
-
-5. Access the Airflow UI by navigating to http://localhost:8080/ in your web browser.
+5. Once you have set up your environment variables, start Airflow by running the following command from the root directory:
+```bash
+docker compose up
+```
+5. Access the Airflow UI by navigating to ``http://localhost:8080/`` in your web browser.
 
 6. To run the DAGs in Airflow, click on the dags links on the Airflow UI and toggle the switch to enable the DAGs.
 
