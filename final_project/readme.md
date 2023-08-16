@@ -116,7 +116,7 @@ DB_NAME=CloudSQL database name
 
 DB_PORT=CloudSQL database port number.
 
-OPENAI_API_KEY=Your OpenAI API key for accessing the GPT model.
+OPENAI_API_KEY= 'Your OpenAI API key for accessing the GPT model.'
 ```
 10. Navigate to Terraform dir and comment out the resource - ``google_compute_instance`` if you don't want the app hosted on GCP
 11. Navigate to ``Terraform/`` path to create the GCP infrastructure with Terraform
@@ -137,7 +137,7 @@ docker compose up
 15. First sign up and then sign in to use the StackAI app and explore it's features
 
 
-## TO stop the app -
+## To stop the app -
 17. Run this command inside terraform/ to destroy the GCP infrastructure created by terraform -
 ```bash
 terraform destroy --auto-approve
