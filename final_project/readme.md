@@ -10,7 +10,7 @@ Data Pipeline : [![Apache Airflow](https://img.shields.io/badge/Apache_Airflow-0
 
 Documentation : [![codelabs](https://img.shields.io/badge/codelabs-4285F4?style=for-the-badge&logo=codelabs&logoColor=white)](https://codelabs-preview.appspot.com/?file_id=1QLTgE_6TTnMbBc1Sw0KOtDvdpv3VR2oRGZPVJhNTFgs#0)
 
-App Demo : [![Youtube](https://img.shields.io/badge/Youtube-808080?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtu.be/DnmAYNL0kcI)
+App Demo : [![Youtube](https://img.shields.io/badge/Youtube-808080?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtu.be/BS94kg-8jGs)
 
 
 
@@ -68,7 +68,7 @@ The data for this project is sourced from Google Bigquery public Stackoverflow D
 
 ## Project Architecture Diagram
 
-![Implemented Architecture Diagram](https://github.com/Sukruthmothakapally/DAMG7245-Summer2023/raw/Sukruth-branch/final_project/Implemented_architecture_diagram.jpg)
+![Implemented Architecture Diagram](https://github.com/BigDataIA-Summer2023-Team3/final_project/blob/main/diagrams/Implemented_architecture_diagram.jpg)
 
 
 
