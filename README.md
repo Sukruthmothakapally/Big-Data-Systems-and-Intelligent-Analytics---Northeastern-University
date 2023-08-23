@@ -10,4 +10,4 @@ Northeastern University - Course - Big Data Systems and Intelligent Analytics
 6. Fastapi
 7. GCP deployment
 
-# Please check out - `Sukruth-branch` for all the latest push
+# Please check out - [Sukruth-branch](https://github.com/Sukruthmothakapally/DAMG7245-Summer2023/tree/Sukruth-branch) for all the latest push
