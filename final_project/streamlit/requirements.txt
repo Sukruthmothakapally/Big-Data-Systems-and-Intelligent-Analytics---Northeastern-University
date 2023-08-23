@@ -1,5 +1,0 @@
-streamlit
-sentence-transformers
-db-dtypes
-google-cloud-bigquery
-scikit-learn
